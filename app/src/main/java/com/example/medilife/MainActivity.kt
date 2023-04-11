@@ -11,8 +11,6 @@ class MainActivity : AppCompatActivity() {
 
         if(hola=="hi"){
              hola="one shot"
-
-
         }
         else{
 
