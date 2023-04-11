@@ -10,10 +10,10 @@ class MainActivity : AppCompatActivity() {
         var hola:String="hi";
 
         if(hola=="hi"){
-             hola="pito"
+             hola="Elpepe"
         }
         else{
-            hola="papa"
+
         }
     }
 }
