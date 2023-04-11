@@ -11,6 +11,7 @@ class MainActivity : AppCompatActivity() {
 
         if(hola=="hi"){
              hola="Elpepe"
+
         }
         else{
 
