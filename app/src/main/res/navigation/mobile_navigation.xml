@@ -2,24 +2,26 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/mobile_navigation"
-    app:startDestination="@+id/navigation_home">
+    android:id="@+id/mobile_navigation">
 
     <fragment
-        android:id="@+id/navigation_home"
-        android:name="com.example.medilife.ui.home.HomeFragment"
-        android:label="@string/title_home"
-        tools:layout="@layout/fragment_home" />
-
+        android:id="@+id/homeCliente"
+        android:name="com.example.medilife.HomeCliente"
+        android:label="fragment_home_cliente"
+        tools:layout="@layout/fragment_home_cliente" />
     <fragment
-        android:id="@+id/navigation_dashboard"
-        android:name="com.example.medilife.ui.dashboard.DashboardFragment"
-        android:label="@string/title_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
-
+        android:id="@+id/homeDoctor"
+        android:name="com.example.medilife.HomeDoctor"
+        android:label="fragment_home_doctor"
+        tools:layout="@layout/fragment_home_doctor" />
     <fragment
-        android:id="@+id/navigation_notifications"
-        android:name="com.example.medilife.ui.notifications.NotificationsFragment"
-        android:label="@string/title_notifications"
-        tools:layout="@layout/fragment_notifications" />
+        android:id="@+id/homeSecretaria"
+        android:name="com.example.medilife.HomeSecretaria"
+        android:label="fragment_home_secretaria"
+        tools:layout="@layout/fragment_home_secretaria" />
+    <fragment
+        android:id="@+id/cuentaGeneral"
+        android:name="com.example.medilife.CuentaGeneral"
+        android:label="fragment_cuenta_general"
+        tools:layout="@layout/fragment_cuenta_general" />
 </navigation>
