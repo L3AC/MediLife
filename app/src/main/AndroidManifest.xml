@@ -12,6 +12,9 @@
         android:theme="@style/Theme.MediLife"
         tools:targetApi="31">
         <activity
+            android:name=".RecupContra"
+            android:exported="false" />
+        <activity
             android:name=".RegistroMain"
             android:exported="false" />
         <activity
