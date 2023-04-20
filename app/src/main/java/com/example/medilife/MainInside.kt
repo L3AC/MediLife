@@ -1,6 +1,7 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.util.Log
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
@@ -10,12 +11,12 @@ import androidx.navigation.ui.setupWithNavController
 import com.example.medilife.databinding.ActivityMainInsideBinding
 
 class MainInside : AppCompatActivity() {
-
+    var idCuenta: Int = 0
     private lateinit var binding: ActivityMainInsideBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        Log.i("insta",idCuenta.toString())
         binding = ActivityMainInsideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
