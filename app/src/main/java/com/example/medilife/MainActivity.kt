@@ -26,7 +26,7 @@ class MainActivity : AppCompatActivity() {
         editContra = findViewById(R.id.txtContra)
         bIngresar = findViewById(R.id.btnIngresar)
 
-        val hola:String="prueba2"
+        val hola:String="Prueba 234 KIO23"
         bIngresar.setOnClickListener {
 
         }
