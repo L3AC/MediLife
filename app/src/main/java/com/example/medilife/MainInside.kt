@@ -16,7 +16,7 @@ class MainInside : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        Log.i("insta",idCuenta.toString())
+        //Log.i("insta",idCuenta.toString())
         binding = ActivityMainInsideBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -27,6 +27,7 @@ class MainInside : AppCompatActivity() {
         // menu should be considered as top level destinations.
         val appBarConfiguration = AppBarConfiguration(
             setOf(
+
                 R.id.homeCliente, R.id.cuentaGeneral
             )
         )

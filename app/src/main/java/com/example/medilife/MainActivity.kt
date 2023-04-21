@@ -40,8 +40,8 @@ class MainActivity : AppCompatActivity() {
 
     fun VerifTipo() {
         try {
-            val cadena: String = "select * from tbUsuarios where usuario='poji' " +
-                    "COLLATE SQL_Latin1_General_CP1_CS_AS and contra='poji' COLLATE SQL_Latin1_General_CP1_CS_AS"
+            val cadena: String = "select * from tbUsuarios where usuario=? " +
+                    "COLLATE SQL_Latin1_General_CP1_CS_AS and contra=? COLLATE SQL_Latin1_General_CP1_CS_AS"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
