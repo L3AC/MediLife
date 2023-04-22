@@ -1,11 +1,13 @@
 package com.example.medilife
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -14,12 +16,15 @@ import java.sql.SQLException
 lateinit var editUsu: EditText
 lateinit var editContra: EditText
 lateinit var bIngresar: Button
+lateinit var recupc: TextView
+lateinit var registrarse: TextView
 
 class MainActivity : AppCompatActivity() {
     private var conx = Conx()
     var idTipo: Int = 0
     var idUs: Int = 0
     var idCuenta: Int = 0
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,10 +32,20 @@ class MainActivity : AppCompatActivity() {
         editUsu = findViewById(R.id.txtUsuario)
         editContra = findViewById(R.id.txtContra)
         bIngresar = findViewById(R.id.btnIngresar)
+        recupc=findViewById(R.id.txvContraR)
+        registrarse=findViewById(R.id.txvRegistrarse)
 
-        val hola: String = "Prueba 234 KIO23"
+        recupc.setOnClickListener{
+            val scndAct = Intent(this, RecupContra::class.java)
+            startActivity(scndAct)
+        }
+        registrarse.setOnClickListener{
+            val scndAct = Intent(this, RegistroMain::class.java)
+            startActivity(scndAct)
+        }
+
+
         bIngresar.setOnClickListener {
-
             VerifTipo()
             VerifDatos()
 
