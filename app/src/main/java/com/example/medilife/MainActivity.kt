@@ -4,9 +4,11 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import java.sql.PreparedStatement
@@ -18,12 +20,14 @@ lateinit var editContra: EditText
 lateinit var bIngresar: Button
 lateinit var recupc: TextView
 lateinit var registrarse: TextView
+lateinit var mirarc:ImageButton
 
 class MainActivity : AppCompatActivity() {
     private var conx = Conx()
     var idTipo: Int = 0
     var idUs: Int = 0
     var idCuenta: Int = 0
+    var contraVisible = false
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,6 +38,7 @@ class MainActivity : AppCompatActivity() {
         bIngresar = findViewById(R.id.btnIngresar)
         recupc=findViewById(R.id.txvContraR)
         registrarse=findViewById(R.id.txvRegistrarse)
+        mirarc=findViewById(R.id.btnMirar)
 
         recupc.setOnClickListener{
             val scndAct = Intent(this, RecupContra::class.java)
@@ -43,14 +48,20 @@ class MainActivity : AppCompatActivity() {
             val scndAct = Intent(this, RegistroMain::class.java)
             startActivity(scndAct)
         }
-
+        mirarc.setOnClickListener{
+            contraVisible = !contraVisible
+                if (contraVisible) {
+                    editContra.inputType = InputType.TYPE_CLASS_TEXT
+                } else {
+                    editContra.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+                editContra.setSelection(editContra.text.length)
+        }
 
         bIngresar.setOnClickListener {
             VerifTipo()
             VerifDatos()
-
         }
-
     }
 
     fun VerifTipo() {

@@ -13,10 +13,10 @@ class RecupContra : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recup_contra)
 
-    val imageButton = findViewById<ImageButton>(R.id.imageButton4)
-        imageButton.setBackgroundColor(ContextCompat.getColor(this,android.R.color.transparent))
+    val imageButton = findViewById<ImageButton>(R.id.btnVolver)
+        //imageButton.setBackgroundColor(ContextCompat.getColor(this,android.R.color.transparent))
 
         val textView = findViewById<TextView>(R.id.txtUC)
-        textView.setBackgroundColor(ContextCompat.getColor(this,android.R.color.white))
+        //textView.setBackgroundColor(ContextCompat.getColor(this,android.R.color.white))
     }
 }
