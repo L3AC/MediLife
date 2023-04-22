@@ -25,6 +25,16 @@
         android:name="com.example.medilife.CuentaGeneral"
         android:label="fragment_cuenta_general"
         tools:layout="@layout/fragment_cuenta_general" />
+    <fragment
+        android:id="@+id/infoCuentaGeneral"
+        android:name="com.example.medilife.infoCuentaGeneral"
+        android:label="fragment_info_cuenta_general"
+        tools:layout="@layout/fragment_info_cuenta_general" />
+    <fragment
+        android:id="@+id/reservaCita"
+        android:name="com.example.medilife.reservaCita"
+        android:label="fragment_reserva_cita"
+        tools:layout="@layout/fragment_reserva_cita" />
 
 
 </navigation>
