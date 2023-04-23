@@ -23,7 +23,7 @@
         app:layout_constraintVertical_bias="0.386" />
 
     <TextView
-        android:id="@+id/textView"
+        android:id="@+id/txvContraR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="¿Olvidó su contraseña?"
@@ -62,7 +62,7 @@
         app:layout_constraintVertical_bias="0.108" />
 
     <TextView
-        android:id="@+id/textView3"
+        android:id="@+id/txvRegistrarse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Crear cuenta"
@@ -118,13 +118,17 @@
         app:layout_constraintVertical_bias="0.776" />
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btnMirar"
         android:layout_width="49dp"
         android:layout_height="49dp"
         android:background="@android:color/transparent"
         android:scaleType="fitXY"
-        app:srcCompat="@drawable/showp"
-        tools:layout_editor_absoluteX="16dp"
-        tools:layout_editor_absoluteY="266dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.39"
+        app:srcCompat="@drawable/showp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

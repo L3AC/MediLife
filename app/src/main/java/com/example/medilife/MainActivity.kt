@@ -1,11 +1,15 @@
 package com.example.medilife
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.InputType
 import android.util.Log
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -14,12 +18,17 @@ import java.sql.SQLException
 lateinit var editUsu: EditText
 lateinit var editContra: EditText
 lateinit var bIngresar: Button
+lateinit var recupc: TextView
+lateinit var registrarse: TextView
+lateinit var mirarc:ImageButton
 
 class MainActivity : AppCompatActivity() {
     private var conx = Conx()
     var idTipo: Int = 0
     var idUs: Int = 0
     var idCuenta: Int = 0
+    var contraVisible = false
+    @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -27,15 +36,32 @@ class MainActivity : AppCompatActivity() {
         editUsu = findViewById(R.id.txtUsuario)
         editContra = findViewById(R.id.txtContra)
         bIngresar = findViewById(R.id.btnIngresar)
+        recupc=findViewById(R.id.txvContraR)
+        registrarse=findViewById(R.id.txvRegistrarse)
+        mirarc=findViewById(R.id.btnMirar)
 
-        val hola: String = "Prueba 234 KIO23"
-        bIngresar.setOnClickListener {
-
-            VerifTipo()
-            VerifDatos()
-
+        recupc.setOnClickListener{
+            val scndAct = Intent(this, RecupContra::class.java)
+            startActivity(scndAct)
+        }
+        registrarse.setOnClickListener{
+            val scndAct = Intent(this, RegistroMain::class.java)
+            startActivity(scndAct)
+        }
+        mirarc.setOnClickListener{
+            contraVisible = !contraVisible
+                if (contraVisible) {
+                    editContra.inputType = InputType.TYPE_CLASS_TEXT
+                } else {
+                    editContra.inputType = InputType.TYPE_CLASS_TEXT or InputType.TYPE_TEXT_VARIATION_PASSWORD
+                }
+                editContra.setSelection(editContra.text.length)
         }
 
+        bIngresar.setOnClickListener {
+            VerifTipo()
+            VerifDatos()
+        }
     }
 
     fun VerifTipo() {
@@ -86,6 +112,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                 } else {
                     Toast.makeText(applicationContext, "Datos incorrectos", Toast.LENGTH_SHORT)
@@ -109,6 +136,7 @@ class MainActivity : AppCompatActivity() {
                 if (found == 1) {
                     idCuenta = st.getInt("idSecretaria")
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
@@ -120,9 +148,9 @@ class MainActivity : AppCompatActivity() {
             }
             //CLIENTES
             if (idTipo == 3) {
-                val cadena: String = "select idCliente from tbClientes inner join \n" +
-                        "tbUsuarios on tbClientes.idUsuario=tbUsuarios.idUsuario\n" +
-                        "where tbClientes.idUsuario=?;;"
+                val cadena: String ="select idCliente from tbClientes inner join \n" +
+                        "tbUsuarios on tbClientes.idUsuario=tbUsuarios.idUsuario \n" +
+                        "where tbClientes.idUsuario=?;"
                 val st: ResultSet
                 val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
@@ -134,6 +162,7 @@ class MainActivity : AppCompatActivity() {
                 if (found == 1) {
                     idCuenta = st.getInt("idCliente")
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()

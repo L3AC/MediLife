@@ -7,6 +7,20 @@
     android:background="@drawable/degradado"
     tools:context=".RecupContra">
 
+    <ImageButton
+        android:id="@+id/btnVolver2"
+        android:layout_width="49dp"
+        android:layout_height="49dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.002"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.064"
+        app:srcCompat="@drawable/regresar" />
+
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
@@ -17,10 +31,10 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.528"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="@+id/imageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.821" />
+        app:layout_constraintVertical_bias="0.793" />
 
     <androidx.constraintlayout.widget.Barrier
         android:id="@+id/barrier2"
@@ -38,56 +52,52 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.724"
         app:srcCompat="@drawable/po" />
 
     <TextView
         android:id="@+id/textView8"
-        android:layout_width="245dp"
-        android:layout_height="109dp"
+        android:layout_width="243dp"
+        android:layout_height="76dp"
         android:fontFamily="sans-serif-light"
         android:text="Ingrese su nombre de usuario o correo"
         android:textAlignment="center"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="83dp"
-        tools:layout_editor_absoluteY="154dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.291" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="352dp"
-        android:layout_height="71dp"
+        android:layout_width="326dp"
+        android:layout_height="33dp"
         android:fontFamily="sans-serif-light"
         android:text="Recuperacion de Contraseña"
         android:textAlignment="viewStart"
         android:textAllCaps="false"
         android:textColor="#000000"
         android:textSize="25sp"
-        tools:layout_editor_absoluteX="66dp"
-        tools:layout_editor_absoluteY="27dp" />
-
-    <androidx.constraintlayout.widget.Guideline
-        android:id="@+id/guideline"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        app:layout_constraintGuide_begin="16dp" />
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:srcCompat="?attr/homeAsUpIndicator"
-        tools:layout_editor_absoluteX="1dp"
-        tools:layout_editor_absoluteY="27dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.811"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.074" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/txtUC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="textPersonName"
-        tools:layout_editor_absoluteX="100dp"
-        tools:layout_editor_absoluteY="319dp" />
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

@@ -25,6 +25,34 @@
                 android:layout_width="match_parent"
                 android:layout_height="1069dp">
 
+                <ImageButton
+                    android:id="@+id/imageButton"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.436"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.684"
+                    app:srcCompat="@drawable/showp" />
+
+                <ImageButton
+                    android:id="@+id/btnVolver"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.069"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.09"
+                    app:srcCompat="@drawable/regresar" />
+
                 <TextView
                     android:id="@+id/textoNormal"
                     android:layout_width="185dp"
@@ -66,6 +94,34 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.613" />
+
+                <EditText
+                    android:id="@+id/txtNaci"
+                    android:layout_width="145dp"
+                    android:layout_height="48dp"
+                    android:ems="10"
+                    android:hint="Nacimiento"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.048"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.684" />
+
+                <EditText
+                    android:id="@+id/txtTipoS"
+                    android:layout_width="145dp"
+                    android:layout_height="48dp"
+                    android:ems="10"
+                    android:hint="Tipo de sangre"
+                    android:inputType="number"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.906"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.677" />
 
                 <EditText
                     android:id="@+id/editTextTextPassword2"
@@ -168,7 +224,7 @@
                     app:layout_constraintVertical_bias="0.264" />
 
                 <Spinner
-                    android:id="@+id/spinner"
+                    android:id="@+id/spinSexo"
                     android:layout_width="145dp"
                     android:layout_height="48dp"
                     android:hint="@string/sexo"
@@ -178,30 +234,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.615" />
-
-                <Spinner
-                    android:id="@+id/spinner2"
-                    android:layout_width="145dp"
-                    android:layout_height="48dp"
-                    android:hint="@string/sexo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.838"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.681" />
-
-                <Spinner
-                    android:id="@+id/spinner3"
-                    android:layout_width="145dp"
-                    android:layout_height="48dp"
-                    android:hint="@string/sexo"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.211"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.68" />
 
                 <Button
                     android:id="@+id/button"
