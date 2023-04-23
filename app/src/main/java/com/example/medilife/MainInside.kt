@@ -36,15 +36,19 @@ class MainInside : AppCompatActivity() {
 
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.homeDoctor, R.id.cuentaGeneral,R.id.homeCliente
+                    R.id.homeDoctor, R.id.cuentaGeneral
                 )
             )
-
+            //PASAR PARAMETROS
+            val bundle = Bundle().apply {
+                putInt("idoc", idCuenta)
+            }
+            val fragmentoDestino = HomeDoctor()
+            fragmentoDestino.arguments =bundle
+            //INICIAR CON OTRO FRAGMENT
             navController.navigate(R.id.homeDoctor)
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
-
-
         }
         if(idTipo==2){
             val appBarConfiguration = AppBarConfiguration(
@@ -53,6 +57,11 @@ class MainInside : AppCompatActivity() {
                     R.id.homeSecretaria, R.id.cuentaGeneral
                 )
             )
+            val bundle = Bundle().apply {
+                putInt("idoc", idCuenta)
+            }
+            val fragmentoDestino = HomeDoctor()
+            fragmentoDestino.arguments =bundle
             navController.navigate(R.id.homeSecretaria)
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
