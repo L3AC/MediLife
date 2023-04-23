@@ -112,6 +112,7 @@ class MainActivity : AppCompatActivity() {
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                 } else {
                     Toast.makeText(applicationContext, "Datos incorrectos", Toast.LENGTH_SHORT)
@@ -135,6 +136,7 @@ class MainActivity : AppCompatActivity() {
                 if (found == 1) {
                     idCuenta = st.getInt("idSecretaria")
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
@@ -146,9 +148,9 @@ class MainActivity : AppCompatActivity() {
             }
             //CLIENTES
             if (idTipo == 3) {
-                val cadena: String = "select idCliente from tbClientes inner join \n" +
-                        "tbUsuarios on tbClientes.idUsuario=tbUsuarios.idUsuario\n" +
-                        "where tbClientes.idUsuario=?;;"
+                val cadena: String ="select idCliente from tbClientes inner join \n" +
+                        "tbUsuarios on tbClientes.idUsuario=tbUsuarios.idUsuario \n" +
+                        "where tbClientes.idUsuario=?;"
                 val st: ResultSet
                 val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
@@ -160,6 +162,7 @@ class MainActivity : AppCompatActivity() {
                 if (found == 1) {
                     idCuenta = st.getInt("idCliente")
                     scndAct.putExtra("idCuenta", idCuenta)
+                    scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
