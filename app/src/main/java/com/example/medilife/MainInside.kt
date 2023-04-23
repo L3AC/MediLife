@@ -17,12 +17,6 @@ class MainInside : AppCompatActivity() {
     var idTipo:Int=0
     private lateinit var binding: ActivityMainInsideBinding
 
-    fun Cargar(){
-        binding = ActivityMainInsideBinding.inflate(layoutInflater)
-        setContentView(binding.root)
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main_inside)
-    }
     @SuppressLint("ResourceType")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -42,7 +36,7 @@ class MainInside : AppCompatActivity() {
 
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.homeDoctor, R.id.cuentaGeneral
+                    R.id.homeDoctor, R.id.cuentaGeneral,R.id.homeCliente
                 )
             )
 
@@ -62,6 +56,7 @@ class MainInside : AppCompatActivity() {
             navController.navigate(R.id.homeSecretaria)
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
+
         }
         if(idTipo==3){
             val appBarConfiguration = AppBarConfiguration(
@@ -73,6 +68,9 @@ class MainInside : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
         }
+    }
+    override fun onBackPressed() {
+        // Deja vacío este método
     }
 
 }
