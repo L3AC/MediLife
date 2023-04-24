@@ -1,31 +1,18 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [HomeCliente.newInstance] factory method to
- * create an instance of this fragment.
- */
 class HomeCliente : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
-
+    var idCuenta:Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+            idCuenta = arguments?.getInt("idcu")!!
         }
     }
 
@@ -36,8 +23,12 @@ class HomeCliente : Fragment() {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_cliente, container, false)
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        Log.i("clien",idCuenta.toString())
+    }
 
-    companion object {
+ /*   companion object {
         /**
          * Use this factory method to create a new instance of
          * this fragment using the provided parameters.
@@ -55,5 +46,5 @@ class HomeCliente : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
+    }*/
 }

@@ -1,6 +1,7 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -12,13 +13,13 @@ private const val ARG_PARAM2 = "param2"
 
 
 class HomeDoctor : Fragment() {
-
     var idCuenta:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            idCuenta = it.getInt("idoc", 0)
+            val parametros = arguments
+            idCuenta = parametros?.getInt("idcu")!!
         }
     }
 
@@ -31,26 +32,8 @@ class HomeDoctor : Fragment() {
 //LA IMPORTANTE
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+    Log.i("doctor",idCuenta.toString())
 
     }
 
-/*    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeDoctor.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic fun newInstance(param1: String, param2: String) =
-                HomeDoctor().apply {
-                    arguments = Bundle().apply {
-                        putString(ARG_PARAM1, param1)
-                        putString(ARG_PARAM2, param2)
-                    }
-                }
-    }*/
 }
