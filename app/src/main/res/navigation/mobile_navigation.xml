@@ -35,6 +35,15 @@
         android:name="com.example.medilife.reservaCita"
         android:label="fragment_reserva_cita"
         tools:layout="@layout/fragment_reserva_cita" />
+    <activity
+        android:id="@+id/mainInside"
+        android:name="com.example.medilife.MainInside"
+        android:label="MainInside" />
+    <fragment
+        android:id="@+id/dashboardFragment"
+        android:name="com.example.medilife.ui.dashboard.DashboardFragment"
+        android:label="fragment_dashboard"
+        tools:layout="@layout/fragment_dashboard" />
 
 
 </navigation>

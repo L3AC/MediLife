@@ -164,6 +164,7 @@ class MainActivity : AppCompatActivity() {
                     scndAct.putExtra("idCuenta", idCuenta)
                     scndAct.putExtra("idTipo", idTipo)
                     startActivity(scndAct)
+                    overridePendingTransition(0, 0)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
                 } else {
