@@ -22,6 +22,7 @@ import com.example.medilife.databinding.ActivityMainInsideBinding
 class MainInside : AppCompatActivity() {
     var idCuenta: Int = 0
     var idTipo: Int = 0
+
     private lateinit var binding: ActivityMainInsideBinding
 
     @SuppressLint("ResourceType")
@@ -76,15 +77,14 @@ class MainInside : AppCompatActivity() {
             )
             val fragmentoDestino = HomeCliente()
             fragmentoDestino.arguments = bundle
-
             val fragmentoDestino2 = CuentaGeneral()
             fragmentoDestino2.arguments = bundle
 
             //navController.navigate(R.id.cuentaGeneral, bundle)
-            navController.navigate(R.id.homeCliente)
-
+            navController.navigate(R.id.homeCliente,bundle)
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
+
 
             /*navView.setOnItemReselectedListener{ item ->
                 when (item.itemId) {
@@ -146,6 +146,23 @@ class MainInside : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
+        val bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+        }
+        if (idTipo == 3) {
+            val appBarConfiguration = AppBarConfiguration(
+                setOf(
+                    R.id.homeCliente, R.id.cuentaGeneral
+                )
+            )
+            val fragmentoDestino = HomeCliente()
+            fragmentoDestino.arguments = bundle
+            val fragmentoDestino2 = CuentaGeneral()
+            fragmentoDestino2.arguments = bundle
+
+            //navController.navigate(R.id.cuentaGeneral, bundle)
+            //navController.navigate(R.id.homeCliente, bundle)
+        }
         /*val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
         }
