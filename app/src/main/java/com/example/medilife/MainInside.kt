@@ -182,7 +182,7 @@ class MainInside : AppCompatActivity() {
             navView.setupWithNavController(navo)
         }*/
     }
-override fun on
+
     override fun onBackPressed() {
         // Deja vacío este método
     }
