@@ -13,7 +13,7 @@ class CuentaGeneral : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            idCuenta = arguments?.getInt("idcu")!!
+
         }
     }
 
@@ -21,6 +21,7 @@ class CuentaGeneral : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        idCuenta = arguments?.getInt("idcu")!!
         return inflater.inflate(R.layout.fragment_cuenta_general, container, false)
     }
 

@@ -11,7 +11,6 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
 import androidx.navigation.ActivityNavigator
 import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
@@ -22,7 +21,6 @@ import com.example.medilife.databinding.ActivityMainInsideBinding
 class MainInside : AppCompatActivity() {
     var idCuenta: Int = 0
     var idTipo: Int = 0
-
     private lateinit var binding: ActivityMainInsideBinding
 
     @SuppressLint("ResourceType")
@@ -34,9 +32,9 @@ class MainInside : AppCompatActivity() {
 
         binding = ActivityMainInsideBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        val navView: BottomNavigationView = binding.navView
-        val navController = findNavController(R.id.nav_host_fragment_activity_main_inside)
+        val navView:BottomNavigationView= binding.navView
 
+        val navController = findNavController(R.id.nav_host_fragment_activity_main_inside)
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
         }
@@ -75,65 +73,34 @@ class MainInside : AppCompatActivity() {
                     R.id.homeCliente, R.id.cuentaGeneral
                 )
             )
+
             val fragmentoDestino = HomeCliente()
             fragmentoDestino.arguments = bundle
-            val fragmentoDestino2 = CuentaGeneral()
-            fragmentoDestino2.arguments = bundle
-
-            //navController.navigate(R.id.cuentaGeneral, bundle)
-            navController.navigate(R.id.homeCliente,bundle)
+            navController.navigate(R.id.homeCliente, bundle)
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
 
-
-            /*navView.setOnItemReselectedListener{ item ->
-                when (item.itemId) {
-                    R.id.cuentaGeneral -> {
-                        if (item.isChecked) {
-                            // El elemento ya está seleccionado
-                            navController.navigate(R.id.cuentaGeneral, bundle)
-                        } else {
-                            // El elemento ha sido seleccionado
-
-                        }
-                        true
-                    }
-                    R.id.homeCliente -> {
-                        if (item.isChecked) {
-                            // El elemento ya está seleccionado
-                            navController.navigate(R.id.homeCliente, bundle)
-                        } else {
-                            // El elemento ha sido seleccionado
-
-                        }
-                        true
-                    }
-                    // Agregar más casos para otros elementos del menú
-                    else -> false
-                }
-            }*/
-            /*navView.setOnNavigationItemSelectedListener { menuItem ->
+            navView.setOnNavigationItemSelectedListener { menuItem ->
                 when (menuItem.itemId) {
-                    R.id.cuentaGeneral -> {
-
-                        true
-                    }
                     R.id.homeCliente -> {
                         val fragmentoDestino = HomeCliente()
                         fragmentoDestino.arguments = bundle
-                        val navController2 = findNavController(R.id.nav_host_fragment_activity_main_inside)
-                        navController2.navigate(R.id.homeCliente, bundle)
-                        setupActionBarWithNavController(navController2, appBarConfiguration)
-                        navView.setupWithNavController(navController2)
-
-
+                        navController.navigate(R.id.homeCliente, bundle)
+                        setupActionBarWithNavController(navController, appBarConfiguration)
+                        navView.setupWithNavController(navController)
                         true
                     }
-
-                    else -> true
+                    R.id.cuentaGeneral -> {
+                        val fragmentoCuenta = CuentaGeneral()
+                        fragmentoCuenta.arguments = bundle
+                        navController.navigate(R.id.cuentaGeneral, bundle)
+                        setupActionBarWithNavController(navController, appBarConfiguration)
+                        navView.setupWithNavController(navController)
+                        true
+                    }
+                    else -> false
                 }
-            }*/
-
+            }
         }
 
     }
@@ -142,62 +109,6 @@ class MainInside : AppCompatActivity() {
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         return super.onCreateView(name, context, attrs)
 
-    }
-
-    override fun onResume() {
-        super.onResume()
-        val bundle = Bundle().apply {
-            putInt("idcu", idCuenta)
-        }
-        if (idTipo == 3) {
-            val appBarConfiguration = AppBarConfiguration(
-                setOf(
-                    R.id.homeCliente, R.id.cuentaGeneral
-                )
-            )
-            val fragmentoDestino = HomeCliente()
-            fragmentoDestino.arguments = bundle
-            val fragmentoDestino2 = CuentaGeneral()
-            fragmentoDestino2.arguments = bundle
-
-            //navController.navigate(R.id.cuentaGeneral, bundle)
-            //navController.navigate(R.id.homeCliente, bundle)
-        }
-        /*val bundle = Bundle().apply {
-            putInt("idcu", idCuenta)
-        }
-        if (idTipo == 3) {
-            val navView: BottomNavigationView = binding.navView
-            val navo = findNavController(R.id.nav_host_fragment_activity_main_inside)
-            navo.navigate(R.id.homeCliente, bundle)
-            navView.setOnItemReselectedListener{ item ->
-                when (item.itemId) {
-                    R.id.cuentaGeneral -> {
-                        if (item.isChecked) {
-                            // El elemento ya está seleccionado
-                            navo.navigate(R.id.cuentaGeneral, bundle)
-                        } else {
-                            // El elemento ha sido seleccionado
-
-                        }
-                        true
-                    }
-                    R.id.homeCliente -> {
-                        if (item.isChecked) {
-                            // El elemento ya está seleccionado
-                            navo.navigate(R.id.homeCliente, bundle)
-                        } else {
-                            // El elemento ha sido seleccionado
-
-                        }
-                        true
-                    }
-                    // Agregar más casos para otros elementos del menú
-                    else -> false
-                }
-            }
-            navView.setupWithNavController(navo)
-        }*/
     }
 
     override fun onBackPressed() {

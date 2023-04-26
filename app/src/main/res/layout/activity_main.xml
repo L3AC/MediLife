@@ -10,109 +10,109 @@
 
     <EditText
         android:id="@+id/txtContra"
-        android:layout_width="275dp"
-        android:layout_height="44dp"
-        android:background="@drawable/customs_edidtext"
-        android:elevation="5dp"
+        android:layout_width="268dp"
+        android:layout_height="54dp"
         android:ems="10"
         android:fontFamily="@font/comfortaa"
         android:hint="Contraseña"
         android:inputType="textPassword"
-        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.643"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.387" />
+        app:layout_constraintVertical_bias="0.494" />
 
     <TextView
         android:id="@+id/txvContraR"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa"
         android:text="¿Olvidó su contraseña?"
         android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.857"
+        app:layout_constraintHorizontal_bias="0.873"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.473" />
+        app:layout_constraintVertical_bias="0.582" />
 
     <Button
         android:id="@+id/btnIngresar"
         android:layout_width="111dp"
         android:layout_height="53dp"
-        android:backgroundTint="#FFC107"
+        android:backgroundTint="#FBE0FF"
+        android:fontFamily="@font/comfortaa"
         android:text="Ingresar"
+        android:textColor="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.617" />
+        app:layout_constraintVertical_bias="0.743" />
 
     <TextView
         android:id="@+id/textView2"
-        android:layout_width="183dp"
-        android:layout_height="34dp"
+        android:layout_width="294dp"
+        android:layout_height="35dp"
         android:fontFamily="@font/comfortaa"
         android:text="Bienvenido a Medilife"
+        android:textAlignment="center"
         android:textColor="#000000"
+        android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintHorizontal_bias="0.564"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.108" />
+        app:layout_constraintVertical_bias="0.076" />
 
     <TextView
         android:id="@+id/txvRegistrarse"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa"
-        android:text="Registrarse"
+        android:text="Crear cuenta"
         android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.82"
+        app:layout_constraintHorizontal_bias="0.87"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.775" />
+        app:layout_constraintVertical_bias="0.859" />
 
     <EditText
         android:id="@+id/txtUsuario"
-        android:layout_width="275dp"
-        android:layout_height="44dp"
-        android:background="@drawable/customs_edidtext"
-        android:elevation="5dp"
+        android:layout_width="268dp"
+        android:layout_height="62dp"
         android:ems="10"
         android:fontFamily="@font/comfortaa"
         android:hint="Usuario"
         android:inputType="textPersonName"
-        android:textColor="#000000"
-        android:textColorHint="#000000"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.522"
+        app:layout_constraintHorizontal_bias="0.643"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.275" />
+        app:layout_constraintVertical_bias="0.312" />
 
     <TextView
         android:id="@+id/textView4"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:fontFamily="@font/comfortaa"
         android:text="Inicio de sesión"
+        android:textAlignment="center"
         android:textColor="#000000"
+        android:textSize="34sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.174" />
+        app:layout_constraintVertical_bias="0.179" />
 
     <TextView
         android:id="@+id/textView5"
@@ -121,14 +121,14 @@
         android:fontFamily="@font/comfortaa"
         android:text="¿Es cliente y no tiene cuenta aún?"
         android:textAlignment="center"
-        android:textColor="#FFFFFF"
+        android:textColor="#000000"
         android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.106"
+        app:layout_constraintHorizontal_bias="0.168"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.793" />
+        app:layout_constraintVertical_bias="0.865" />
 
     <ImageButton
         android:id="@+id/btnMirar"
@@ -141,7 +141,7 @@
         app:layout_constraintHorizontal_bias="0.044"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.39"
+        app:layout_constraintVertical_bias="0.497"
         app:srcCompat="@drawable/showp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
