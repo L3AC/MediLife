@@ -6,6 +6,7 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import java.util.Date
 
 class CuentaGeneral : Fragment() {
     var idCuenta: Int = 0
@@ -13,7 +14,6 @@ class CuentaGeneral : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
         }
     }
 
