@@ -8,4 +8,6 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="Bordes">#AFF2F2</color>
+    <color name="Grey">#e8ebec</color>
+    <color name="Transparente">#00FF0000</color>
 </resources>
