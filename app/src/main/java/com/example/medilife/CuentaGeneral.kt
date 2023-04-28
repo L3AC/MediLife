@@ -29,6 +29,9 @@ class CuentaGeneral : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         Log.i("cuentage",idCuenta.toString())
     }
+
+
+
     /*companion object {
         /**
          * Use this factory method to create a new instance of
