@@ -39,11 +39,6 @@
         android:id="@+id/mainInside"
         android:name="com.example.medilife.MainInside"
         android:label="MainInside" />
-    <fragment
-        android:id="@+id/dashboardFragment"
-        android:name="com.example.medilife.ui.dashboard.DashboardFragment"
-        android:label="fragment_dashboard"
-        tools:layout="@layout/fragment_dashboard" />
 
 
 </navigation>
