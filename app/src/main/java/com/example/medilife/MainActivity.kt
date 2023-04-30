@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -48,6 +49,7 @@ class MainActivity : AppCompatActivity() {
             val scndAct = Intent(this, RegistroMain::class.java)
             startActivity(scndAct)
         }
+
         mirarc.setOnClickListener{
             contraVisible = !contraVisible
                 if (contraVisible) {
@@ -63,7 +65,9 @@ class MainActivity : AppCompatActivity() {
             VerifDatos()
         }
     }
-
+    /*val builder = AlertDialog.Builder(this)
+    builder.setTitle("Eliminar registro")
+    builder.setMessage("¿Estás seguro de que quieres eliminar este registro?")*/
     fun VerifTipo() {
         try {
             val cadena: String = "select * from tbUsuarios where usuario=? " +

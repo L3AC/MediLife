@@ -5,6 +5,14 @@
         android:icon="@drawable/ic_home_black_24dp"
         android:title="@string/title_home" />
     <item
+        android:id="@+id/homeDoctor"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+    <item
+        android:id="@+id/homeSecretaria"
+        android:icon="@drawable/ic_home_black_24dp"
+        android:title="@string/title_home" />
+    <item
         android:id="@+id/cuentaGeneral"
         android:icon="@drawable/ic_dashboard_black_24dp"
         android:title="Cuenta" />

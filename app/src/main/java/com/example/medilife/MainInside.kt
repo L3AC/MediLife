@@ -9,10 +9,8 @@ import android.view.View
 import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.os.bundleOf
-import androidx.navigation.ActivityNavigator
-import androidx.navigation.findNavController
+import androidx.navigation.*
 import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.navArgs
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
@@ -28,6 +26,8 @@ class MainInside : AppCompatActivity() {
     @SuppressLint("ResourceType")
     public override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        supportActionBar?.hide()
+
         val extras = intent.extras
         idCuenta = extras?.getInt("idCuenta")!!
         idTipo = extras?.getInt("idTipo")!!
@@ -44,13 +44,18 @@ class MainInside : AppCompatActivity() {
         if (idTipo == 1) {
             val appBarConfiguration = AppBarConfiguration(
                 setOf(
-                    R.id.homeDoctor, R.id.cuentaGeneral
+                    R.id.homeDoctor,R.id.cuentaGeneral
                 )
             )
 
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
             navController.navigate(R.id.homeDoctor,bundle)
+
+            val it1 = navView.menu.findItem(R.id.homeCliente)
+            val it2 = navView.menu.findItem(R.id.homeSecretaria)
+            it1.isVisible=false
+            it2.isVisible=false
 
             navView.setOnNavigationItemSelectedListener { item ->
                 navController.navigate(item.itemId, bundle)
@@ -68,6 +73,11 @@ class MainInside : AppCompatActivity() {
             navView.setupWithNavController(navController)
             navController.navigate(R.id.homeSecretaria,bundle)
 
+            val it1 = navView.menu.findItem(R.id.homeCliente)
+            val it2 = navView.menu.findItem(R.id.homeDoctor)
+            it1.isVisible=false
+            it2.isVisible=false
+
             navView.setOnNavigationItemSelectedListener { item ->
                 navController.navigate(item.itemId, bundle)
                 true
@@ -84,6 +94,11 @@ class MainInside : AppCompatActivity() {
             setupActionBarWithNavController(navController, appBarConfiguration)
             navView.setupWithNavController(navController)
             navController.navigate(R.id.homeCliente,bundle)
+
+            val it1 = navView.menu.findItem(R.id.homeSecretaria)
+            val it2 = navView.menu.findItem(R.id.homeDoctor)
+            it1.isVisible=false
+            it2.isVisible=false
 
             navView.setOnNavigationItemSelectedListener { item ->
                 navController.navigate(item.itemId, bundle)
