@@ -47,6 +47,8 @@ class RegistroMain : AppCompatActivity() {
         //LLENAR SPINNER
         LLenarSpin()
 
+
+
         volv.setOnClickListener{
             val scndAct = Intent(this,MainActivity::class.java)
             startActivity(scndAct)
