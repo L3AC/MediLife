@@ -24,12 +24,20 @@
         android:id="@+id/cuentaGeneral"
         android:name="com.example.medilife.CuentaGeneral"
         android:label="fragment_cuenta_general"
-        tools:layout="@layout/fragment_cuenta_general" />
+        tools:layout="@layout/fragment_cuenta_general" >
+        <action
+            android:id="@+id/action_cuentaGeneral_to_infoCuentaGeneral"
+            app:destination="@id/infoCuentaGeneral" />
+    </fragment>
     <fragment
         android:id="@+id/infoCuentaGeneral"
         android:name="com.example.medilife.infoCuentaGeneral"
         android:label="fragment_info_cuenta_general"
-        tools:layout="@layout/fragment_info_cuenta_general" />
+        tools:layout="@layout/fragment_info_cuenta_general" >
+        <action
+            android:id="@+id/action_infoCuentaGeneral_to_cuentaGeneral"
+            app:destination="@id/cuentaGeneral" />
+    </fragment>
     <fragment
         android:id="@+id/reservaCita"
         android:name="com.example.medilife.reservaCita"

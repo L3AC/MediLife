@@ -12,6 +12,7 @@ import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.fragment.app.DialogFragment
 import java.sql.PreparedStatement
@@ -119,9 +120,29 @@ class RegistroMain : AppCompatActivity() {
             Toast.makeText(applicationContext,"No existen doctores", Toast.LENGTH_SHORT).show()
         }
     }*/
-    fun Registrar(){
+    /*fun Registrar(){
+        Boton.setOnClickListener {
+            try {
+                val addEstudiante: PreparedStatement =  connectSql.dbConn()?.prepareStatement("insert into Estudiantes values (?,?)")!!
+                addEstudiante.setString(1, CajitaNombre.text.toString())
+                addEstudiante.setString(2, CajitaCodigo.text.toString())
+                addEstudiante.executeUpdate()
 
-    }
+                Toast.makeText(this, "Estudiante ingresado correctamente", Toast.LENGTH_SHORT).show()
+                CajitaCodigo.clearFocus()
+                CajitaNombre.clearFocus()
+
+                //Para ocultar el teclado
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(Boton.windowToken, 0)
+
+                CajitaNombre.setText("")
+                CajitaCodigo.setText("")
+            }catch (ex: SQLException){
+                Toast.makeText(this, "Error al ingresar", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }*/
 
     private fun verResultado(year: Int, month: Int, day: Int) {
         val mes=month+1
