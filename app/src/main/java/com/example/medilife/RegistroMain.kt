@@ -47,29 +47,6 @@ class RegistroMain : AppCompatActivity() {
         //LLENAR SPINNER
         LLenarSpin()
 
-        val Nom:EditText = findViewById<(EditText)>(R.id.txtUs)
-
-        Nom.addTextChangedListener(object: TextWatcher {
-            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-            }
-
-            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
-                TODO("Not yet implemented")
-                val regex = Regex("[a-zA-Z]+")
-                if (!p0.toString().matches(regex)){
-                    Nom.error = "Solo se permiten letras"
-                }
-                else{
-                    Nom.error = null
-                }
-            }
-
-            override fun afterTextChanged(p0: Editable?) {
-                TODO("Not yet implemented")
-            }
-        })
-
         volv.setOnClickListener{
             val scndAct = Intent(this,MainActivity::class.java)
             startActivity(scndAct)
