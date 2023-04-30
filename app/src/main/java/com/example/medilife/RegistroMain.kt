@@ -7,6 +7,8 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.text.Editable
+import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
@@ -31,9 +33,7 @@ val sexo = listOf("Femenino", "Masculino")
 
 class RegistroMain : AppCompatActivity() {
 
-    fun Nombre(){
 
-    }
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,6 +46,29 @@ class RegistroMain : AppCompatActivity() {
 
         //LLENAR SPINNER
         LLenarSpin()
+
+        val Nom:EditText = findViewById<(EditText)>(R.id.txtUs)
+
+        Nom.addTextChangedListener(object: TextWatcher {
+            override fun beforeTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+            }
+
+            override fun onTextChanged(p0: CharSequence?, p1: Int, p2: Int, p3: Int) {
+                TODO("Not yet implemented")
+                val regex = Regex("[a-zA-Z]+")
+                if (!p0.toString().matches(regex)){
+                    Nom.error = "Solo se permiten letras"
+                }
+                else{
+                    Nom.error = null
+                }
+            }
+
+            override fun afterTextChanged(p0: Editable?) {
+                TODO("Not yet implemented")
+            }
+        })
 
         volv.setOnClickListener{
             val scndAct = Intent(this,MainActivity::class.java)
