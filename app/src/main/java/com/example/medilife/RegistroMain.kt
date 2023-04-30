@@ -30,6 +30,10 @@ private var spinText:String=""
 val sexo = listOf("Femenino", "Masculino")
 
 class RegistroMain : AppCompatActivity() {
+
+    fun Nombre(){
+
+    }
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
