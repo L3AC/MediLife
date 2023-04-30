@@ -62,7 +62,7 @@ class infoCuentaGeneral : Fragment() {
         }
         Log.i("xd", idCuenta.toString())
 
-        val volver = requireView().findViewById<Button>(R.id.btnVolver4)
+        val volver = requireView().findViewById<ImageButton>(R.id.btnVolver4)
 
         volver.setOnClickListener{
             findNavController().navigate(R.id.action_infoCuentaGeneral_to_cuentaGeneral,bundle)
