@@ -102,7 +102,7 @@ class RegistroMain : AppCompatActivity() {
                 Toast.makeText(applicationContext, "Ya existe usuario", Toast.LENGTH_SHORT).show()
 
             } else {
-
+                textAdv.isVisible = false
             }
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
