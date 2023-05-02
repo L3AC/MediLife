@@ -26,7 +26,7 @@
                 android:layout_height="1069dp">
 
                 <ImageButton
-                    android:id="@+id/btnFecha"
+                    android:id="@+id/btnNaci"
                     android:layout_width="49dp"
                     android:layout_height="49dp"
                     android:background="@android:color/transparent"
@@ -104,7 +104,7 @@
                     app:layout_constraintVertical_bias="0.613" />
 
                 <EditText
-                    android:id="@+id/txtFecha"
+                    android:id="@+id/txtNaci"
                     android:layout_width="145dp"
                     android:layout_height="48dp"
                     android:background="@drawable/transparente"

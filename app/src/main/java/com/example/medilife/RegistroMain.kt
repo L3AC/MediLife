@@ -32,9 +32,9 @@ lateinit var tpsexo: Spinner
 lateinit var bFecha: ImageButton
 lateinit var tpsangre: EditText
 lateinit var tpdoc: Spinner
-lateinit var tdoc: EditText
+lateinit var ndoc: EditText
 lateinit var patol: EditText
-lateinit var tFecha: EditText
+lateinit var tNaci: EditText
 
 //VARIABLES GLOBALES
 lateinit var textAdv: TextView
@@ -60,7 +60,7 @@ class RegistroMain : AppCompatActivity() {
         volv = findViewById(R.id.btnVolver)
         bingresar = findViewById(R.id.btnReg)
         usu = findViewById(R.id.txtUs)
-        tFecha = findViewById(R.id.txtFecha)
+        tNaci = findViewById(R.id.txtNaci)
         contra1 = findViewById(R.id.txtContra1)
         contra2 = findViewById(R.id.txtContra2)
         correo = findViewById(R.id.txtCorreo)
@@ -68,10 +68,10 @@ class RegistroMain : AppCompatActivity() {
         apell = findViewById(R.id.txtApellidos)
         tel = findViewById(R.id.txtTel)
         tpsexo = findViewById(R.id.spinSexo)
-        bFecha = findViewById(R.id.btnFecha)
+        bFecha = findViewById(R.id.btnNaci)
         tpsangre = findViewById(R.id.txtTipoS)
         tpdoc = findViewById(R.id.spinTD)
-        tdoc = findViewById(R.id.txtDoc)
+        ndoc = findViewById(R.id.txtDoc)
         patol = findViewById(R.id.txtPatologias)
 
 
@@ -84,8 +84,11 @@ class RegistroMain : AppCompatActivity() {
             startActivity(scndAct)
         }
         bingresar.setOnClickListener {
-            val scndAct = Intent(this, MainActivity::class.java)
-            startActivity(scndAct)
+            createUs()
+            selectUs()
+            createCl()
+            /*val scndAct = Intent(this, MainActivity::class.java)
+            startActivity(scndAct)*/
         }
         bFecha.setOnClickListener {
             val Calendario =
@@ -131,8 +134,29 @@ class RegistroMain : AppCompatActivity() {
         conx.dbConn()!!.close()
 
     }
-    fun idUs(){
+    fun selectUs(){
+        try {
+            val cadena: String = "select * from tbUsuarios where usuario=? COLLATE SQL_Latin1_General_CP1_CS_AS" +
+                    " and idTipo=3;"
+            val st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
+            ps.setString(1, usu.text.toString())
+            st = ps.executeQuery()
+            st.next()
+
+            val found = st.row
+            if (found == 1) {
+                idus = st.getInt("idUsuario")
+
+            } else {
+                Toast.makeText(applicationContext, "Error de inserción", Toast.LENGTH_SHORT).show()
+            }
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(applicationContext, "Error interno", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
     }
 
     fun createCl() {
@@ -145,12 +169,16 @@ class RegistroMain : AppCompatActivity() {
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
-            ps.setString(1, usu.text.toString())
-            ps.setString(1, usu.text.toString())
-            ps.setString(1, usu.text.toString())
-            ps.setString(1, usu.text.toString())
-            ps.setString(1, usu.text.toString())
-            ps.setString(1, usu.text.toString())
+            ps.setString(1, idus.toString())
+            ps.setString(2, nomb.text.toString())
+            ps.setString(3, apell.text.toString())
+            ps.setString(4, tpdoc.selectedItem.toString())
+            ps.setString(5, ndoc.text.toString())
+            ps.setString(6, tNaci.text.toString())
+            ps.setString(7, tpsexo.selectedItem.toString())
+            ps.setString(8, tel.text.toString())
+            ps.setString(9, tpsangre.text.toString())
+            ps.setString(10, patol.text.toString())
 
             ps.executeUpdate()
 
@@ -273,7 +301,7 @@ class RegistroMain : AppCompatActivity() {
     private fun verResultado(year: Int, month: Int, day: Int) {
         val mes = month + 1
         fechaSql = "$year-$mes-$day"
-        tFecha?.setText("$day-$mes-$year")
+        tNaci?.setText("$day-$mes-$year")
 
     }
 
