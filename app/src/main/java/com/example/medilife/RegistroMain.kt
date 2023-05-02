@@ -55,7 +55,9 @@ class RegistroMain : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_registro_main)
         textAdv = findViewById(R.id.lbAdver)
+        textAdv2 = findViewById(R.id.lbAdver2)
         textAdv.isVisible = false
+        textAdv2.isVisible = false
 
         volv = findViewById(R.id.btnVolver)
         bingresar = findViewById(R.id.btnReg)
@@ -218,7 +220,12 @@ class RegistroMain : AppCompatActivity() {
 
     fun verifContra() {
         if (contra1.text != contra2.text) {
-        bingresar.isEnabled=false
+            textAdv2.isVisible=true
+            bingresar.isEnabled=false
+        }
+        else{
+            textAdv2.isVisible=false
+            bingresar.isEnabled=true
         }
 
     }
