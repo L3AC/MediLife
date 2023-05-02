@@ -138,7 +138,7 @@
                     app:layout_constraintHorizontal_bias="0.906"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.677" />
+                    app:layout_constraintVertical_bias="0.684" />
 
                 <EditText
                     android:id="@+id/txtContra2"
@@ -231,24 +231,24 @@
                     app:layout_constraintVertical_bias="0.846" />
 
                 <EditText
-                    android:id="@+id/txtDUI"
-                    android:layout_width="290dp"
-                    android:layout_height="48dp"
+                    android:id="@+id/txtDoc"
+                    android:layout_width="196dp"
+                    android:layout_height="47dp"
                     android:background="@drawable/transparente"
                     android:drawableEnd="@drawable/dui"
                     android:drawablePadding="10dp"
                     android:elevation="5dp"
                     android:ems="10"
-                    android:hint="Documento de identidad"
+                    android:hint="Documento"
                     android:inputType="number"
                     android:textColor="#FFFFFF"
                     android:textColorHint="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.604"
+                    app:layout_constraintHorizontal_bias="0.934"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.761" />
+                    app:layout_constraintVertical_bias="0.763" />
 
                 <EditText
                     android:id="@+id/txtContra1"
@@ -280,6 +280,18 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.615" />
 
+                <Spinner
+                    android:id="@+id/spinTD"
+                    android:layout_width="168dp"
+                    android:layout_height="42dp"
+                    android:hint="@string/sexo"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.065"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.76" />
+
                 <Button
                     android:id="@+id/btnReg"
                     android:layout_width="124dp"
@@ -306,6 +318,20 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.165" />
+
+                <TextView
+                    android:id="@+id/lbAdver2"
+                    android:layout_width="210dp"
+                    android:layout_height="20dp"
+                    android:text="La contraseña debe ser igual"
+                    android:textColor="#FFEB3B"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.766"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.305" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

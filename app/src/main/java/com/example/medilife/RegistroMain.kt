@@ -7,12 +7,9 @@ import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.text.Editable
-import android.text.TextWatcher
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -21,18 +18,34 @@ import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
 
+//CAMPOS
 lateinit var volv: ImageButton
 lateinit var bingresar: Button
 lateinit var usu: EditText
+lateinit var contra1: EditText
+lateinit var contra2: EditText
+lateinit var correo: EditText
+lateinit var nomb: EditText
+lateinit var apell: EditText
+lateinit var tel: EditText
+lateinit var tpsexo: Spinner
 lateinit var bFecha: ImageButton
+lateinit var tpsangre: EditText
+lateinit var tpdoc: Spinner
+lateinit var tdoc: EditText
+lateinit var patol: EditText
 lateinit var tFecha: EditText
-lateinit var textAdv: TextView
 
-private var nombus: String = ""
+//VARIABLES GLOBALES
+lateinit var textAdv: TextView
+lateinit var textAdv2: TextView
+
+private var idus: Int = 0
 private var fechaSql: String = ""
 private var spinText: String = ""
 
 val sexo = listOf("Femenino", "Masculino")
+val tipodoc = listOf("DUI", "Pasaporte")
 
 class RegistroMain : AppCompatActivity() {
     private var conx = Conx()
@@ -47,12 +60,23 @@ class RegistroMain : AppCompatActivity() {
         volv = findViewById(R.id.btnVolver)
         bingresar = findViewById(R.id.btnReg)
         usu = findViewById(R.id.txtUs)
-        bFecha = findViewById(R.id.btnFecha)
         tFecha = findViewById(R.id.txtFecha)
+        contra1 = findViewById(R.id.txtContra1)
+        contra2 = findViewById(R.id.txtContra2)
+        correo = findViewById(R.id.txtCorreo)
+        nomb = findViewById(R.id.txtNomb)
+        apell = findViewById(R.id.txtApellidos)
+        tel = findViewById(R.id.txtTel)
+        tpsexo = findViewById(R.id.spinSexo)
+        bFecha = findViewById(R.id.btnFecha)
+        tpsangre = findViewById(R.id.txtTipoS)
+        tpdoc = findViewById(R.id.spinTD)
+        tdoc = findViewById(R.id.txtDoc)
+        patol = findViewById(R.id.txtPatologias)
+
 
         //LLENAR SPINNER
         LLenarSpin()
-
 
 
         volv.setOnClickListener {
@@ -73,6 +97,11 @@ class RegistroMain : AppCompatActivity() {
                 verifUs()
             }
         }
+        contra2.setOnFocusChangeListener(){ view, hasFocus ->
+            if (!hasFocus) {
+                verifContra()
+            }
+        }
 
     }
 
@@ -82,8 +111,55 @@ class RegistroMain : AppCompatActivity() {
     }
 
     fun createUs() {
-        val cadena: String = "insert into tbUsuarios(idTipo,usuario,contra,correo) " +
-                "values(1,'poji','poji','poji@gmail.com')"
+
+        try {
+            val cadena: String = "insert into tbUsuarios(idTipo,usuario,contra,correo) " +
+                    "values(3,?,?,?);"
+
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, usu.text.toString())
+            ps.setString(2, contra2.text.toString())
+            ps.setString(3, correo.text.toString())
+
+            ps.executeUpdate()
+
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(applicationContext, "Errorsito", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
+
+    }
+    fun idUs(){
+
+    }
+
+    fun createCl() {
+
+        try {
+            val cadena: String =
+                "insert into tbClientes(idUsuario,nombres,apellidos,tipodocum,numdocum," +
+                        "nacimiento,sexo,telefono,tipoSangre,patologias) " +
+                        "values (?,?,?,?,?,?,?,?,?,?);"
+
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, usu.text.toString())
+            ps.setString(1, usu.text.toString())
+            ps.setString(1, usu.text.toString())
+            ps.setString(1, usu.text.toString())
+            ps.setString(1, usu.text.toString())
+            ps.setString(1, usu.text.toString())
+
+            ps.executeUpdate()
+
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(applicationContext, "Errorsito", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
+
     }
 
     fun verifUs() {
@@ -103,12 +179,20 @@ class RegistroMain : AppCompatActivity() {
 
             } else {
                 textAdv.isVisible = false
+                bingresar.isEnabled = false
             }
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(applicationContext, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(applicationContext, "Error interno", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
+    }
+
+    fun verifContra() {
+        if (contra1.text != contra2.text) {
+        bingresar.isEnabled=false
+        }
+
     }
 
     fun LLenarSpin() {
@@ -116,6 +200,11 @@ class RegistroMain : AppCompatActivity() {
         adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val spinner = findViewById<Spinner>(R.id.spinSexo)
         spinner.adapter = adaptadorSpinner
+
+        val adaptadorSpinner2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, tipodoc)
+        adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner2 = findViewById<Spinner>(R.id.spinTD)
+        spinner2.adapter = adaptadorSpinner
     }
     /*
     fun Spin(cb: Spinner) {
@@ -158,28 +247,28 @@ class RegistroMain : AppCompatActivity() {
         }
     }*/
     /*fun Registrar(){
-        Boton.setOnClickListener {
-            try {
-                val addEstudiante: PreparedStatement =  connectSql.dbConn()?.prepareStatement("insert into Estudiantes values (?,?)")!!
-                addEstudiante.setString(1, CajitaNombre.text.toString())
-                addEstudiante.setString(2, CajitaCodigo.text.toString())
-                addEstudiante.executeUpdate()
+    Boton.setOnClickListener {
+        try {
+            val addEstudiante: PreparedStatement =  connectSql.dbConn()?.prepareStatement("insert into Estudiantes values (?,?)")!!
+            addEstudiante.setString(1, CajitaNombre.text.toString())
+            addEstudiante.setString(2, CajitaCodigo.text.toString())
+            addEstudiante.executeUpdate()
 
-                Toast.makeText(this, "Estudiante ingresado correctamente", Toast.LENGTH_SHORT).show()
-                CajitaCodigo.clearFocus()
-                CajitaNombre.clearFocus()
+            Toast.makeText(this, "Estudiante ingresado correctamente", Toast.LENGTH_SHORT).show()
+            CajitaCodigo.clearFocus()
+            CajitaNombre.clearFocus()
 
-                //Para ocultar el teclado
-                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-                inputMethodManager.hideSoftInputFromWindow(Boton.windowToken, 0)
+            //Para ocultar el teclado
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(Boton.windowToken, 0)
 
-                CajitaNombre.setText("")
-                CajitaCodigo.setText("")
-            }catch (ex: SQLException){
-                Toast.makeText(this, "Error al ingresar", Toast.LENGTH_SHORT).show()
-            }
+            CajitaNombre.setText("")
+            CajitaCodigo.setText("")
+        }catch (ex: SQLException){
+            Toast.makeText(this, "Error al ingresar", Toast.LENGTH_SHORT).show()
         }
-    }*/
+    }
+}*/
 
     private fun verResultado(year: Int, month: Int, day: Int) {
         val mes = month + 1
