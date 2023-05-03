@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
@@ -89,6 +90,10 @@ class RegistroMain : AppCompatActivity() {
             createUs()
             selectUs()
             createCl()
+            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+            inputMethodManager.hideSoftInputFromWindow(bingresar.windowToken, 0)
+
+            Toast.makeText(applicationContext, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
             val scndAct = Intent(this, MainActivity::class.java)
             startActivity(scndAct)
         }
@@ -115,25 +120,6 @@ class RegistroMain : AppCompatActivity() {
         }
 
     }
-    fun declararID(){
-        volv = findViewById(R.id.btnVolver)
-        bingresar = findViewById(R.id.btnReg)
-        usu = findViewById(R.id.txtUs)
-        tNaci = findViewById(R.id.txtNaci)
-        contra1 = findViewById(R.id.txtContra1)
-        contra2 = findViewById(R.id.txtContra2)
-        correo = findViewById(R.id.txtCorreo)
-        nomb = findViewById(R.id.txtNomb)
-        apell = findViewById(R.id.txtApellidos)
-        tel = findViewById(R.id.txtTel)
-        tpsexo = findViewById(R.id.spinSexo)
-        bFecha = findViewById(R.id.btnNaci)
-        tpsangre = findViewById(R.id.txtTipoS)
-        tpdoc = findViewById(R.id.spinTD)
-        ndoc = findViewById(R.id.txtDoc)
-        patol = findViewById(R.id.txtPatologias)
-    }
-
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
         return super.onCreateView(name, context, attrs)
 
@@ -207,7 +193,6 @@ class RegistroMain : AppCompatActivity() {
             ps.setString(10, patol.text.toString())
 
             ps.executeUpdate()
-            Toast.makeText(applicationContext, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
 
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)

@@ -1,31 +1,35 @@
 package com.example.medilife
 
+import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
+import android.widget.ArrayAdapter
+import android.widget.Spinner
+import android.widget.Toast
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+class espe(val id: Int, val nombre: String)
 
-/**
- * A simple [Fragment] subclass.
- * Use the [reservaCita.newInstance] factory method to
- * create an instance of this fragment.
- */
+val espec = mutableListOf<espe>()
+
+class doc(val id: Int, val nombre: String)
+
+val doctores = mutableListOf<doc>()
+
 class reservaCita : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private var conx = Conx()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -37,23 +41,52 @@ class reservaCita : Fragment() {
         return inflater.inflate(R.layout.fragment_reserva_cita, container, false)
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment reservaCita.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            reservaCita().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+    }
+
+    fun SpinDoc(cb: Spinner) {
+        try {
+            val cadena = "select * from tbDoctores;"
+            val st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+
+            st = ps.executeQuery()
+            //LLENAR SPINNER
+            while (st.next()) {
+                val idDoc = st.getString("idDoctor").toInt()
+                val nombre = st.getString("nombre")
+                doctores.add(doc(idDoc, "$nombre"))
             }
+            val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
+                doctores.map { it.nombre })
+            cb.adapter = adapter
+            conx.dbConn()!!.close()
+
+            cb.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    /*spinText = parent.getItemAtPosition(position).toString()
+                    val doct = doctores[position]
+                    nDoctor = doct.nombre
+                    idDoctor = doct.id*/
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+
+            }
+
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(context, "No existen doctores", Toast.LENGTH_SHORT).show()
+        }
     }
 }
