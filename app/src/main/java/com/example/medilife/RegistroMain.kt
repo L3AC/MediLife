@@ -102,12 +102,36 @@ class RegistroMain : AppCompatActivity() {
                 verifUs()
             }
         }
+
         contra2.setOnFocusChangeListener(){ view, hasFocus ->
             if (!hasFocus) {
                 verifContra()
             }
+            contra1.setOnFocusChangeListener(){ view, hasFocus ->
+                if (!hasFocus) {
+                    verifContra()
+                }
+            }
         }
 
+    }
+    fun declararID(){
+        volv = findViewById(R.id.btnVolver)
+        bingresar = findViewById(R.id.btnReg)
+        usu = findViewById(R.id.txtUs)
+        tNaci = findViewById(R.id.txtNaci)
+        contra1 = findViewById(R.id.txtContra1)
+        contra2 = findViewById(R.id.txtContra2)
+        correo = findViewById(R.id.txtCorreo)
+        nomb = findViewById(R.id.txtNomb)
+        apell = findViewById(R.id.txtApellidos)
+        tel = findViewById(R.id.txtTel)
+        tpsexo = findViewById(R.id.spinSexo)
+        bFecha = findViewById(R.id.btnNaci)
+        tpsangre = findViewById(R.id.txtTipoS)
+        tpdoc = findViewById(R.id.spinTD)
+        ndoc = findViewById(R.id.txtDoc)
+        patol = findViewById(R.id.txtPatologias)
     }
 
     override fun onCreateView(name: String, context: Context, attrs: AttributeSet): View? {
@@ -176,7 +200,7 @@ class RegistroMain : AppCompatActivity() {
             ps.setString(3, apell.text.toString())
             ps.setString(4, tpdoc.selectedItem.toString())
             ps.setString(5, ndoc.text.toString())
-            ps.setString(6, tNaci.text.toString())
+            ps.setString(6, fechaSql)
             ps.setString(7, tpsexo.selectedItem.toString())
             ps.setString(8, tel.text.toString())
             ps.setString(9, tpsangre.text.toString())
@@ -240,7 +264,7 @@ class RegistroMain : AppCompatActivity() {
         val adaptadorSpinner2 = ArrayAdapter(this, android.R.layout.simple_spinner_item, tipodoc)
         adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         val spinner2 = findViewById<Spinner>(R.id.spinTD)
-        spinner2.adapter = adaptadorSpinner
+        spinner2.adapter = adaptadorSpinner2
     }
     /*
     fun Spin(cb: Spinner) {
