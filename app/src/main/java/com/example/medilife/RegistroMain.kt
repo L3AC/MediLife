@@ -89,8 +89,8 @@ class RegistroMain : AppCompatActivity() {
             createUs()
             selectUs()
             createCl()
-            /*val scndAct = Intent(this, MainActivity::class.java)
-            startActivity(scndAct)*/
+            val scndAct = Intent(this, MainActivity::class.java)
+            startActivity(scndAct)
         }
         bFecha.setOnClickListener {
             val Calendario =
@@ -183,6 +183,7 @@ class RegistroMain : AppCompatActivity() {
             ps.setString(10, patol.text.toString())
 
             ps.executeUpdate()
+            Toast.makeText(applicationContext, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
 
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
@@ -194,7 +195,7 @@ class RegistroMain : AppCompatActivity() {
 
     fun verifUs() {
         try {
-            val cadena: String = "select * from tbUsuarios where usuario=? and idTipo=3"
+            val cadena: String = "select * from tbUsuarios where usuario=?;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
@@ -219,11 +220,11 @@ class RegistroMain : AppCompatActivity() {
     }
 
     fun verifContra() {
-        if (contra1.text != contra2.text) {
+        if (contra1.text.toString() != contra2.text.toString()) {
             textAdv2.isVisible=true
             bingresar.isEnabled=false
         }
-        else{
+        else {
             textAdv2.isVisible=false
             bingresar.isEnabled=true
         }
