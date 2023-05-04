@@ -35,30 +35,37 @@ private var idEsp:Int=0
 private var nDoctor:String=""
 private var idDoctor:Int=0
 
+private var idCliente:Int=0
+
 class reservaCita : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            cbEsp=requireView().findViewById(R.id.spinEsp)
-            cbDoc=requireView().findViewById(R.id.spinDoc)
-            lbHorario=requireView().findViewById(R.id.txvHorario)
-            cbDoc.isEnabled=false
-            lbHorario.isVisible=false
+            idCliente = arguments?.getInt("idcu")!!
 
         }
     }
 
-    override fun onCreateView(
+   override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_reserva_cita, container, false)
+       return inflater.inflate(R.layout.fragment_reserva_cita, container, false)
+
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        cbEsp=requireView().findViewById(R.id.spinEsp)
+        cbDoc=requireView().findViewById(R.id.spinDoc)
+        lbHorario=requireView().findViewById(R.id.txvHorario)
+        cbDoc.isEnabled=false
+        lbHorario.isVisible=false
+
+        SpinEsp(cbEsp)
 
     }
     fun SpinEsp(cb: Spinner) {
@@ -66,7 +73,7 @@ class reservaCita : Fragment() {
             val cadena = "select * from tbEspecialidades;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
-            ps.setString(1,idEsp.toString())
+
 
             st = ps.executeQuery()
             //LLENAR SPINNER
@@ -95,7 +102,6 @@ class reservaCita : Fragment() {
                     idEsp = espc.id
                     //LLENAR EL OTRO SPIN
                     SpinDoc(cbDoc)
-
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {

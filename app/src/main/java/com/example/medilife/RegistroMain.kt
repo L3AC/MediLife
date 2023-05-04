@@ -41,15 +41,15 @@ lateinit var tNaci: EditText
 lateinit var textAdv: TextView
 lateinit var textAdv2: TextView
 
-private var idus: Int = 0
-private var fechaSql: String = ""
-private var spinText: String = ""
-
-val sexo = listOf("Femenino", "Masculino")
-val tipodoc = listOf("DUI", "Pasaporte")
 
 class RegistroMain : AppCompatActivity() {
     private var conx = Conx()
+    private var idus: Int = 0
+    private var fechaSql: String = ""
+    private var spinText: String = ""
+
+    val sexo = listOf("Femenino", "Masculino")
+    val tipodoc = listOf("DUI", "Pasaporte")
 
     @SuppressLint("MissingInflatedId")
     override fun onCreate(savedInstanceState: Bundle?) {

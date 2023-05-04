@@ -9,7 +9,11 @@
         android:id="@+id/homeCliente"
         android:name="com.example.medilife.HomeCliente"
         android:label="fragment_home_cliente"
-        tools:layout="@layout/fragment_home_cliente" />
+        tools:layout="@layout/fragment_home_cliente" >
+        <action
+            android:id="@+id/action_homeCliente_to_reservaCita"
+            app:destination="@id/reservaCita" />
+    </fragment>
     <fragment
         android:id="@+id/homeDoctor"
         android:name="com.example.medilife.HomeDoctor"

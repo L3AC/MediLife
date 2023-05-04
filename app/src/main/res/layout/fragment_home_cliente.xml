@@ -8,6 +8,20 @@
     tools:context=".HomeCliente"
     android:background="@drawable/degradado">
 
+    <ImageButton
+        android:id="@+id/btnReserv"
+        android:layout_width="97dp"
+        android:layout_height="88dp"
+        android:background="@android:color/transparent"
+        android:scaleType="fitXY"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.863"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.091"
+        app:srcCompat="@drawable/asdadasd" />
+
     <ImageView
         android:id="@+id/imageView4"
         android:layout_width="142dp"
@@ -20,19 +34,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.062" />
-
-    <ImageView
-        android:id="@+id/imageView7"
-        android:layout_width="103dp"
-        android:layout_height="91dp"
-        android:adjustViewBounds="true"
-        android:src="@drawable/asdadasd"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.87"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.087" />
 
     <TextView
         android:id="@+id/textView28"
