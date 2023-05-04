@@ -26,6 +26,19 @@
                 android:layout_height="752dp">
 
                 <ImageButton
+                    android:id="@+id/btnFecha"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.543"
+                    app:srcCompat="@drawable/calnd" />
+
+                <ImageButton
                     android:id="@+id/btnVolver5"
                     android:layout_width="49dp"
                     android:layout_height="49dp"
@@ -41,15 +54,15 @@
 
                 <Button
                     android:id="@+id/btnReg"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="BOENAS"
+                    android:layout_width="135dp"
+                    android:layout_height="60dp"
+                    android:text="Confirmar"
+                    android:textColor="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.498"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.924" />
+                    app:layout_constraintVertical_bias="0.942" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -97,7 +110,7 @@
                     app:layout_constraintVertical_bias="0.302" />
 
                 <Spinner
-                    android:id="@+id/spinner4"
+                    android:id="@+id/spinEsp"
                     android:layout_width="321dp"
                     android:layout_height="53dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -108,7 +121,7 @@
                     app:layout_constraintVertical_bias="0.214" />
 
                 <Spinner
-                    android:id="@+id/spinner5"
+                    android:id="@+id/spinDoc"
                     android:layout_width="321dp"
                     android:layout_height="53dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -120,18 +133,18 @@
 
                 <EditText
                     android:id="@+id/editTextDate2"
-                    android:layout_width="182dp"
-                    android:layout_height="53dp"
+                    android:layout_width="144dp"
+                    android:layout_height="51dp"
                     android:ems="10"
                     android:hint="YYYY/MM/DD"
                     android:inputType="date"
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.161"
+                    app:layout_constraintHorizontal_bias="0.138"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.559" />
+                    app:layout_constraintVertical_bias="0.542" />
 
                 <EditText
                     android:id="@+id/editTextDate4"
@@ -158,17 +171,17 @@
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.86"
+                    app:layout_constraintHorizontal_bias="0.901"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.559" />
+                    app:layout_constraintVertical_bias="0.547" />
 
                 <TextView
                     android:id="@+id/textView11"
                     android:layout_width="85dp"
                     android:layout_height="25dp"
                     android:gravity="center"
-                    android:text="Hora:"
+                    android:text="Fecha:"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -176,7 +189,7 @@
                     app:layout_constraintHorizontal_bias="0.113"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.478" />
+                    app:layout_constraintVertical_bias="0.466" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -188,10 +201,25 @@
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.773"
+                    app:layout_constraintHorizontal_bias="0.809"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.467" />
+                    app:layout_constraintVertical_bias="0.466" />
+
+                <TextView
+                    android:id="@+id/txvHorario"
+                    android:layout_width="85dp"
+                    android:layout_height="25dp"
+                    android:gravity="center"
+                    android:text="Horario"
+                    android:textColor="#FFFFFF"
+                    android:textSize="16sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.809"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.612" />
 
                 <TextView
                     android:id="@+id/textView13"
