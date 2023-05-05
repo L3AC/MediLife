@@ -2,6 +2,7 @@ package com.example.medilife
 
 import android.content.Context
 import android.os.Bundle
+import android.text.method.TextKeyListener.clear
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -34,7 +35,7 @@ private var nEsp:String=""
 private var idEsp:Int=0
 private var nDoctor:String=""
 private var idDoctor:Int=0
-
+private var idDoc:Int=0
 private var idCliente:Int=0
 
 class reservaCita : Fragment() {
@@ -85,6 +86,7 @@ class reservaCita : Fragment() {
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
                 especL.map { it.nombre })
             cb.adapter = adapter
+
             conx.dbConn()!!.close()
             cbDoc.isEnabled=true //HABILITAR EL OTRO SPIN
 
@@ -100,8 +102,8 @@ class reservaCita : Fragment() {
                     val espc = especL[position]
                     nEsp = espc.nombre
                     idEsp = espc.id
-                    //LLENAR EL OTRO SPIN
                     SpinDoc(cbDoc)
+
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -124,14 +126,17 @@ class reservaCita : Fragment() {
 
             st = ps.executeQuery()
             //LLENAR SPINNER
+            doctores.clear()
             while (st.next()) {
-                val idDoc = st.getString("idDoctor").toInt()
+                idDoc = st.getString("idDoctor").toInt()
                 val nombre = st.getString("nombre")
                 doctores.add(doc(idDoc, "$nombre"))
             }
             val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_dropdown_item,
                 doctores.map { it.nombre })
+
             cb.adapter = adapter
+
             conx.dbConn()!!.close()
 
             cb.onItemSelectedListener = object :
@@ -142,11 +147,12 @@ class reservaCita : Fragment() {
                     position: Int,
                     id: Long
                 ) {
+                    //adapter.clear()
+
                     spinDoc = parent.getItemAtPosition(position).toString()
                     val doct = doctores[position]
                     nDoctor = doct.nombre
                     idDoctor = doct.id
-
                 }
 
                 override fun onNothingSelected(p0: AdapterView<*>?) {
