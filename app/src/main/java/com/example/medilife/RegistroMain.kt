@@ -251,68 +251,10 @@ class RegistroMain : AppCompatActivity() {
         val spinner2 = findViewById<Spinner>(R.id.spinTD)
         spinner2.adapter = adaptadorSpinner2
     }
-    /*
-    fun Spin(cb: Spinner) {
-        try {
-            val cadena = "select * from tbDoctores;"
-            val st: ResultSet
-            val ps: PreparedStatement =conx.dbConn()?.prepareStatement(cadena)!!
 
-
-            st = ps.executeQuery()
-            //LLENAR SPINNER
-            while (st.next()) {
-                val idDoc = st.getString("idDoctor").toInt()
-                val nombre = st.getString("nombre")
-                doctores.add(doc(idDoc,"$nombre"))
-            }
-            val adapter = ArrayAdapter(this, android.R.layout.simple_spinner_dropdown_item,
-                doctores.map { it.nombre })
-            cb.adapter = adapter
-            conx.dbConn()!!.close()
-
-            cb.onItemSelectedListener=object:
-                AdapterView.OnItemSelectedListener{
-                override fun onItemSelected(parent: AdapterView<*>, view: View?, position: Int, id: Long) {
-                    spinText = parent.getItemAtPosition(position).toString()
-                    val doct = doctores[position]
-                    nDoctor=doct.nombre
-                    idDoctor = doct.id
-                }
-
-                override fun onNothingSelected(p0: AdapterView<*>?) {
-                }
-
-            }
-
-        }
-        catch(ex: SQLException){
-            Log.e("Error: ",ex.message!!)
-            Toast.makeText(applicationContext,"No existen doctores", Toast.LENGTH_SHORT).show()
-        }
-    }*/
-    /*fun Registrar(){
-    Boton.setOnClickListener {
-        try {
-            val addEstudiante: PreparedStatement =  connectSql.dbConn()?.prepareStatement("insert into Estudiantes values (?,?)")!!
-            addEstudiante.setString(1, CajitaNombre.text.toString())
-            addEstudiante.setString(2, CajitaCodigo.text.toString())
-            addEstudiante.executeUpdate()
-
-            Toast.makeText(this, "Estudiante ingresado correctamente", Toast.LENGTH_SHORT).show()
-            CajitaCodigo.clearFocus()
-            CajitaNombre.clearFocus()
-
-            //Para ocultar el teclado
+    /*//Para ocultar el teclado
             val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
             inputMethodManager.hideSoftInputFromWindow(Boton.windowToken, 0)
-
-            CajitaNombre.setText("")
-            CajitaCodigo.setText("")
-        }catch (ex: SQLException){
-            Toast.makeText(this, "Error al ingresar", Toast.LENGTH_SHORT).show()
-        }
-    }
 }*/
 
     private fun verResultado(year: Int, month: Int, day: Int) {
