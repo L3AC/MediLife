@@ -8,6 +8,7 @@
     android:background="@drawable/degradado"
     tools:context=".reservaCita" >
 
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -23,7 +24,7 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="752dp">
+                android:layout_height="842dp">
 
                 <ImageButton
                     android:id="@+id/btnFecha"
@@ -51,18 +52,6 @@
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.046"
                     app:srcCompat="@drawable/regresar" />
-
-                <Button
-                    android:id="@+id/btnReg"
-                    android:layout_width="135dp"
-                    android:layout_height="60dp"
-                    android:text="Confirmar"
-                    android:textColor="#000000"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.942" />
 
                 <TextView
                     android:id="@+id/textView7"
@@ -132,7 +121,7 @@
                     app:layout_constraintVertical_bias="0.363" />
 
                 <EditText
-                    android:id="@+id/editTextDate2"
+                    android:id="@+id/txtFecha"
                     android:layout_width="144dp"
                     android:layout_height="51dp"
                     android:ems="10"
@@ -148,9 +137,9 @@
                     app:layout_constraintVertical_bias="0.542" />
 
                 <EditText
-                    android:id="@+id/editTextDate4"
-                    android:layout_width="340dp"
-                    android:layout_height="87dp"
+                    android:id="@+id/txtNota"
+                    android:layout_width="339dp"
+                    android:layout_height="50dp"
                     android:ems="10"
                     android:gravity="fill_vertical|fill_horizontal"
                     android:hint="Nota"
@@ -158,12 +147,13 @@
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.535"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.829" />
+                    app:layout_constraintVertical_bias="0.747" />
 
                 <EditText
-                    android:id="@+id/editTextDate3"
+                    android:id="@+id/txtHora"
                     android:layout_width="93dp"
                     android:layout_height="46dp"
                     android:ems="10"
@@ -210,18 +200,18 @@
 
                 <TextView
                     android:id="@+id/txvDispo"
-                    android:layout_width="85dp"
-                    android:layout_height="25dp"
+                    android:layout_width="149dp"
+                    android:layout_height="58dp"
                     android:gravity="center"
                     android:text="Disponible"
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.865"
+                    app:layout_constraintHorizontal_bias="0.973"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.653" />
+                    app:layout_constraintVertical_bias="0.649" />
 
                 <TextView
                     android:id="@+id/textView12"
@@ -252,6 +242,18 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.558" />
+
+                <Button
+                    android:id="@+id/btnConfirm"
+                    android:layout_width="135dp"
+                    android:layout_height="60dp"
+                    android:text="Confirmar"
+                    android:textColor="#000000"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.913" />
 
 
             </androidx.constraintlayout.widget.ConstraintLayout>

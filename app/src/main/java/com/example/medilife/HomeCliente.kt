@@ -14,9 +14,7 @@ lateinit var reservar:ImageButton
 class HomeCliente : Fragment() {
     private var conx = Conx()
     var idCuenta:Int = 0
-    private var bundle = Bundle().apply {
-        putInt("idcu", idCuenta)
-    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -36,29 +34,13 @@ class HomeCliente : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         Log.i("cliente",idCuenta.toString())
+        var bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+        }
         reservar=requireView().findViewById(R.id.btnReserv)
         reservar.setOnClickListener(){
             findNavController().navigate(R.id.action_homeCliente_to_reservaCita,bundle)
         }
     }
 
- /*   companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment HomeCliente.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            HomeCliente().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
-    }*/
 }

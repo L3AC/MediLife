@@ -61,7 +61,7 @@ class RegistroMain : AppCompatActivity() {
         textAdv2.isVisible = false
 
         volv = findViewById(R.id.btnVolver)
-        bingresar = findViewById(R.id.btnReg)
+        bingresar = findViewById(R.id.btnConfirm)
         usu = findViewById(R.id.txtUs)
         tNaci = findViewById(R.id.txtNaci)
         contra1 = findViewById(R.id.txtContra1)
