@@ -221,7 +221,7 @@ class reservaCita : Fragment() {
             }
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Error base", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
     }
@@ -277,7 +277,7 @@ class reservaCita : Fragment() {
 
     fun verifCita() {
         try {
-            dateh = fechaSql+ txtHora.text
+            dateh = fechaSql+" "+ txtHora.text
             val cadena: String = "select * from tbCitas where idDoctor=? and fechahora=?;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
@@ -292,6 +292,7 @@ class reservaCita : Fragment() {
             if (found == 1) {
                 lbDispo.isVisible = true
                 lbDispo.text = "No disponible"
+                bConfirmar.isEnabled=false
 
             } else {
                 lbDispo.isVisible = true
