@@ -6,12 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
+import android.widget.Button
+import android.widget.ListView
+import androidx.navigation.fragment.findNavController
 
 
+lateinit var bPendiente:Button
 class HomeDoctor : Fragment() {
     var idCuenta:Int = 0
 
@@ -32,7 +32,15 @@ class HomeDoctor : Fragment() {
 //LA IMPORTANTE
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+    bPendiente = requireView().findViewById(R.id.btnPendi)
+
     Log.i("doctor",idCuenta.toString())
+    var bundle = Bundle().apply {
+        putInt("idcu", idCuenta)
+    }
+    bPendiente.setOnClickListener(){
+        findNavController().navigate(R.id.action_homeDoctor_to_citasActivas,bundle)
+    }
 
     }
 

@@ -44,6 +44,7 @@ class reservaCita : Fragment() {
     private var idDoc: Int = 0
     private var idCliente: Int = 0
     private var fechaSql: String = ""
+    private var dateh:String=""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -255,35 +256,35 @@ class reservaCita : Fragment() {
     fun Confirmar() {
         try {
             val cadena: String =
-                "insert into tbCitas(fecha,hora,idCliente,idDoctor,descrip) " +
-                        "values(?,?,?,?,?);;"
+                "insert into tbCitas(fechahora,idCliente,idDoctor,descrip,estado) " +
+                        "values(?,?,?,?,'Pendiente');;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
-            ps.setString(1, fechaSql)
-            ps.setString(2, txtHora.text.toString())
-            ps.setString(3, idCliente.toString())
-            ps.setString(4, idDoc.toString())
-            ps.setString(5, txtNota.text.toString())
+            ps.setString(1, dateh)
+            ps.setString(2, idCliente.toString())
+            ps.setString(3, idDoc.toString())
+            ps.setString(4, txtNota.text.toString())
             ps.executeUpdate()
+
             Toast.makeText(context, "Cita agendada correctamente", Toast.LENGTH_SHORT).show()
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Verifique la fecha o algun campo incorrecto", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
     }
 
     fun verifCita() {
         try {
-            val cadena: String = "select * from tbCitas where idDoctor=? and " +
-                    "fecha=? and hora=?;"
+            dateh = fechaSql+ txtHora.text
+            val cadena: String = "select * from tbCitas where idDoctor=? and fechahora=?;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
             ps.setString(1, idDoctor.toString())
-            ps.setString(2, fechaSql)
-            ps.setString(3, txtHora.text.toString())
+            ps.setString(2,dateh)
+
             st = ps.executeQuery()
             st.next()
 

@@ -18,7 +18,11 @@
         android:id="@+id/homeDoctor"
         android:name="com.example.medilife.HomeDoctor"
         android:label="fragment_home_doctor"
-        tools:layout="@layout/fragment_home_doctor" />
+        tools:layout="@layout/fragment_home_doctor" >
+        <action
+            android:id="@+id/action_homeDoctor_to_citasActivas"
+            app:destination="@id/citasActivas" />
+    </fragment>
     <fragment
         android:id="@+id/homeSecretaria"
         android:name="com.example.medilife.HomeSecretaria"
@@ -51,6 +55,11 @@
         android:id="@+id/mainInside"
         android:name="com.example.medilife.MainInside"
         android:label="MainInside" />
+    <fragment
+        android:id="@+id/citasActivas"
+        android:name="com.example.medilife.citasActivas"
+        android:label="fragment_citas_activas"
+        tools:layout="@layout/fragment_citas_activas" />
 
 
 </navigation>
