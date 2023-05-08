@@ -7,12 +7,14 @@ import android.view.View
 import android.view.ViewGroup
 
 class infoCita : Fragment() {
-
+    var idCuenta: Int = 0
+    var idCita: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-
+            idCuenta = arguments?.getInt("idcu")!!
+            idCita = arguments?.getInt("idcita")!!
         }
     }
 
