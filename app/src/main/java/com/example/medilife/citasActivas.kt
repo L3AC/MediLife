@@ -5,16 +5,19 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
-import android.widget.Toast
+import android.widget.*
+import androidx.navigation.fragment.findNavController
 import java.sql.SQLException
 
 lateinit var ListVista1: ListView
+class fila(val id: Int,val fecha: String,val idCl:Int,val idDoc:Int ,val descrip:String,val estado:String)
+val reg = mutableListOf<fila>()
+
 val myData = mutableListOf<String>()
 
 class citasActivas : Fragment() {
     var idCuenta: Int = 0
+    var idCita: Int = 0
     private var conx = Conx()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -30,33 +33,50 @@ class citasActivas : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
+
         return inflater.inflate(R.layout.fragment_citas_activas, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        ListVista1=requireView().findViewById(R.id.miLista)
+        CargarDatos()
 
+        ListVista1.setOnItemClickListener(){ parent, view, position, id ->
+                val espc = reg[position]
+                idCita = espc.id
+            var bundle = Bundle().apply {
+                putInt("idcu", idCuenta)
+                putInt("idcita",idCita)
+            }
+            findNavController().navigate(R.id.action_citasActivas_to_infoClienteCita,bundle)
+        }
     }
 
-    fun Tabla() {
+    fun CargarDatos() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
         ListVista1.adapter = adapter
         myData.clear()
+        reg.clear()
         try {
             val statement = conx.dbConn()?.createStatement()
-            val resulSet =
-                statement?.executeQuery("select * from tbCitas where fechahora>GETDATE();")
+            val resulSet = statement?.executeQuery("select * from tbCitas where fechahora>GETDATE();")
 
             while (resulSet?.next() == true) {
 
-                val column1 = resulSet.getString("hora")
-                val column2 = resulSet.getString("codigo")
+                val col1 = resulSet.getInt("idCita")
+                val col2 = resulSet.getString("fechahora")
+                val col3 = resulSet.getInt("idCliente")
+                val col4 = resulSet.getInt("idDoctor")
+                val col5 = resulSet.getString("descrip")
+                val col6 = resulSet.getString("estado")
 
-                val newElement = "$column1, $column2"
+                reg.add(fila(col1, "$col2",col3,col4,col5,col6))
+
+                val newElement = "  $col2   $col3   $col4    $col5    $col6"
 
                 myData.add(newElement)
-
                 adapter.notifyDataSetChanged()
 
             }
@@ -65,6 +85,5 @@ class citasActivas : Fragment() {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
-
 
 }

@@ -59,7 +59,19 @@
         android:id="@+id/citasActivas"
         android:name="com.example.medilife.citasActivas"
         android:label="fragment_citas_activas"
-        tools:layout="@layout/fragment_citas_activas" />
+        tools:layout="@layout/fragment_citas_activas" >
+        <action
+            android:id="@+id/action_citasActivas_to_homeDoctor"
+            app:destination="@id/homeDoctor" />
+        <action
+            android:id="@+id/action_citasActivas_to_infoClienteCita"
+            app:destination="@id/infoClienteCita" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoClienteCita"
+        android:name="com.example.medilife.infoClienteCita"
+        android:label="fragment_info_cliente_cita"
+        tools:layout="@layout/fragment_info_cliente_cita" />
 
 
 </navigation>

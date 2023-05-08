@@ -27,8 +27,8 @@
 
                 <ListView
                     android:id="@+id/miLista"
-                    android:layout_width="366dp"
-                    android:layout_height="511dp"
+                    android:layout_width="407dp"
+                    android:layout_height="491dp"
                     android:layout_marginBottom="40dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
