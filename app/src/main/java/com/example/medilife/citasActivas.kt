@@ -10,7 +10,14 @@ import androidx.navigation.fragment.findNavController
 import java.sql.SQLException
 
 lateinit var ListVista1: ListView
-class fila(val id: Int,val fecha: String,val idCl:Int,val idDoc:Int ,val descrip:String,val estado:String)
+
+class fila(
+    val id: Int,
+    val fecha: String,
+    val hora: String,
+    val paciente: String
+)
+
 val reg = mutableListOf<fila>()
 
 val myData = mutableListOf<String>()
@@ -40,17 +47,17 @@ class citasActivas : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ListVista1=requireView().findViewById(R.id.miLista)
+        ListVista1 = requireView().findViewById(R.id.miLista)
         CargarDatos()
 
-        ListVista1.setOnItemClickListener(){ parent, view, position, id ->
-                val espc = reg[position]
-                idCita = espc.id
+        ListVista1.setOnItemClickListener() { parent, view, position, id ->
+            val espc = reg[position]
+            idCita = espc.id
             var bundle = Bundle().apply {
                 putInt("idcu", idCuenta)
-                putInt("idcita",idCita)
+                putInt("idcita", idCita)
             }
-            findNavController().navigate(R.id.action_citasActivas_to_infoClienteCita,bundle)
+            findNavController().navigate(R.id.action_citasActivas_to_infoClienteCita, bundle)
         }
     }
 
@@ -61,20 +68,21 @@ class citasActivas : Fragment() {
         reg.clear()
         try {
             val statement = conx.dbConn()?.createStatement()
-            val resulSet = statement?.executeQuery("select * from tbCitas where fechahora>GETDATE();")
+            val resulSet = statement?.executeQuery(
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente and fechahora>GETDATE() and estado='Pendiente';"
+            )
 
             while (resulSet?.next() == true) {
 
                 val col1 = resulSet.getInt("idCita")
-                val col2 = resulSet.getString("fechahora")
-                val col3 = resulSet.getInt("idCliente")
-                val col4 = resulSet.getInt("idDoctor")
-                val col5 = resulSet.getString("descrip")
-                val col6 = resulSet.getString("estado")
+                val col2 = resulSet.getString("fecha")
+                val col3 = resulSet.getString("hora")
+                val col4 = resulSet.getString("paciente")
 
-                reg.add(fila(col1, "$col2",col3,col4,col5,col6))
+                reg.add(fila(col1, col2, col3, col4))
 
-                val newElement = "  $col2   $col3   $col4    $col5    $col6"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
 
                 myData.add(newElement)
                 adapter.notifyDataSetChanged()
