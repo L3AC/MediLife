@@ -26,6 +26,7 @@ class infoCita : Fragment() {
     var idCuenta: Int = 0
     var idCita: Int = 0
     var nivelC: Int = 0
+    var idCliente:Int=0
     private var conx = Conx()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -63,7 +64,7 @@ class infoCita : Fragment() {
     }
     fun CargarDatos(){
         try {
-            var cadena: String = "select CONCAT(d.nombres,' ',d.apellidos) as Doctor,e.especialidad,FORMAT(fechahora,'dd-MM-yyyy') AS Fecha,\n" +
+            var cadena: String = "select ci.idCliente,CONCAT(d.nombres,' ',d.apellidos) as Doctor,e.especialidad,FORMAT(fechahora,'dd-MM-yyyy') AS Fecha,\n" +
                     "FORMAT(fechahora,'hh:mm tt') as Hora, CONCAT(c.nombres,' ',c.apellidos) as Paciente from tbCitas ci,\n" +
                     "tbClientes c,tbDoctores d,tbEspecialidades e where ci.idCliente=c.idCliente and e.idEspecialidad=d.idEspecialidad \n" +
                     "and  ci.idDoctor=d.idDoctor and idCita=?;"
@@ -79,6 +80,8 @@ class infoCita : Fragment() {
             txtFecha2.setText(st.getString("Fecha"))
             txtHora2.setText(st.getString("Hora"))
             txtNombre.setText(st.getString("Paciente"))
+            idCliente=st.getInt("idCliente")
+
 
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
