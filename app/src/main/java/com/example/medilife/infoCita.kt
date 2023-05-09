@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -59,7 +60,15 @@ class infoCita : Fragment() {
         btnCancelar = requireView().findViewById(R.id.btnCancelar)
         btnAtender = requireView().findViewById(R.id.btnAtender)
 
+        var bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("idcita", idCita)
+            putInt("nvc", nivelC)
+        }
         CargarDatos()
+        btnInfo.setOnClickListener(){
+            findNavController().navigate(R.id.action_infoCita_to_infoClienteCita,bundle)
+        }
 
     }
     fun CargarDatos(){
