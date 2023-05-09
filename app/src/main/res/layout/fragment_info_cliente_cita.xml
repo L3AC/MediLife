@@ -65,18 +65,18 @@
 
                 <EditText
                     android:id="@+id/txtPatolog"
-                    android:layout_width="311dp"
-                    android:layout_height="46dp"
+                    android:layout_width="367dp"
+                    android:layout_height="41dp"
                     android:background="@drawable/edidtextgris"
                     android:elevation="5dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.23"
+                    app:layout_constraintHorizontal_bias="0.522"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.748" />
+                    app:layout_constraintVertical_bias="0.744" />
 
                 <TextView
                     android:id="@+id/textView45"
@@ -93,7 +93,7 @@
                     app:layout_constraintVertical_bias="0.574" />
 
                 <EditText
-                    android:id="@+id/txtTelef"
+                    android:id="@+id/txtTelf"
                     android:layout_width="177dp"
                     android:layout_height="39dp"
                     android:background="@drawable/edidtextgris"
@@ -106,20 +106,6 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintVertical_bias="0.634" />
-
-                <ImageButton
-                    android:id="@+id/btnEditar"
-                    android:layout_width="49dp"
-                    android:layout_height="49dp"
-                    android:background="@android:color/transparent"
-                    android:scaleType="fitXY"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.958"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.748"
-                    app:srcCompat="@drawable/editar" />
 
                 <TextView
                     android:id="@+id/textView52"
@@ -212,7 +198,7 @@
                     app:layout_constraintVertical_bias="0.382" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName17"
+                    android:id="@+id/txtTipoSangre"
                     android:layout_width="136dp"
                     android:layout_height="36dp"
                     android:background="@drawable/edidtextgris"
@@ -300,7 +286,7 @@
                     app:layout_constraintVertical_bias="0.38" />
 
                 <EditText
-                    android:id="@+id/editTextTextPersonName14"
+                    android:id="@+id/txtIdent"
                     android:layout_width="177dp"
                     android:layout_height="39dp"
                     android:background="@drawable/edidtextgris"

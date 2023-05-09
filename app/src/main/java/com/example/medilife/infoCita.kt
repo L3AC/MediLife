@@ -63,7 +63,7 @@ class infoCita : Fragment() {
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
-            putInt("nvc", nivelC)
+            putInt("idcl", idCliente)
         }
         CargarDatos()
         btnInfo.setOnClickListener(){
