@@ -14,12 +14,14 @@ import androidx.navigation.fragment.findNavController
 lateinit var bPendiente:Button
 class HomeDoctor : Fragment() {
     var idCuenta:Int = 0
+    var nivelC:Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             val parametros = arguments
             idCuenta = parametros?.getInt("idcu")!!
+            nivelC = arguments?.getInt("nvc")!!
         }
     }
 
@@ -37,6 +39,7 @@ class HomeDoctor : Fragment() {
     Log.i("doctor",idCuenta.toString())
     var bundle = Bundle().apply {
         putInt("idcu", idCuenta)
+        putInt("nvc", nivelC)
     }
     bPendiente.setOnClickListener(){
         findNavController().navigate(R.id.action_homeDoctor_to_citasActivas,bundle)

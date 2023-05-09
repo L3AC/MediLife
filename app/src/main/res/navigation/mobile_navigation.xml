@@ -64,14 +64,23 @@
             android:id="@+id/action_citasActivas_to_homeDoctor"
             app:destination="@id/homeDoctor" />
         <action
-            android:id="@+id/action_citasActivas_to_infoClienteCita"
-            app:destination="@id/infoClienteCita" />
+            android:id="@+id/action_citasActivas_to_infoCita"
+            app:destination="@id/infoCita" />
     </fragment>
     <fragment
         android:id="@+id/infoClienteCita"
         android:name="com.example.medilife.infoClienteCita"
         android:label="fragment_info_cliente_cita"
         tools:layout="@layout/fragment_info_cliente_cita" />
+    <fragment
+        android:id="@+id/infoCita"
+        android:name="com.example.medilife.infoCita"
+        android:label="fragment_info_cita"
+        tools:layout="@layout/fragment_info_cita" >
+        <action
+            android:id="@+id/action_infoCita_to_infoClienteCita"
+            app:destination="@id/infoClienteCita" />
+    </fragment>
 
 
 </navigation>

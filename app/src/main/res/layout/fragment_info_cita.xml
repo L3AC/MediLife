@@ -27,8 +27,8 @@
 
                 <ImageView
                     android:id="@+id/imageView10"
-                    android:layout_width="463dp"
-                    android:layout_height="579dp"
+                    android:layout_width="462dp"
+                    android:layout_height="598dp"
                     android:src="@drawable/yop"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -217,7 +217,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"
-                    android:text="Nombres:"
+                    android:text="Nombre:"
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
@@ -228,47 +228,18 @@
 
                 <EditText
                     android:id="@+id/txtNombre"
-                    android:layout_width="191dp"
-                    android:layout_height="36dp"
+                    android:layout_width="350dp"
+                    android:layout_height="40dp"
                     android:background="@drawable/customs_edidtext"
                     android:elevation="5dp"
                     android:ems="10"
                     android:inputType="textPersonName"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.154"
+                    app:layout_constraintHorizontal_bias="0.557"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.667" />
-
-                <TextView
-                    android:id="@+id/textView45"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/comfortaa"
-                    android:text="Apellidos"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.096"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.762" />
-
-                <EditText
-                    android:id="@+id/txtApellid"
-                    android:layout_width="199dp"
-                    android:layout_height="38dp"
-                    android:background="@drawable/customs_edidtext"
-                    android:elevation="5dp"
-                    android:ems="10"
-                    android:inputType="textPersonName"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.24"
-                    app:layout_constraintStart_toStartOf="@+id/imageView10"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.822" />
+                    app:layout_constraintVertical_bias="0.668" />
 
                 <Button
                     android:id="@+id/btnInfo"
@@ -279,10 +250,10 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.883"
+                    app:layout_constraintHorizontal_bias="0.505"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.742" />
+                    app:layout_constraintVertical_bias="0.767" />
 
                 <Button
                     android:id="@+id/btnCancelar"

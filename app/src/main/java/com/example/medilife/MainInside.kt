@@ -39,6 +39,7 @@ class MainInside : AppCompatActivity() {
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
+            putInt("nvc", idTipo)
         }
 
         if (idTipo == 1) {

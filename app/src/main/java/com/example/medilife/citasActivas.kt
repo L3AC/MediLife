@@ -24,6 +24,7 @@ val myData = mutableListOf<String>()
 
 class citasActivas : Fragment() {
     var idCuenta: Int = 0
+    var nivelC: Int = 0
     var idCita: Int = 0
     private var conx = Conx()
 
@@ -31,6 +32,8 @@ class citasActivas : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
+            idCita= arguments?.getInt("idci")!!
+            nivelC = arguments?.getInt("nvc")!!
         }
 
     }
@@ -56,8 +59,9 @@ class citasActivas : Fragment() {
             var bundle = Bundle().apply {
                 putInt("idcu", idCuenta)
                 putInt("idcita", idCita)
+                putInt("nvc", nivelC)
             }
-            findNavController().navigate(R.id.action_citasActivas_to_infoClienteCita, bundle)
+            findNavController().navigate(R.id.action_citasActivas_to_infoCita, bundle)
         }
     }
 
