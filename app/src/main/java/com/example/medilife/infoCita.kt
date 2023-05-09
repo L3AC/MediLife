@@ -1,6 +1,7 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,6 +34,7 @@ class infoCita : Fragment() {
             idCuenta = arguments?.getInt("idcu")!!
             idCita = arguments?.getInt("idcita")!!
             nivelC = arguments?.getInt("nvc")!!
+            Log.i("k",idCita.toString())
         }
     }
 
@@ -68,10 +70,10 @@ class infoCita : Fragment() {
             var st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
-            ps.setString(1, idCita.toString())
+            ps.setInt(1, idCita)
 
             st = ps.executeQuery()
-
+            st.next()
             txtMedico.setText(st.getString("Doctor"))
             txtEsp.setText(st.getString("especialidad"))
             txtFecha2.setText(st.getString("Fecha"))
