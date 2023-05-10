@@ -7,14 +7,15 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ListView
 import androidx.navigation.fragment.findNavController
 
 
-lateinit var bPendiente:Button
+lateinit var bPendiente: Button
+lateinit var bPasadas: Button
+
 class HomeDoctor : Fragment() {
-    var idCuenta:Int = 0
-    var nivelC:Int = 0
+    var idCuenta: Int = 0
+    var nivelC: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,26 +26,31 @@ class HomeDoctor : Fragment() {
         }
     }
 
-    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
+    override fun onCreateView(
+        inflater: LayoutInflater, container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home_doctor, container, false)
     }
 
-//LA IMPORTANTE
+    //LA IMPORTANTE
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-    bPendiente = requireView().findViewById(R.id.btnPendi)
-
-    Log.i("doctor",idCuenta.toString())
-    var bundle = Bundle().apply {
-        putInt("idcu", idCuenta)
-        putInt("nvc", nivelC)
-    }
-    bPendiente.setOnClickListener(){
-        findNavController().navigate(R.id.action_homeDoctor_to_citasActivas,bundle)
-    }
-
+        bPendiente = requireView().findViewById(R.id.btnPendiH)
+        bPasadas = requireView().findViewById(R.id.btnPasadS)
+        Log.i("doctor", idCuenta.toString())
+        Log.i("nivel ", nivelC.toString())
+        var bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+        }
+        bPendiente.setOnClickListener() {
+            findNavController().navigate(R.id.action_homeDoctor_to_citasActivas, bundle)
+        }
+        bPasadas.setOnClickListener() {
+            findNavController().navigate(R.id.action_homeDoctor_to_historialCitas, bundle)
+        }
     }
 
 }

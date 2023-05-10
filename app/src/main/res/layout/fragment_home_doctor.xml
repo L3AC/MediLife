@@ -52,7 +52,7 @@
                     app:layout_constraintVertical_bias="0.517" />
 
                 <Button
-                    android:id="@+id/btnPendi"
+                    android:id="@+id/btnPendiH"
                     android:layout_width="107dp"
                     android:layout_height="56dp"
                     android:background="@drawable/border"
@@ -106,7 +106,7 @@
                     app:layout_constraintVertical_bias="0.664" />
 
                 <Button
-                    android:id="@+id/btnPasad"
+                    android:id="@+id/btnPasadS"
                     android:layout_width="107dp"
                     android:layout_height="56dp"
                     android:background="@drawable/border"

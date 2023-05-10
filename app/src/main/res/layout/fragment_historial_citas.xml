@@ -5,7 +5,8 @@
     android:id="@+id/frameLayout4"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".historialCitas" >
+    android:background="@drawable/degradado"
+    tools:context=".historialCitas">
 
     <ScrollView
         android:layout_width="match_parent"
@@ -22,24 +23,51 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
-                android:layout_height="766dp">
+                android:layout_height="734dp">
 
-                <Button
-                    android:id="@+id/button2"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Button"
+                <ListView
+                    android:id="@+id/miLista"
+                    android:layout_width="408dp"
+                    android:layout_height="567dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.475"
+                    app:layout_constraintHorizontal_bias="0.47"
+
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.452" />
+                    app:layout_constraintVertical_bias="0.877" />
+
+                <TextView
+                    android:id="@+id/textView38"
+                    android:layout_width="184dp"
+                    android:layout_height="41dp"
+                    android:fontFamily="@font/comfortaa"
+                    android:text="Citas pasadas"
+                    android:textColor="@color/white"
+                    android:textSize="20sp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.537"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.063" />
+
+                <ImageButton
+                    android:id="@+id/btnVolver6"
+                    android:layout_width="45dp"
+                    android:layout_height="44dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.069"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.059"
+                    app:srcCompat="@drawable/regresar" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </LinearLayout>
     </ScrollView>
-
-
 
 </androidx.constraintlayout.widget.ConstraintLayout>

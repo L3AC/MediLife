@@ -53,7 +53,15 @@ class citasActivas : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         ListVista1 = requireView().findViewById(R.id.miLista)
-        CargarDatos()
+        if(nivelC==1){
+            CargarDatosDoc()
+        }
+        if(nivelC==2){
+            CargarDatosSec()
+        }
+        if(nivelC==3){
+            CargarDatosCl()
+        }
 
         ListVista1.setOnItemClickListener() { parent, view, position, id ->
             val espc = reg[position]
@@ -67,7 +75,7 @@ class citasActivas : Fragment() {
         }
     }
 
-    fun CargarDatos() {
+    fun CargarDatosDoc() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
         ListVista1.adapter = adapter
         myData.clear()
@@ -80,6 +88,82 @@ class citasActivas : Fragment() {
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
                         "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
                         "and fechahora>GETDATE() and estado='Pendiente' and idDoctor=?;"
+
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+            ps.setInt(1, idCuenta)
+            st = ps.executeQuery()
+
+            while (st?.next() == true) {
+
+                val col1 = st.getInt("idCita")
+                val col2 = st.getString("fecha")
+                val col3 = st.getString("hora")
+                val col4 = st.getString("paciente")
+
+                reg.add(fila(col1, col2, col3, col4))
+
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+
+                myData.add(newElement)
+                adapter.notifyDataSetChanged()
+
+            }
+            ListVista1.visibility = View.VISIBLE
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun CargarDatosSec() {
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
+        ListVista1.adapter = adapter
+        myData.clear()
+        reg.clear()
+        try {
+            val statement = conx.dbConn()?.createStatement()
+            var st: ResultSet
+            var cadena: String =
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and fechahora>GETDATE() and estado='Pendiente';"
+
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+            //ps.setInt(1, idCuenta)
+            st = ps.executeQuery()
+
+            while (st?.next() == true) {
+
+                val col1 = st.getInt("idCita")
+                val col2 = st.getString("fecha")
+                val col3 = st.getString("hora")
+                val col4 = st.getString("paciente")
+
+                reg.add(fila(col1, col2, col3, col4))
+
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+
+                myData.add(newElement)
+                adapter.notifyDataSetChanged()
+
+            }
+            ListVista1.visibility = View.VISIBLE
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+    fun CargarDatosCl() {
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
+        ListVista1.adapter = adapter
+        myData.clear()
+        reg.clear()
+        try {
+            val statement = conx.dbConn()?.createStatement()
+            var st: ResultSet
+            var cadena: String =
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and fechahora>GETDATE() and estado='Pendiente' and c.idCliente=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
