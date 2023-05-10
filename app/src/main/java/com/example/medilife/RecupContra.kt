@@ -2,16 +2,11 @@ package com.example.medilife
 
 import android.annotation.SuppressLint
 import android.content.Intent
-import android.media.Image
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.provider.ContactsContract.CommonDataKinds.Email
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import  java.security.MessageDigest
-import java.security.NoSuchAlgorithmException
-import java.security.SecureRandom
 import java.util.Properties
 import java.util.Scanner
 import javax.mail.Message
