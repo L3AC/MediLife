@@ -11,9 +11,10 @@ import androidx.navigation.fragment.findNavController
 
 lateinit var bPendienteS: Button
 lateinit var bPasadasS: Button
+
 class HomeSecretaria : Fragment() {
-    var idCuenta:Int = 0
-    var nivelC:Int = 0
+    var idCuenta: Int = 0
+    var nivelC: Int = 0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,8 +34,8 @@ class HomeSecretaria : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("secre",idCuenta.toString())
-        Log.i("nivel ",nivelC.toString())
+        Log.i("secre", idCuenta.toString())
+        Log.i("nivel ", nivelC.toString())
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
@@ -42,10 +43,12 @@ class HomeSecretaria : Fragment() {
         bPendienteS = requireView().findViewById(R.id.btnPendiS)
         bPasadasS = requireView().findViewById(R.id.btnPasadS)
 
-        bPendienteS.setOnClickListener(){
-            findNavController().navigate(R.id.action_homeSecretaria_to_citasActivas,bundle)
+        bPendienteS.setOnClickListener() {
+            findNavController().navigate(R.id.action_homeSecretaria_to_citasActivas, bundle)
         }
-
+        bPasadasS.setOnClickListener() {
+            findNavController().navigate(R.id.action_homeSecretaria_to_historialCitas, bundle)
+        }
     }
 
 }

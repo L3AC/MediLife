@@ -38,7 +38,7 @@ class HomeDoctor : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         bPendiente = requireView().findViewById(R.id.btnPendiH)
-        bPasadas = requireView().findViewById(R.id.btnPasadS)
+        bPasadas = requireView().findViewById(R.id.btnPasadH)
         Log.i("doctor", idCuenta.toString())
         Log.i("nivel ", nivelC.toString())
         var bundle = Bundle().apply {
