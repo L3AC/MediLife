@@ -25,10 +25,7 @@ class SendMailTask(private val destinatario: String,
         val session = Session.getDefaultInstance(props,
             object : javax.mail.Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-
-                    //Colocamos el correo y contraseña desde donde enviaremos el mensaje
-                    //La contraseña debe ser generada en "Contraseñas de aplicaciones"
-                    return PasswordAuthentication("egrande447@gmail.com", "vwkpxcomkphircba")
+                    return PasswordAuthentication("leac.2xy@gmail.com", "uxuugqsgxyspazfw")
                 }
             })
 
@@ -37,7 +34,7 @@ class SendMailTask(private val destinatario: String,
             val message = MimeMessage(session)
 
             //Cambiamos el valor por el correo desde donde enviaremos el mensaje
-            message.setFrom(InternetAddress("egrande447@gmail.com"))
+            message.setFrom(InternetAddress("leac.2xy@gmail.com"))
             message.addRecipient(Message.RecipientType.TO, InternetAddress(destinatario))
             message.subject = asunto
             message.setText(this.mensaje)

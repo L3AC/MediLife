@@ -4,47 +4,70 @@ import android.annotation.SuppressLint
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
-import java.util.Properties
-import java.util.Scanner
-import javax.mail.Message
-import javax.mail.MessagingException
-import javax.mail.PasswordAuthentication
-import javax.mail.Session
-import javax.mail.Transport
-import javax.mail.internet.InternetAddress
-import javax.mail.internet.MimeMessage
+import android.widget.Toast
+import java.sql.PreparedStatement
+import java.sql.ResultSet
+import java.sql.SQLException
 
 
 lateinit var volver: ImageButton
-lateinit var usco:EditText
-lateinit var env:Button
-lateinit var elpepe:EditText
+lateinit var txtUsuario: EditText
+lateinit var env: Button
 
 class RecupContra : AppCompatActivity() {
+    private var conx = Conx()
+    private var correo:String=""
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_recup_contra)
 
         volver = findViewById(R.id.btnVolver2)
-        usco = findViewById(R.id.txtUC)
+        txtUsuario = findViewById(R.id.txtUsuario2)
         env = findViewById(R.id.btnEnvi)
 
-        env.setOnClickListener{
-            val task = SendMailTask("correo_destinatario@gmail.com", "Aqui esta el link para la recuperacion de contraseña", "Fuckyu")
-            task.execute()
+        env.setOnClickListener {
+BuscarCorreo()
         }
 
         volver.setOnClickListener {
             val scndAct = Intent(this, MainActivity::class.java)
             startActivity(scndAct)
-
-
-                }
-
-            }
         }
+    }
+    fun BuscarCorreo(){
+        try {
+            val cadena: String = "select correo from tbUsuarios where usuario=? " +
+                    "COLLATE SQL_Latin1_General_CP1_CS_AS;"
+            val st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, txtUsuario.text.toString())
+            st = ps.executeQuery()
+            st.next()
+
+            val found = st.row
+            if (found == 1) {
+                correo= st.getString("correo")
+                val task = SendMailTask(
+                    correo,
+                    "Aqui esta el link para la recuperacion de contraseña",
+                    "Prueba"
+                )
+                task.execute()
+                Toast.makeText(applicationContext, "Mensaje enviado a su correo", Toast.LENGTH_SHORT).show()
+            } else {
+                Toast.makeText(applicationContext, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
+            }
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(applicationContext, "Error interno", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
+    }
+}
 
