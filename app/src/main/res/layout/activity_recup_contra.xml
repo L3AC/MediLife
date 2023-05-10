@@ -7,6 +7,19 @@
     android:background="@drawable/degradado"
     tools:context=".RecupContra">
 
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="412dp"
+        android:layout_height="500dp"
+        android:baselineAlignBottom="false"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.636"
+        app:srcCompat="@drawable/yop" />
+
     <ImageButton
         android:id="@+id/btnVolver2"
         android:layout_width="49dp"
@@ -30,9 +43,8 @@
         android:text="Enviar"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/imageView"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="@+id/imageView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.705" />
 
@@ -42,19 +54,6 @@
         android:layout_height="wrap_content"
         app:barrierDirection="top"
         tools:layout_editor_absoluteY="67dp" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="412dp"
-        android:layout_height="500dp"
-        android:baselineAlignBottom="false"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.636"
-        app:srcCompat="@drawable/yop" />
 
     <TextView
         android:id="@+id/textView8"
