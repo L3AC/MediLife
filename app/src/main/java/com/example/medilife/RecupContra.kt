@@ -21,7 +21,7 @@ import javax.mail.internet.MimeMessage
 lateinit var volver: ImageButton
 lateinit var usco:EditText
 lateinit var env:Button
-lateinit var elpepe67:EditText
+lateinit var elpepe90:EditText
 
 class RecupContra : AppCompatActivity() {
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
