@@ -64,7 +64,7 @@ class RecupContra : AppCompatActivity() {
 
                     // Aquí se realizaría la lógica de buscar el usuario y obtener su contraseña anterior
                     val oldPassword = "miPasswordAnterior123"
-
+val elpepe:String=""
                     val props = Properties()
                     props["mail.smtp.host"] = "smtp.gmail.com"
                     props["mail.smtp.socketFactory.port"] = "465"
