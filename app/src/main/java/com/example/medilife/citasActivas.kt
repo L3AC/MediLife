@@ -7,6 +7,8 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
+import java.sql.PreparedStatement
+import java.sql.ResultSet
 import java.sql.SQLException
 
 lateinit var ListVista1: ListView
@@ -72,17 +74,23 @@ class citasActivas : Fragment() {
         reg.clear()
         try {
             val statement = conx.dbConn()?.createStatement()
-            val resulSet = statement?.executeQuery(
-                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente and fechahora>GETDATE() and estado='Pendiente';"
-            )
+            var st: ResultSet
+            var cadena: String =
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and fechahora>GETDATE() and estado='Pendiente' and idDoctor=?;"
 
-            while (resulSet?.next() == true) {
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+            ps.setInt(1, idCuenta)
+            st = ps.executeQuery()
 
-                val col1 = resulSet.getInt("idCita")
-                val col2 = resulSet.getString("fecha")
-                val col3 = resulSet.getString("hora")
-                val col4 = resulSet.getString("paciente")
+            while (st?.next() == true) {
+
+                val col1 = st.getInt("idCita")
+                val col2 = st.getString("fecha")
+                val col3 = st.getString("hora")
+                val col4 = st.getString("paciente")
 
                 reg.add(fila(col1, col2, col3, col4))
 
