@@ -21,6 +21,7 @@ lateinit var env: Button
 class RecupContra : AppCompatActivity() {
     private var conx = Conx()
     private var correo:String=""
+    private var contra:String=""
     @SuppressLint("MissingInflatedId", "SuspiciousIndentation")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,7 +42,7 @@ BuscarCorreo()
     }
     fun BuscarCorreo(){
         try {
-            val cadena: String = "select correo from tbUsuarios where usuario=? " +
+            val cadena: String = "select correo,contra from tbUsuarios where usuario=? " +
                     "COLLATE SQL_Latin1_General_CP1_CS_AS;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
@@ -53,10 +54,11 @@ BuscarCorreo()
             val found = st.row
             if (found == 1) {
                 correo= st.getString("correo")
+                contra= st.getString("contra")
                 val task = SendMailTask(
                     correo,
                     "Aqui esta el link para la recuperacion de contraseña",
-                    "Prueba"
+                    "Su contraseña es: $contra, pero se le recomienda que la cambie lo antes posible"
                 )
                 task.execute()
                 Toast.makeText(applicationContext, "Mensaje enviado a su correo", Toast.LENGTH_SHORT).show()
