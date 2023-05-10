@@ -76,9 +76,9 @@ class historialCitas : Fragment() {
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
                         ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora<GETDATE() and idDoctor=?;"
+                        "and estado='Atendida' and idDoctor=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -115,9 +115,9 @@ class historialCitas : Fragment() {
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
                         ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora<GETDATE();"
+                        "and estado='Atendida';"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             //ps.setInt(1, idCuenta)
@@ -153,10 +153,10 @@ class historialCitas : Fragment() {
 
             var st: ResultSet
             var cadena: String =
-                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') \n" +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente\n" +
-                        "and fechahora<GETDATE() and c.idCliente=?;"
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and estado='Atendida' and ci.idCliente=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)

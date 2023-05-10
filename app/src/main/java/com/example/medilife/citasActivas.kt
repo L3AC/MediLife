@@ -83,9 +83,9 @@ class citasActivas : Fragment() {
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and idDoctor=?;"
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and estado='Pendiente' and idDoctor=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -97,10 +97,11 @@ class citasActivas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
                 reg.add(fila(col1, col2, col3, col4))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData.add(newElement)
                 adapter.notifyDataSetChanged()
@@ -121,9 +122,9 @@ class citasActivas : Fragment() {
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() ;"
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and estado='Pendiente' ;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             //ps.setInt(1, idCuenta)
@@ -135,10 +136,11 @@ class citasActivas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
                 reg.add(fila(col1, col2, col3, col4))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData.add(newElement)
                 adapter.notifyDataSetChanged()
@@ -159,9 +161,9 @@ class citasActivas : Fragment() {
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
-                        "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and c.idCliente=?;"
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and estado='Pendiente' and c.idCliente=? ;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -173,10 +175,11 @@ class citasActivas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
                 reg.add(fila(col1, col2, col3, col4))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData.add(newElement)
                 adapter.notifyDataSetChanged()
