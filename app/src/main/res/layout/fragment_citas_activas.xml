@@ -26,7 +26,7 @@
                 android:layout_height="734dp">
 
                 <ListView
-                    android:id="@+id/miLista"
+                    android:id="@+id/miLista2"
                     android:layout_width="408dp"
                     android:layout_height="567dp"
                     app:layout_constraintBottom_toBottomOf="parent"

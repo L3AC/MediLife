@@ -21,7 +21,6 @@ class fila(
 )
 
 val reg = mutableListOf<fila>()
-
 val myData = mutableListOf<String>()
 
 class citasActivas : Fragment() {
@@ -34,7 +33,6 @@ class citasActivas : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
-            idCita= arguments?.getInt("idci")!!
             nivelC = arguments?.getInt("nvc")!!
         }
 
@@ -52,7 +50,7 @@ class citasActivas : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        ListVista1 = requireView().findViewById(R.id.miLista)
+        ListVista1 = requireView().findViewById(R.id.miLista2)
         if(nivelC==1){
             CargarDatosDoc()
         }
