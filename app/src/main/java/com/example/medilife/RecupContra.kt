@@ -12,17 +12,15 @@ import android.widget.ImageButton
 import  java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
-/*import java.util.*
-import javax.mail.*
+import java.util.Properties
+import java.util.Scanner
+import javax.mail.Message
+import javax.mail.MessagingException
+import javax.mail.PasswordAuthentication
+import javax.mail.Session
+import javax.mail.Transport
 import javax.mail.internet.InternetAddress
-import javax.mail.internet.MailDateFormat
-import android.widget.TextView
-import androidx.core.content.ContextCompat
-import com.sun.mail.iap.ByteArray
-import com.sun.mail.imap.protocol.BODY
-import java.lang.RuntimeException
 import javax.mail.internet.MimeMessage
-import javax.security.auth.Subject*/
 
 
 lateinit var volver: ImageButton
@@ -51,7 +49,7 @@ class RecupContra : AppCompatActivity() {
                     return true
                 }
 
-                /*fun main() {
+                fun main() {
                     val scanner = Scanner(System.`in`)
                     println("Ingresa tu correo electronico")
                     val email = scanner.nextLine()
@@ -93,7 +91,7 @@ class RecupContra : AppCompatActivity() {
                     } catch (e: MessagingException) {
                         e.printStackTrace()
                     }
-                }*/
+                }
 
             }
         }
