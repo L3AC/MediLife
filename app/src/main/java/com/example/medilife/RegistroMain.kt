@@ -40,7 +40,7 @@ lateinit var tNaci: EditText
 //VARIABLES GLOBALES
 lateinit var textAdv: TextView
 lateinit var textAdv2: TextView
-
+lateinit var textAdv6: TextView
 
 class RegistroMain : AppCompatActivity() {
     private var conx = Conx()
