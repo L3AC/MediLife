@@ -79,13 +79,13 @@ class citasActivas : Fragment() {
         myData.clear()
         reg.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
+
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
                         "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente' and idDoctor=?;"
+                        "and fechahora>GETDATE() and idDoctor=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -117,13 +117,13 @@ class citasActivas : Fragment() {
         myData.clear()
         reg.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
+
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
                         "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente';"
+                        "and fechahora>GETDATE() ;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             //ps.setInt(1, idCuenta)
@@ -155,13 +155,13 @@ class citasActivas : Fragment() {
         myData.clear()
         reg.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
+
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
                         "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente' and c.idCliente=?;"
+                        "and fechahora>GETDATE() and c.idCliente=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)

@@ -1,6 +1,7 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -16,12 +17,9 @@ import java.sql.SQLException
 lateinit var ListVista2: ListView
 
 class fila2(
-    val id: Int,
-    val fecha: String,
-    val hora: String,
-    val paciente: String
+    val id: Int
 )
-val reg2 = mutableListOf<fila>()
+val reg2 = mutableListOf<fila2>()
 val myData2 = mutableListOf<String>()
 class historialCitas : Fragment() {
 
@@ -34,6 +32,7 @@ class historialCitas : Fragment() {
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
             nivelC = arguments?.getInt("nvc")!!
+            Log.i("param",idCuenta.toString()+" "+nivelC.toString())
         }
     }
 
@@ -69,18 +68,17 @@ class historialCitas : Fragment() {
         }
     }
     fun CargarDatosDoc() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData2)
         ListVista2.adapter = adapter
         myData2.clear()
         reg2.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente' and idDoctor=?;"
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and fechahora<GETDATE() and idDoctor=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -92,10 +90,11 @@ class historialCitas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
-                reg2.add(fila(col1, col2, col3, col4))
+                reg2.add(fila2(col1))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData2.add(newElement)
                 adapter.notifyDataSetChanged()
@@ -107,18 +106,18 @@ class historialCitas : Fragment() {
         }
     }
     fun CargarDatosSec() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData2)
         ListVista2.adapter = adapter
         myData2.clear()
         reg2.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
+
             var st: ResultSet
             var cadena: String =
                 "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente';"
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and fechahora<GETDATE();"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             //ps.setInt(1, idCuenta)
@@ -130,10 +129,11 @@ class historialCitas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
-                reg2.add(fila(col1, col2, col3, col4))
+                reg2.add(fila2(col1))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData2.add(newElement)
                 adapter.notifyDataSetChanged()
@@ -145,18 +145,18 @@ class historialCitas : Fragment() {
         }
     }
     fun CargarDatosCl() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
+        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData2)
         ListVista2.adapter = adapter
         myData2.clear()
         reg2.clear()
         try {
-            val statement = conx.dbConn()?.createStatement()
+
             var st: ResultSet
             var cadena: String =
-                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') \n" +
                         "as hora,CONCAT(nombres,' ',apellidos) as paciente\n" +
-                        "from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
-                        "and fechahora>GETDATE() and estado='Pendiente' and c.idCliente=?;"
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente\n" +
+                        "and fechahora<GETDATE() and c.idCliente=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
@@ -168,14 +168,14 @@ class historialCitas : Fragment() {
                 val col2 = st.getString("fecha")
                 val col3 = st.getString("hora")
                 val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
 
-                reg2.add(fila(col1, col2, col3, col4))
+                reg2.add(fila2(col1))
 
-                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4"
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData2.add(newElement)
                 adapter.notifyDataSetChanged()
-
             }
             ListVista2.visibility = View.VISIBLE
         } catch (ex: SQLException) {
