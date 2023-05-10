@@ -12,6 +12,16 @@ import android.widget.ImageButton
 import  java.security.MessageDigest
 import java.security.NoSuchAlgorithmException
 import java.security.SecureRandom
+import java.util.Properties
+import java.util.Scanner
+import javax.mail.Message
+import javax.mail.MessagingException
+import javax.mail.PasswordAuthentication
+import javax.mail.Session
+import javax.mail.Transport
+import javax.mail.internet.InternetAddress
+import javax.mail.internet.MimeMessage
+
 /*import java.util.*
 import javax.mail.*
 import javax.mail.internet.InternetAddress
@@ -51,7 +61,7 @@ class RecupContra : AppCompatActivity() {
                     return true
                 }
 
-                /*fun main() {
+                fun main() {
                     val scanner = Scanner(System.`in`)
                     println("Ingresa tu correo electronico")
                     val email = scanner.nextLine()
@@ -82,7 +92,7 @@ class RecupContra : AppCompatActivity() {
 
                     try {
                         val message = MimeMessage(session)
-                        message.setFrom(InternetAddress("miCorreo@gmail.com"))
+                        message.setFrom(InternetAddress("egrande447@gmail.com"))
                         message.addRecipient(Message.RecipientType.TO, InternetAddress(email))
                         message.subject = "Recuperación de contraseña"
                         message.setText("Tu contraseña anterior es: $oldPassword")
@@ -93,7 +103,7 @@ class RecupContra : AppCompatActivity() {
                     } catch (e: MessagingException) {
                         e.printStackTrace()
                     }
-                }*/
+                }
 
             }
         }
