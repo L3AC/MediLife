@@ -33,63 +33,18 @@ class RecupContra : AppCompatActivity() {
         usco = findViewById(R.id.txtUC)
         env = findViewById(R.id.btnEnvi)
 
+        env.setOnClickListener{
+            val task = SendMailTask("correo_destinatario@gmail.com", "Aqui esta el link para la recuperacion de contraseña", "Fuckyu")
+            task.execute()
+        }
+
         volver.setOnClickListener {
             val scndAct = Intent(this, MainActivity::class.java)
             startActivity(scndAct)
 
-            env.setOnClickListener {
-                val hola = Intent(this, MainActivity::class.java)
-                startActivity(hola)
 
-                fun verificarUsuarioENBD(usuario: String): Boolean {
-                    return true
-                }
-
-                fun main() {
-                    val scanner = Scanner(System.`in`)
-                    println("Ingresa tu correo electronico")
-                    val email = scanner.nextLine()
-
-                    println("Ingresa tu nombre de usuario: ")
-                    val usuario = scanner.nextLine()
-
-                    if (!verificarUsuarioENBD(usuario)) {
-                        println("El usuario ingresado no existe")
-                        return
-                    }
-
-                    // Aquí se realizaría la lógica de buscar el usuario y obtener su contraseña anterior
-                    val oldPassword = "miPasswordAnterior123"
-val elpepe:String=""
-                    val props = Properties()
-                    props["mail.smtp.host"] = "smtp.gmail.com"
-                    props["mail.smtp.socketFactory.port"] = "465"
-                    props["mail.smtp.socketFactory.class"] = "javax.net.ssl.SSLSocketFactory"
-                    props["mail.smtp.auth"] = "true"
-                    props["mail.smtp.port"] = "465"
-
-                    val session = Session.getDefaultInstance(props, object : javax.mail.Authenticator() {
-                        override fun getPasswordAuthentication(): PasswordAuthentication {
-                            return PasswordAuthentication("egrande447@gmail.com", "vwkpxcomkphircba")
-                        }
-                    })
-
-                    try {
-                        val message = MimeMessage(session)
-                        message.setFrom(InternetAddress("miCorreo@gmail.com"))
-                        message.addRecipient(Message.RecipientType.TO, InternetAddress(email))
-                        message.subject = "Recuperación de contraseña"
-                        message.setText("Tu contraseña anterior es: $oldPassword")
-
-                        Transport.send(message)
-
-                        println("Mensaje enviado correctamente")
-                    } catch (e: MessagingException) {
-                        e.printStackTrace()
-                    }
                 }
 
             }
         }
-    }
-}
+
