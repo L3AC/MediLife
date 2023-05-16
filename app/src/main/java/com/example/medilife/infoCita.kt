@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -64,10 +65,15 @@ class infoCita : Fragment() {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
             putInt("idcl", idCliente)
+            putInt("nvc", nivelC)
         }
         CargarDatos()
         btnInfo.setOnClickListener(){
             findNavController().navigate(R.id.action_infoCita_to_infoClienteCita,bundle)
+        }
+        if(nivelC==3){
+            btnInfo.isVisible=false
+            btnAtender.isVisible=false
         }
 
     }
