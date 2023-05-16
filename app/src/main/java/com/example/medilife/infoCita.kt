@@ -15,20 +15,20 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-lateinit var txtMedico:EditText
-lateinit var txtEsp:EditText
-lateinit var txtFecha2:EditText
-lateinit var txtHora2:EditText
-lateinit var txtNombre:EditText
-lateinit var btnInfo:Button
-lateinit var btnCancelar:Button
-lateinit var btnAtender:Button
+lateinit var txtMedico: EditText
+lateinit var txtEsp: EditText
+lateinit var txtFecha2: EditText
+lateinit var txtHora2: EditText
+lateinit var txtNombre: EditText
+lateinit var btnInfo: Button
+lateinit var btnCancelar: Button
+lateinit var btnAtender: Button
 
 class infoCita : Fragment() {
     var idCuenta: Int = 0
     var idCita: Int = 0
     var nivelC: Int = 0
-    var idCliente:Int=0
+    var idCliente: Int = 0
     private var conx = Conx()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,7 +37,7 @@ class infoCita : Fragment() {
             idCuenta = arguments?.getInt("idcu")!!
             idCita = arguments?.getInt("idcita")!!
             nivelC = arguments?.getInt("nvc")!!
-            Log.i("k",idCita.toString())
+            Log.i("k", idCita.toString())
         }
     }
 
@@ -68,21 +68,29 @@ class infoCita : Fragment() {
             putInt("nvc", nivelC)
         }
         CargarDatos()
-        btnInfo.setOnClickListener(){
-            findNavController().navigate(R.id.action_infoCita_to_infoClienteCita,bundle)
-        }
-        if(nivelC==3){
-            btnInfo.isVisible=false
-            btnAtender.isVisible=false
-        }
 
+        if (nivelC == 3) {
+            btnInfo.isVisible = false
+            btnAtender.isVisible = false
+        }
+        btnInfo.setOnClickListener() {
+            findNavController().navigate(R.id.action_infoCita_to_infoClienteCita, bundle)
+        }
+        btnAtender.setOnClickListener() {
+            AtenderCita()
+        }
+        btnCancelar.setOnClickListener() {
+            CancelarCita()
+        }
     }
-    fun CargarDatos(){
+
+    fun CargarDatos() {
         try {
-            var cadena: String = "select ci.idCliente,CONCAT(d.nombres,' ',d.apellidos) as Doctor,e.especialidad,FORMAT(fechahora,'dd-MM-yyyy') AS Fecha,\n" +
-                    "FORMAT(fechahora,'hh:mm tt') as Hora, CONCAT(c.nombres,' ',c.apellidos) as Paciente from tbCitas ci,\n" +
-                    "tbClientes c,tbDoctores d,tbEspecialidades e where ci.idCliente=c.idCliente and e.idEspecialidad=d.idEspecialidad \n" +
-                    "and  ci.idDoctor=d.idDoctor and idCita=?;"
+            var cadena: String =
+                "select ci.idCliente,CONCAT(d.nombres,' ',d.apellidos) as Doctor,e.especialidad,FORMAT(fechahora,'dd-MM-yyyy') AS Fecha,\n" +
+                        "FORMAT(fechahora,'hh:mm tt') as Hora, CONCAT(c.nombres,' ',c.apellidos) as Paciente from tbCitas ci,\n" +
+                        "tbClientes c,tbDoctores d,tbEspecialidades e where ci.idCliente=c.idCliente and e.idEspecialidad=d.idEspecialidad \n" +
+                        "and  ci.idDoctor=d.idDoctor and idCita=?;"
             var st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
@@ -95,7 +103,45 @@ class infoCita : Fragment() {
             txtFecha2.setText(st.getString("Fecha"))
             txtHora2.setText(st.getString("Hora"))
             txtNombre.setText(st.getString("Paciente"))
-            idCliente=st.getInt("idCliente")
+            idCliente = st.getInt("idCliente")
+
+
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun AtenderCita() {
+        try {
+            var cadena: String =
+                "update tbCitas set estado='Atentida' where idCita=?;"
+            var st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setInt(1, idCita)
+
+            st = ps.executeQuery()
+            st.next()
+            Toast.makeText(context, "Cita marcar", Toast.LENGTH_SHORT).show()
+
+
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    fun CancelarCita() {
+        try {
+            var cadena: String =
+                "delete tbCitas  where idCita=?;"
+            var st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setInt(1, idCita)
+
+            st = ps.executeQuery()
+            st.next()
+            Toast.makeText(context, "Cita eliminada", Toast.LENGTH_SHORT).show()
 
 
         } catch (ex: SQLException) {
