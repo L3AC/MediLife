@@ -107,7 +107,7 @@ class citasActivas : Fragment() {
                 adapter.notifyDataSetChanged()
 
             }
-            /*INSTA*/
+            /*CAMBIO*/
             ListVista1.visibility = View.VISIBLE
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
