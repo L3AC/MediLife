@@ -10,12 +10,14 @@ import android.widget.ArrayAdapter
 import android.widget.ListView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
 lateinit var ListVista2: ListView
-
+lateinit var miRecyclerView: RecyclerView
 class fila2(
     val id: Int
 )
@@ -47,6 +49,8 @@ class historialCitas : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         ListVista2 = requireView().findViewById(R.id.miLista2)
+        miRecyclerView = requireView().findViewById(R.id.recyclerView)
+        miRecyclerView.layoutManager = LinearLayoutManager(context)
         if(nivelC==1){
             CargarDatosDoc()
         }
@@ -105,7 +109,7 @@ class historialCitas : Fragment() {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
-    fun CargarDatosSec() {
+    /*fun CargarDatosSec() {
         val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData2)
         ListVista2.adapter = adapter
         myData2.clear()
@@ -140,6 +144,42 @@ class historialCitas : Fragment() {
 
             }
             ListVista2.visibility = View.VISIBLE
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }*/
+    fun CargarDatosSec() {
+        myData.clear()
+        reg.clear()
+        try {
+
+            var st: ResultSet
+            var cadena: String =
+                "select idCita,FORMAT(fechahora,'dd-MM-yyyy') AS fecha,FORMAT(fechahora,'hh:mm tt') " +
+                        "as hora,CONCAT(nombres,' ',apellidos) as paciente" +
+                        ",estado from tbCitas ci,tbClientes c where ci.idCliente=c.idCliente " +
+                        "and estado='Atendida' ;"
+
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+            st = ps.executeQuery()
+
+            while (st?.next() == true) {
+
+                val col1 = st.getInt("idCita")
+                val col2 = st.getString("fecha")
+                val col3 = st.getString("hora")
+                val col4 = st.getString("paciente")
+                val col5 = st.getString("estado")
+
+                reg.add(fila(col1, col2, col3, col4))
+
+                val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
+
+                myData.add(newElement)
+                //adapter.notifyDataSetChanged()
+
+            }
+            //Cartas.visibility = View.VISIBLE
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }

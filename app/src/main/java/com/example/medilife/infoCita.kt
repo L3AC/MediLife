@@ -61,6 +61,8 @@ class infoCita : Fragment() {
         btnCancelar = requireView().findViewById(R.id.btnCancelar)
         btnAtender = requireView().findViewById(R.id.btnAtender)
 
+
+
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
