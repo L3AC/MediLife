@@ -245,6 +245,7 @@
                     android:id="@+id/btnInfo"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#158CC1"
                     android:fontFamily="@font/comfortaa"
                     android:text="Más Info."
                     android:textStyle="bold"
@@ -259,6 +260,7 @@
                     android:id="@+id/btnCancelar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:backgroundTint="#C32929"
                     android:text="Cancelar"
                     android:textColorHighlight="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -266,20 +268,21 @@
                     app:layout_constraintHorizontal_bias="0.191"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.894" />
+                    app:layout_constraintVertical_bias="0.896" />
 
                 <Button
                     android:id="@+id/btnAtender"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_width="126dp"
+                    android:layout_height="49dp"
+                    android:backgroundTint="#C68526"
                     android:text="Atendida"
                     android:textColorHighlight="#000000"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.788"
+                    app:layout_constraintHorizontal_bias="0.8"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.891" />
+                    app:layout_constraintVertical_bias="0.895" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 

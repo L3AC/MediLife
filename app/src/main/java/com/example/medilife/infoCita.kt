@@ -6,8 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
@@ -24,6 +26,7 @@ lateinit var btnInfo: Button
 lateinit var btnCancelar: Button
 lateinit var btnAtender: Button
 
+
 class infoCita : Fragment() {
     var idCuenta: Int = 0
     var idCita: Int = 0
@@ -31,12 +34,14 @@ class infoCita : Fragment() {
     var idCliente: Int = 0
     private var conx = Conx()
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
             idCita = arguments?.getInt("idcita")!!
             nivelC = arguments?.getInt("nvc")!!
+
             Log.i("k", idCita.toString())
         }
     }
@@ -62,7 +67,7 @@ class infoCita : Fragment() {
         btnAtender = requireView().findViewById(R.id.btnAtender)
 
 
-
+        buscarID()
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
@@ -150,4 +155,24 @@ class infoCita : Fragment() {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun buscarID() {
+        try {
+            var cadena: String =
+                "select idCliente from tbCitas where idCita=?;"
+            var st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setInt(1, idCita)
+
+            st = ps.executeQuery()
+            st.next()
+            idCliente = st.getInt("idCliente")
+
+
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 }

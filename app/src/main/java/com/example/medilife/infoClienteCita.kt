@@ -6,10 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Spinner
 import android.widget.Toast
 import java.sql.PreparedStatement
+import java.sql.ResultSet
 import java.sql.SQLException
 
 lateinit var txtNombres: EditText
@@ -22,11 +25,15 @@ lateinit var txtTelf: EditText
 lateinit var txtPatolog: EditText
 lateinit var btnGuardar:Button
 lateinit var btnVolver: Button
+lateinit var tpsexo2: Spinner
 
 class infoClienteCita : Fragment() {
-    private var idCita: Int = 0
-    private var idCuenta:Int=0
-    private var idCliente:Int=0
+    var idCuenta: Int = 0
+    var idCita: Int = 0
+    var nivelC: Int = 0
+    var idCliente: Int = 0
+    private var conx = Conx()
+    val sexo = listOf("Femenino", "Masculino")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,9 +41,11 @@ class infoClienteCita : Fragment() {
             idCuenta = arguments?.getInt("idcu")!!
             idCita = arguments?.getInt("idcita")!!
             idCliente = arguments?.getInt("idcl")!!
+            nivelC = arguments?.getInt("nvc")!!
             Log.i("IDCUENTA", idCuenta.toString())
             Log.i("IDcita", idCita.toString())
             Log.i("IDCLIENTE", idCliente.toString())
+
         }
     }
 
@@ -60,15 +69,54 @@ class infoClienteCita : Fragment() {
         txtPatolog = requireView().findViewById(R.id.txtPatolog)
         btnGuardar = requireView().findViewById(R.id.btnGuardar)
 
+        LLenarSpin()
+        /*cbNombre.setSelectedItem(st.getString("Nombre"));
+        txtNombres = requireView().findViewById(R.id.txtNombres)
+        txtApellid2 = requireView().findViewById(R.id.txtApellid2)
+        txtNacimiento = requireView().findViewById(R.id.txtNacimiento)
+        txtSexo = requireView().findViewById(R.id.txtSexo)
+        txtIdent = requireView().findViewById(R.id.txtIdent)
+        txtTipoSangre = requireView().findViewById(R.id.txtTipoSangre)
+        txtTelf = requireView().findViewById(R.id.txtTelf)
+        txtPatolog = requireView().findViewById(R.id.txtPatolog)
+        btnGuardar = requireView().findViewById(R.id.btnGuardar)*/
+
+        CargarDatos()
         btnGuardar.setOnClickListener(){
 
+        }
+
+    }
+    fun CargarDatos() {
+        try {
+            var cadena: String =
+                "select * from tbClientes where idCliente=?;"
+            var st: ResultSet
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setInt(1, idCliente)
+
+            st = ps.executeQuery()
+            st.next()
+            txtNombres.setText(st.getString("nombres"))
+            txtApellid2.setText(st.getString("apellidos"))
+            txtNacimiento.setText(st.getString("nacimiento"))
+            txtSexo.setText(st.getString("sexo"))
+            txtIdent.setText(st.getString("numdocum"))
+            txtTipoSangre.setText(st.getString("tipoSangre"))
+            txtTelf.setText(st.getString("telefono"))
+            txtPatolog.setText(st.getString("patologias"))
+
+
+        } catch (ex: SQLException) {
+            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
    /* fun updatePat() {
 
         try {
             val cadena: String =
-                "UPDATE tbClientes SET patologias =? 'Ninguna' WHERE idCliente=?;"
+                "UPDATE tbClientes SET patologias =? WHERE idCliente=?;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
@@ -92,6 +140,11 @@ class infoClienteCita : Fragment() {
         conx.dbConn()!!.close()
 
     }*/
-
+   fun LLenarSpin() {
+       val adaptadorSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sexo)
+       adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+       val spinner = requireView().findViewById<Spinner>(R.id.spinSexoIC)
+       spinner.adapter = adaptadorSpinner
+   }
 
 }
