@@ -32,6 +32,8 @@ lateinit var txtHora: EditText
 lateinit var txtNota: EditText
 lateinit var txtFecha: EditText
 lateinit var bConfirmar: Button
+lateinit var spinEnt: Spinner
+lateinit var spinQuin: Spinner
 
 class reservaCita : Fragment() {
 
@@ -44,12 +46,19 @@ class reservaCita : Fragment() {
     private var idDoc: Int = 0
     private var idCliente: Int = 0
     private var fechaSql: String = ""
-    private var dateh:String=""
+    private var dateh: String = ""
+    val hora = listOf(
+        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
+        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
+    )
+    val inhora = listOf("00", "15", "30", "45")
+    var horaN: String = ""
+    var horaM: String = ""
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCliente = arguments?.getInt("idcu")!!
-            Log.i("cliente",idCliente.toString())
+            Log.i("cliente", idCliente.toString())
         }
     }
 
@@ -59,8 +68,6 @@ class reservaCita : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_reserva_cita, container, false)
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -74,12 +81,16 @@ class reservaCita : Fragment() {
         txtNota = requireView().findViewById(R.id.txtNota)
         txtFecha = requireView().findViewById(R.id.txtFecha)
         bConfirmar = requireView().findViewById(R.id.btnConfirm)
+        spinEnt = requireView().findViewById(R.id.spinEnt)
+        spinQuin = requireView().findViewById(R.id.spinQuin)
 
         cbDoc.isEnabled = false
         lbHorario.isVisible = false
         lbDispo.isVisible = false
-        bConfirmar.isEnabled=false
+        bConfirmar.isEnabled = false
+        txtHora.isEnabled=false
 
+        SpinHora()
         SpinEsp(cbEsp)
 
         bFecha2.setOnClickListener() {
@@ -87,22 +98,61 @@ class reservaCita : Fragment() {
                 DatePickerFragment { year, month, day -> verResultado(year, month, day) }
             Calendario.show(childFragmentManager, "DatePicker")
         }
-
-        txtHora.setOnFocusChangeListener { view, hasFocus ->
-            if (!hasFocus && txtFecha.text.isNotEmpty()) {
+        spinQuin.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                horaM = spinQuin.getItemAtPosition(position).toString()
+                txtHora.setText(spinEnt.selectedItem.toString() + ":" + horaM)
                 verifCita()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+        spinEnt.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                horaN = spinEnt.getItemAtPosition(position).toString()
+                txtHora.setText(horaN + ":" + spinQuin.selectedItem.toString())
+                verifCita()
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
             }
         }
 
-        bConfirmar.setOnClickListener(){
+        bConfirmar.setOnClickListener() {
             Confirmar()
         }
+    }
 
+    fun SpinHora() {
+        val adaptadorSpinner =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
+        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner = requireView().findViewById<Spinner>(R.id.spinEnt)
+        spinner.adapter = adaptadorSpinner
 
+        val adaptadorSpinner2 =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, inhora)
+        adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner2 = requireView().findViewById<Spinner>(R.id.spinQuin)
+        spinner2.adapter = adaptadorSpinner2
     }
 
     fun SpinEsp(cb: Spinner) {
         try {
+            especL.clear()
             val cadena = "select * from tbEspecialidades;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
@@ -152,6 +202,7 @@ class reservaCita : Fragment() {
 
     fun SpinDoc(cb: Spinner) {
         try {
+            doctores.clear()
             val cadena = "select idDoctor,CONCAT(nombres,' ',apellidos) as nombre " +
                     "from tbDoctores where idEspecialidad=?;"
             val st: ResultSet
@@ -230,8 +281,8 @@ class reservaCita : Fragment() {
         val mes = month + 1
         fechaSql = "$year-$mes-$day"
         txtFecha?.setText("$day-$mes-$year")
-        if(txtHora.text.isNotEmpty()){
-        verifCita()
+        if (txtHora.text.isNotEmpty()) {
+            verifCita()
         }
     }
 
@@ -270,21 +321,25 @@ class reservaCita : Fragment() {
             Toast.makeText(context, "Cita agendada correctamente", Toast.LENGTH_SHORT).show()
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Verifique la fecha o algun campo incorrecto", Toast.LENGTH_SHORT).show()
+            Toast.makeText(
+                context,
+                "Verifique la fecha o algun campo incorrecto",
+                Toast.LENGTH_SHORT
+            ).show()
         }
         conx.dbConn()!!.close()
     }
 
     fun verifCita() {
         try {
-            dateh = fechaSql+" "+ txtHora.text
-            val cadena: String = "select * from tbCitas where idDoctor=? and fechahora=?;"
+            dateh = fechaSql + " " + txtHora.text
+
+            val cadena = "select * from tbCitas where idDoctor=? and fechahora=?;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
             ps.setString(1, idDoctor.toString())
-            ps.setString(2,dateh)
-
+            ps.setString(2, dateh)
             st = ps.executeQuery()
             st.next()
 
@@ -292,16 +347,16 @@ class reservaCita : Fragment() {
             if (found == 1) {
                 lbDispo.isVisible = true
                 lbDispo.text = "No disponible"
-                bConfirmar.isEnabled=false
+                bConfirmar.isEnabled = false
 
             } else {
                 lbDispo.isVisible = true
                 lbDispo.text = "Disponible"
-                bConfirmar.isEnabled=true
+                bConfirmar.isEnabled = true
             }
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "No se verifico", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
     }

@@ -76,12 +76,8 @@ class RegistroMain : AppCompatActivity() {
         tpdoc = findViewById(R.id.spinTD)
         ndoc = findViewById(R.id.txtDoc)
         patol = findViewById(R.id.txtPatologias)
-
-
         //LLENAR SPINNER
         LLenarSpin()
-
-
         volv.setOnClickListener {
             val scndAct = Intent(this, MainActivity::class.java)
             startActivity(scndAct)

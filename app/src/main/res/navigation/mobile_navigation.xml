@@ -117,6 +117,9 @@
         <action
             android:id="@+id/action_historialCitas_to_homeDoctor"
             app:destination="@id/homeDoctor" />
+        <action
+            android:id="@+id/action_historialCitas_to_infoCita"
+            app:destination="@id/infoCita" />
     </fragment>
 
 
