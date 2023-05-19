@@ -121,6 +121,11 @@
             android:id="@+id/action_historialCitas_to_infoCita"
             app:destination="@id/infoCita" />
     </fragment>
+    <fragment
+        android:id="@+id/cambioContra"
+        android:name="com.example.medilife.CambioContra"
+        android:label="fragment_cambio_contra"
+        tools:layout="@layout/fragment_cambio_contra" />
 
 
 </navigation>

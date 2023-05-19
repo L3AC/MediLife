@@ -1,7 +1,6 @@
 package com.example.medilife
 
 import android.content.Context
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.GestureDetector
@@ -10,8 +9,6 @@ import android.view.LayoutInflater
 import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ArrayAdapter
-import android.widget.ListView
 import android.widget.TextView
 import android.widget.Toast
 import androidx.navigation.fragment.findNavController
@@ -73,7 +70,7 @@ class historialCitas : Fragment() {
                 object : RecyclerItemClickListener.OnItemClickListener {
                     override fun onItemClick(view: View, position: Int) {
                         // Acciones a realizar cuando se hace clic en un elemento del RecyclerView
-                        val itm = reg[position]
+                        val itm = reg2[position]
                         idCita = itm.id
                         var bundle = Bundle().apply {
                             putInt("idcu", idCuenta)

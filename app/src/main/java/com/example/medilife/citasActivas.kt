@@ -2,6 +2,7 @@ package com.example.medilife
 
 import android.content.Context
 import android.os.Bundle
+import android.util.Log
 import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -10,12 +11,13 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 
-lateinit var ListVista1: ListView
+lateinit var miRecyclerView2: RecyclerView
 
 class fila(
     val id: Int
@@ -43,40 +45,44 @@ class citasActivas : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-
         return inflater.inflate(R.layout.fragment_citas_activas, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
-        ListVista1 = requireView().findViewById(R.id.miLista2)
-        if(nivelC==1){
+        miRecyclerView2 = requireView().findViewById(R.id.rcView)
+        miRecyclerView2.layoutManager = LinearLayoutManager(context)
+        if (nivelC == 1) {
             CargarDatosDoc()
         }
-        if(nivelC==2){
+        if (nivelC == 2) {
             CargarDatosSec()
         }
-        if(nivelC==3){
+        if (nivelC == 3) {
             CargarDatosCl()
         }
 
-        ListVista1.setOnItemClickListener() { parent, view, position, id ->
-            val espc = reg[position]
-            idCita = espc.id
-            var bundle = Bundle().apply {
-                putInt("idcu", idCuenta)
-                putInt("idcita", idCita)
-                putInt("nvc", nivelC)
-            }
-            findNavController().navigate(R.id.action_citasActivas_to_infoCita, bundle)
-        }
+        miRecyclerView2.addOnItemTouchListener(
+            historialCitas.RecyclerItemClickListener(requireContext(), miRecyclerView2,
+                object : historialCitas.RecyclerItemClickListener.OnItemClickListener {
+                    override fun onItemClick(view: View, position: Int) {
+                        // Acciones a realizar cuando se hace clic en un elemento del RecyclerView
+                        val itm = reg[position]
+                        idCita = itm.id
+                        var bundle = Bundle().apply {
+                            putInt("idcu", idCuenta)
+                            putInt("idcita", idCita)
+                            putInt("nvc", nivelC)
+                        }
+                        Log.i("IDE: ", idCita.toString())
+                        findNavController().navigate(R.id.action_citasActivas_to_infoCita, bundle)
+                    }
+                })
+        )
+        val miAdapter = historialCitas.misCard(myData)
+        miRecyclerView2.adapter = miAdapter
     }
-
     fun CargarDatosDoc() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
-        ListVista1.adapter = adapter
         myData.clear()
         reg.clear()
         try {
@@ -105,18 +111,12 @@ class citasActivas : Fragment() {
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData.add(newElement)
-                adapter.notifyDataSetChanged()
-
             }
-            /*CAMBIO*/
-            ListVista1.visibility = View.VISIBLE
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
     fun CargarDatosSec() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
-        ListVista1.adapter = adapter
         myData.clear()
         reg.clear()
         try {
@@ -129,7 +129,6 @@ class citasActivas : Fragment() {
                         "and estado='Pendiente' ;"
 
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
-            //ps.setInt(1, idCuenta)
             st = ps.executeQuery()
 
             while (st?.next() == true) {
@@ -145,17 +144,12 @@ class citasActivas : Fragment() {
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
                 myData.add(newElement)
-                adapter.notifyDataSetChanged()
-
             }
-            ListVista1.visibility = View.VISIBLE
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
     fun CargarDatosCl() {
-        val adapter = ArrayAdapter(requireContext(), android.R.layout.simple_list_item_1, myData)
-        ListVista1.adapter = adapter
         myData.clear()
         reg.clear()
         try {
@@ -182,16 +176,14 @@ class citasActivas : Fragment() {
                 reg.add(fila(col1))
 
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
-
                 myData.add(newElement)
-                adapter.notifyDataSetChanged()
-
             }
-            ListVista1.visibility = View.VISIBLE
         } catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+            Log.i("ol",ex.message.toString())
+            Toast.makeText(context, "Error al mostrar cliente", Toast.LENGTH_SHORT).show()
         }
     }
+
     class misCard(private val Datos: MutableList<String>) :
         RecyclerView.Adapter<misCard.MyViewHolder>() {
         class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
