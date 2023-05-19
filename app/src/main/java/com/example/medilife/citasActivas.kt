@@ -1,12 +1,16 @@
 package com.example.medilife
 
+import android.content.Context
 import android.os.Bundle
+import android.view.GestureDetector
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.RecyclerView
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -14,10 +18,7 @@ import java.sql.SQLException
 lateinit var ListVista1: ListView
 
 class fila(
-    val id: Int,
-    val fecha: String,
-    val hora: String,
-    val paciente: String
+    val id: Int
 )
 
 val reg = mutableListOf<fila>()
@@ -99,7 +100,7 @@ class citasActivas : Fragment() {
                 val col4 = st.getString("paciente")
                 val col5 = st.getString("estado")
 
-                reg.add(fila(col1, col2, col3, col4))
+                reg.add(fila(col1))
 
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
@@ -139,7 +140,7 @@ class citasActivas : Fragment() {
                 val col4 = st.getString("paciente")
                 val col5 = st.getString("estado")
 
-                reg.add(fila(col1, col2, col3, col4))
+                reg.add(fila(col1))
 
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
@@ -178,7 +179,7 @@ class citasActivas : Fragment() {
                 val col4 = st.getString("paciente")
                 val col5 = st.getString("estado")
 
-                reg.add(fila(col1, col2, col3, col4))
+                reg.add(fila(col1))
 
                 val newElement = "Fecha: $col2  Hora: $col3  Paciente: $col4  Estado: $col5"
 
@@ -189,6 +190,59 @@ class citasActivas : Fragment() {
             ListVista1.visibility = View.VISIBLE
         } catch (ex: SQLException) {
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+        }
+    }
+    class misCard(private val Datos: MutableList<String>) :
+        RecyclerView.Adapter<misCard.MyViewHolder>() {
+        class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+            val textView: TextView = view.findViewById(R.id.title_text_view)
+            //   val imageView: ImageView = view.findViewById(R.id.image_view)
+        }
+        override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+            val vista =
+                LayoutInflater.from(parent.context).inflate(R.layout.card, parent, false)
+            return MyViewHolder(vista)
+        }
+        override fun getItemCount() = Datos.size
+        override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+            holder.textView.setText(Datos[position])
+            //Reemplazamos la imagen
+            //  holder.imageView.setImageResource(Imagenes[position])
+        }
+
+    }
+    class RecyclerItemClickListener(
+        context: Context,
+        recyclerView: RecyclerView,
+        private val listener: OnItemClickListener?
+    ) : RecyclerView.OnItemTouchListener {
+
+        private val gestureDetector: GestureDetector
+
+        init {
+            gestureDetector =
+                GestureDetector(context, object : GestureDetector.SimpleOnGestureListener() {
+                    override fun onSingleTapUp(e: MotionEvent): Boolean {
+                        return true
+                    }
+                })
+        }
+
+        override fun onInterceptTouchEvent(rv: RecyclerView, e: MotionEvent): Boolean {
+            val childView = rv.findChildViewUnder(e.x, e.y)
+            if (childView != null && gestureDetector.onTouchEvent(e)) {
+                listener?.onItemClick(childView, rv.getChildAdapterPosition(childView))
+                return true
+            }
+            return false
+        }
+
+        override fun onTouchEvent(rv: RecyclerView, e: MotionEvent) {}
+
+        override fun onRequestDisallowInterceptTouchEvent(disallowIntercept: Boolean) {}
+
+        interface OnItemClickListener {
+            fun onItemClick(view: View, position: Int)
         }
     }
 
