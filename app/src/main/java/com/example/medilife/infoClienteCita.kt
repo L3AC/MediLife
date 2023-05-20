@@ -19,6 +19,7 @@ lateinit var txtNombres: EditText
 lateinit var txtApellid2: EditText
 lateinit var txtNacimiento: EditText
 lateinit var txtSexo: EditText
+lateinit var spinSexoIC:Spinner
 lateinit var txtIdent: EditText
 lateinit var txtTipoSangre: EditText
 lateinit var txtTelf: EditText
@@ -34,6 +35,7 @@ class infoClienteCita : Fragment() {
     var idCliente: Int = 0
     private var conx = Conx()
     val sexo = listOf("Femenino", "Masculino")
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -59,10 +61,13 @@ class infoClienteCita : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+
         txtNombres = requireView().findViewById(R.id.txtNombres)
         txtApellid2 = requireView().findViewById(R.id.txtApellid2)
         txtNacimiento = requireView().findViewById(R.id.txtNacimiento)
         txtSexo = requireView().findViewById(R.id.txtSexo)
+        spinSexoIC=requireView().findViewById(R.id.spinSexoIC)
         txtIdent = requireView().findViewById(R.id.txtIdent)
         txtTipoSangre = requireView().findViewById(R.id.txtTipoSangre)
         txtTelf = requireView().findViewById(R.id.txtTelf)
@@ -89,6 +94,7 @@ class infoClienteCita : Fragment() {
     }
     fun CargarDatos() {
         try {
+            val adapti=LLenarSpin()
             var cadena: String =
                 "select * from tbClientes where idCliente=?;"
             var st: ResultSet
@@ -102,6 +108,15 @@ class infoClienteCita : Fragment() {
             txtApellid2.setText(st.getString("apellidos"))
             txtNacimiento.setText(st.getString("nacimiento"))
             txtSexo.setText(st.getString("sexo"))
+
+            /*val selection=st.getString("sexo")
+            if(st.getString("sexo")=="Masculino"){
+
+            }
+            else{
+
+            }*/
+            spinSexoIC.setSelection(adapti.getPosition(st.getString("sexo")));
             txtIdent.setText(st.getString("numdocum"))
             txtTipoSangre.setText(st.getString("tipoSangre"))
             txtTelf.setText(st.getString("telefono"))
@@ -140,11 +155,15 @@ class infoClienteCita : Fragment() {
         conx.dbConn()!!.close()
 
     }*/
-   fun LLenarSpin() {
+
+   fun LLenarSpin(): ArrayAdapter<String> {
        val adaptadorSpinner = ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sexo)
        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
        val spinner = requireView().findViewById<Spinner>(R.id.spinSexoIC)
        spinner.adapter = adaptadorSpinner
+
+       return adaptadorSpinner
+
    }
 
 }
