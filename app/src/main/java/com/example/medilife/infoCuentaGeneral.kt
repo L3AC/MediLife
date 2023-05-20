@@ -89,6 +89,9 @@ class infoCuentaGeneral : Fragment() {
         }
 
     }
+    fun updateData(){
+
+    }
     fun LLenarSpin(): ArrayAdapter<String> {
         val adaptadorSpinner =
             ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sexo)
@@ -96,6 +99,5 @@ class infoCuentaGeneral : Fragment() {
         val spinner = requireView().findViewById<Spinner>(R.id.spinSexo3)
         spinner.adapter = adaptadorSpinner
         return adaptadorSpinner
-
     }
 }

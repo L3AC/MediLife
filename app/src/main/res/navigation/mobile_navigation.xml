@@ -52,6 +52,9 @@
         <action
             android:id="@+id/action_cuentaGeneral_to_infoCuentaGeneral"
             app:destination="@id/infoCuentaGeneral" />
+        <action
+            android:id="@+id/action_cuentaGeneral_to_cambioContra"
+            app:destination="@id/cambioContra" />
     </fragment>
     <fragment
         android:id="@+id/infoCuentaGeneral"
@@ -125,7 +128,11 @@
         android:id="@+id/cambioContra"
         android:name="com.example.medilife.CambioContra"
         android:label="fragment_cambio_contra"
-        tools:layout="@layout/fragment_cambio_contra" />
+        tools:layout="@layout/fragment_cambio_contra" >
+        <action
+            android:id="@+id/action_cambioContra_to_cuentaGeneral"
+            app:destination="@id/cuentaGeneral" />
+    </fragment>
 
 
 </navigation>
