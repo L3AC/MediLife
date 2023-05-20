@@ -11,6 +11,7 @@ import android.view.ViewGroup
 import android.widget.*
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -83,6 +84,11 @@ class reservaCita : Fragment() {
         bConfirmar = requireView().findViewById(R.id.btnConfirm)
         spinEnt = requireView().findViewById(R.id.spinEnt)
         spinQuin = requireView().findViewById(R.id.spinQuin)
+        volver = requireView().findViewById(R.id.btnVolver5)
+
+        volver.setOnClickListener{
+            findNavController().navigate(R.id.action_citasActivas_to_homeCliente)
+        }
 
         cbDoc.isEnabled = false
         lbHorario.isVisible = false

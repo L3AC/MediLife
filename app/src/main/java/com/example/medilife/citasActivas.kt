@@ -81,6 +81,12 @@ class citasActivas : Fragment() {
         )
         val miAdapter = historialCitas.misCard(myData)
         miRecyclerView2.adapter = miAdapter
+
+        volver = requireView().findViewById(R.id.btnVolver6)
+
+        volver.setOnClickListener {
+            findNavController().navigate(R.id.action_historialCitas_to_homeCliente)
+        }
     }
     fun CargarDatosDoc() {
         myData.clear()

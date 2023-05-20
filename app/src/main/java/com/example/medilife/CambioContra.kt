@@ -9,7 +9,7 @@ import android.view.ViewGroup
 import android.widget.ImageButton
 import androidx.navigation.fragment.findNavController
 
-lateinit var volver1: ImageButton
+
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
