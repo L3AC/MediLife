@@ -85,7 +85,7 @@ class citasActivas : Fragment() {
         volver = requireView().findViewById(R.id.btnVolver6)
 
         volver.setOnClickListener {
-            findNavController().navigate(R.id.action_historialCitas_to_homeCliente)
+            findNavController().navigate(R.id.homeCliente)
         }
     }
     fun CargarDatosDoc() {
