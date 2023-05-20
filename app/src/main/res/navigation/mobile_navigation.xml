@@ -69,7 +69,11 @@
         android:id="@+id/reservaCita"
         android:name="com.example.medilife.reservaCita"
         android:label="fragment_reserva_cita"
-        tools:layout="@layout/fragment_reserva_cita" />
+        tools:layout="@layout/fragment_reserva_cita" >
+        <action
+            android:id="@+id/action_reservaCita_to_homeCliente"
+            app:destination="@id/homeCliente" />
+    </fragment>
     <activity
         android:id="@+id/mainInside"
         android:name="com.example.medilife.MainInside"
