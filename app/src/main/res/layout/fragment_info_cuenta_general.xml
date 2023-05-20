@@ -242,7 +242,7 @@
                     app:layout_constraintVertical_bias="0.663" />
 
                 <EditText
-                    android:id="@+id/txtPatologi"
+                    android:id="@+id/txtHorarioD"
                     android:layout_width="400dp"
                     android:layout_height="39dp"
                     android:layout_marginTop="756dp"
