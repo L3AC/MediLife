@@ -58,6 +58,8 @@ class infoCuentaLaboral : Fragment() {
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
     )
+    var horaN: String = ""
+    var horaM: String = ""
     private var conx = Conx()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -97,6 +99,7 @@ class infoCuentaLaboral : Fragment() {
 
         txtNacimiento4.isEnabled = false
         txtHora4.isEnabled = false
+        SpinHora()
         LLenarSpinSe()
         LLenarSpinTPD()
         btnFecha2.setOnClickListener() {
@@ -113,8 +116,8 @@ class infoCuentaLaboral : Fragment() {
             HabilitDoc(false)
         }
         if (nivelC == 2) { //SECRETARIA
-            lbEsp.isEnabled = false
-            spinEsp4.isEnabled = false
+            lbEsp.isVisible = false
+            spinEsp4.isVisible = false
             cargarDataSec()
             HabilitSec(false)
         }
@@ -138,6 +141,36 @@ class infoCuentaLaboral : Fragment() {
                 }
             }
         }
+        spinQuin4.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                horaM = spinQuin.getItemAtPosition(position).toString()
+                txtHora4.setText(spinEnt4.selectedItem.toString() + ":" + horaM)
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
+        spinEnt4.onItemSelectedListener = object :
+            AdapterView.OnItemSelectedListener {
+            override fun onItemSelected(
+                parent: AdapterView<*>,
+                view: View?,
+                position: Int,
+                id: Long
+            ) {
+                horaN = spinEnt.getItemAtPosition(position).toString()
+                txtHora4.setText(horaN + ":" + spinQuin4.selectedItem.toString())
+            }
+
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+        }
         btnGuardar4.setOnClickListener() {
 
         }
@@ -150,8 +183,6 @@ class infoCuentaLaboral : Fragment() {
             val cadena = "select * from tbEspecialidades;"
             val st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
-
-
             st = ps.executeQuery()
             //LLENAR SPINNER
             while (st.next()) {
@@ -281,7 +312,19 @@ class infoCuentaLaboral : Fragment() {
             listener(year, month, day)
         }
     }
+    fun SpinHora() {
+        val adaptadorSpinner =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
+        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner = requireView().findViewById<Spinner>(R.id.spinEnt4)
+        spinner.adapter = adaptadorSpinner
 
+        val adaptadorSpinner2 =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
+        adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner2 = requireView().findViewById<Spinner>(R.id.spinQuin4)
+        spinner2.adapter = adaptadorSpinner2
+    }
     fun HabilitDoc(tf: Boolean) {
         txtUsuario4.isEnabled = tf
         txtMail4.isEnabled = tf
