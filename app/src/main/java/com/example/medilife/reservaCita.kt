@@ -94,6 +94,7 @@ class reservaCita : Fragment() {
         lbHorario.isVisible = false
         lbDispo.isVisible = false
         bConfirmar.isEnabled = false
+        txtFecha.isEnabled=false
         txtHora.isEnabled=false
 
         SpinHora()

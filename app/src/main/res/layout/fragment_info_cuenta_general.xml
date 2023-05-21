@@ -122,7 +122,7 @@
                     app:layout_constraintVertical_bias="0.256" />
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/lbEsp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"

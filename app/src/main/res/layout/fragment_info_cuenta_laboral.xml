@@ -27,6 +27,20 @@
                 tools:layout_editor_absoluteY="-21dp">
 
 
+                <ImageButton
+                    android:id="@+id/btnFecha2"
+                    android:layout_width="49dp"
+                    android:layout_height="49dp"
+                    android:background="@android:color/transparent"
+                    android:scaleType="fitXY"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.953"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintVertical_bias="0.13"
+                    app:srcCompat="@drawable/calnd" />
+
                 <Spinner
                     android:id="@+id/spinQuin4"
                     android:layout_width="90dp"
@@ -144,7 +158,7 @@
                     app:layout_constraintVertical_bias="0.256" />
 
                 <TextView
-                    android:id="@+id/textView26"
+                    android:id="@+id/lbEsp"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/comfortaa"
@@ -388,7 +402,7 @@
                     app:layout_constraintVertical_bias="0.306" />
 
                 <Spinner
-                    android:id="@+id/spinEspD4"
+                    android:id="@+id/spinEsp4"
                     android:layout_width="170dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -455,10 +469,10 @@
                     android:text="Guardar"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.838"
+                    app:layout_constraintHorizontal_bias="0.845"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.943" />
+                    app:layout_constraintVertical_bias="0.923" />
 
                 <Button
                     android:id="@+id/btnEditar4"
@@ -471,7 +485,7 @@
                     app:layout_constraintHorizontal_bias="0.161"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.943" />
+                    app:layout_constraintVertical_bias="0.923" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>

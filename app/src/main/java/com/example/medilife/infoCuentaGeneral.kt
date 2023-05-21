@@ -43,6 +43,7 @@ class infoCuentaGeneral : Fragment() {
     var nivelC=0
     val sexo = listOf("Femenino", "Masculino")
     val tipodoc = listOf("DUI", "Pasaporte")
+
     private var conx = Conx()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
