@@ -89,6 +89,9 @@ class infoCuentaGeneral : Fragment() {
                 Habilit(true)
             }
         }
+        btnGuardar3.setOnClickListener(){
+            updateData()
+        }
 
 
         val bundle = Bundle().apply {
@@ -128,20 +131,17 @@ class infoCuentaGeneral : Fragment() {
             txtnumDocum.setText(st.getString("numdocum"))
             txtPatolog3.setText(st.getString("patologias"))
 
-            ps.executeUpdate()
-            //Toast.makeText(context, "Campos actualizados", Toast.LENGTH_SHORT).show()
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Error al cargar", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
     }
 
     fun updateData() {
         try {
-            val adapti = LLenarSpin()
             val cadena =
-                "UPDATE tbUsuarios SET usuario=?,correo=?  from tbClientes c,tbUsuarios u" +
+                "UPDATE tbUsuarios SET usuario=?,correo=?  from tbClientes c,tbUsuarios u " +
                 "WHERE c.idUsuario=u.idUsuario and idCliente=?;"+
 
                 "UPDATE tbClientes SET nombres =?, apellidos=?,tipodocum=?," +
@@ -151,7 +151,7 @@ class infoCuentaGeneral : Fragment() {
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
             ps.setString(1, txtUsuario3.text.toString())
-            ps.setString(2, txtUsuario3.text.toString())
+            ps.setString(2, txtMail3.text.toString())
             ps.setInt(3, idCuenta)
             ps.setString(4, txtNombres3.text.toString())
             ps.setString(5, txtApellid3.text.toString())
@@ -168,7 +168,7 @@ class infoCuentaGeneral : Fragment() {
             Toast.makeText(context, "Campos actualizados", Toast.LENGTH_SHORT).show()
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
-            Toast.makeText(context, "Errorsito", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "No se pudo actualizar", Toast.LENGTH_SHORT).show()
         }
         conx.dbConn()!!.close()
     }
@@ -192,6 +192,7 @@ class infoCuentaGeneral : Fragment() {
 
     fun Habilit(tf: Boolean) {
         txtUsuario3.isEnabled = tf
+        txtMail3.isEnabled=tf
         txtNombres3.isEnabled = tf
         txtApellid3.isEnabled = tf
         txtNacimiento3.isEnabled = tf

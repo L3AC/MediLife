@@ -85,6 +85,7 @@ class historialCitas : Fragment() {
         val miAdapter = misCard(myData2)
         miRecyclerView.adapter = miAdapter
 
+
     }
 
     fun CargarDatosDoc() {

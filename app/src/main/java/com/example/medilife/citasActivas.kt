@@ -18,7 +18,7 @@ import java.sql.ResultSet
 import java.sql.SQLException
 
 lateinit var miRecyclerView2: RecyclerView
-
+lateinit var volver2:ImageButton
 class fila(
     val id: Int
 )
@@ -82,10 +82,10 @@ class citasActivas : Fragment() {
         val miAdapter = historialCitas.misCard(myData)
         miRecyclerView2.adapter = miAdapter
 
-        volver = requireView().findViewById(R.id.btnVolver6)
+        volver2 = requireView().findViewById(R.id.btnVolver6)
 
-        volver.setOnClickListener {
-            findNavController().navigate(R.id.homeCliente)
+        volver2.setOnClickListener {
+            findNavController().navigate(R.id.action_citasActivas_to_homeCliente)
         }
     }
     fun CargarDatosDoc() {

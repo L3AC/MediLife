@@ -132,10 +132,10 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.83"
+                    app:layout_constraintHorizontal_bias="0.933"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.377" />
+                    app:layout_constraintVertical_bias="0.378" />
 
                 <EditText
                     android:id="@+id/txtUsuario3"
@@ -169,7 +169,7 @@
 
                 <EditText
                     android:id="@+id/txtApellidos3"
-                    android:layout_width="190dp"
+                    android:layout_width="220dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
                     android:elevation="5dp"
@@ -200,7 +200,7 @@
 
                 <EditText
                     android:id="@+id/txtMail3"
-                    android:layout_width="190dp"
+                    android:layout_width="220dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
                     android:elevation="5dp"
@@ -243,7 +243,7 @@
 
                 <EditText
                     android:id="@+id/txtPatolog3"
-                    android:layout_width="400dp"
+                    android:layout_width="390dp"
                     android:layout_height="39dp"
                     android:layout_marginTop="756dp"
                     android:background="@drawable/customs_edidtext"
@@ -337,7 +337,7 @@
 
                 <EditText
                     android:id="@+id/txtTelefono3"
-                    android:layout_width="160dp"
+                    android:layout_width="130dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
                     android:elevation="5dp"
@@ -361,14 +361,14 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.736"
+                    app:layout_constraintHorizontal_bias="0.762"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.499" />
+                    app:layout_constraintVertical_bias="0.506" />
 
                 <EditText
                     android:id="@+id/txtTipoSangre3"
-                    android:layout_width="140dp"
+                    android:layout_width="100dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
                     android:elevation="5dp"
