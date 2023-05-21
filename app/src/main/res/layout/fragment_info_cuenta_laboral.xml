@@ -68,7 +68,7 @@
                     android:layout_width="93dp"
                     android:layout_height="46dp"
                     android:ems="10"
-                    android:hint="00:00"
+                    android:hint="00:00-00:00"
                     android:inputType="time"
                     android:textAlignment="center"
                     android:textColor="#FFFFFF"

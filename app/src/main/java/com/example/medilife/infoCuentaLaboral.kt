@@ -55,8 +55,9 @@ class infoCuentaLaboral : Fragment() {
     private var fechaSql: String = ""
     private var dateh: String = ""
     val hora = listOf(
-        "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
-        "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
+        "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00",
+        "08:00", "09:00", "10:00","11:00", "12:00", "13:00", "14:00", "15:00",
+        "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"
     )
     var horaN: String = ""
     var horaM: String = ""
@@ -102,6 +103,7 @@ class infoCuentaLaboral : Fragment() {
         SpinHora()
         LLenarSpinSe()
         LLenarSpinTPD()
+
         btnFecha2.setOnClickListener() {
             val Calendario =
                 reservaCita.DatePickerFragment { year, month, day ->
@@ -149,8 +151,8 @@ class infoCuentaLaboral : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                horaM = spinQuin.getItemAtPosition(position).toString()
-                txtHora4.setText(spinEnt4.selectedItem.toString() + ":" + horaM)
+                horaM = spinQuin4.getItemAtPosition(position).toString()
+                txtHora4.setText(spinEnt4.selectedItem.toString() + "-" + horaM)
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -164,8 +166,8 @@ class infoCuentaLaboral : Fragment() {
                 position: Int,
                 id: Long
             ) {
-                horaN = spinEnt.getItemAtPosition(position).toString()
-                txtHora4.setText(horaN + ":" + spinQuin4.selectedItem.toString())
+                horaN = spinEnt4.getItemAtPosition(position).toString()
+                txtHora4.setText(horaN + "-" + spinQuin4.selectedItem.toString())
             }
 
             override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -207,8 +209,8 @@ class infoCuentaLaboral : Fragment() {
             var st: ResultSet
             val cadena =
                 "select usuario,correo,especialidad,nombres,apellidos,tipodocum,numdocum,nacimiento,sexo,telefono " +
-                        "from tbDoctores c,tbUsuarios u,tbEspecialidades e " +
-                        "where c.idUsuario=u.idUsuario and c.idEspecialidad=e.idEspecialidad and idDoctor=?;"
+                 ",horarioLaboral from tbDoctores c,tbUsuarios u,tbEspecialidades e " +
+                "where c.idUsuario=u.idUsuario and c.idEspecialidad=e.idEspecialidad and idDoctor=?;"
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
             st = ps.executeQuery()
@@ -218,6 +220,7 @@ class infoCuentaLaboral : Fragment() {
             txtNombres4.setText(st.getString("nombres"))
             txtApellid4.setText(st.getString("apellidos"))
             txtNacimiento4.setText(st.getString("nacimiento"))
+            txtHora4.setText(st.getString("horarioLaboral"))
             spinSexo4.setSelection(adaptSe.getPosition(st.getString("sexo")))
             spinEsp4.setSelection(adaptEsp.getPosition(st.getString("especialidad")))
             txtTelf4.setText(st.getString("telefono"))
@@ -239,7 +242,7 @@ class infoCuentaLaboral : Fragment() {
             var st: ResultSet
             val cadena =
                 "select usuario,correo,nombres,apellidos,tipodocum,numdocum,nacimiento,sexo,telefono " +
-                        "from tbSecretarias c,tbUsuarios u where c.idUsuario=u.idUsuario and idSecretaria=?;"
+                ",horarioLaboral from tbSecretarias c,tbUsuarios u where c.idUsuario=u.idUsuario and idSecretaria=?;"
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
             st = ps.executeQuery()
@@ -249,6 +252,7 @@ class infoCuentaLaboral : Fragment() {
             txtNombres4.setText(st.getString("nombres"))
             txtApellid4.setText(st.getString("apellidos"))
             txtNacimiento4.setText(st.getString("nacimiento"))
+            txtHora4.setText(st.getString("horarioLaboral"))
             spinSexo4.setSelection(adaptSe.getPosition(st.getString("sexo")))
             txtTelf4.setText(st.getString("telefono"))
             spintipoDocum4.setSelection(adaptTPD.getPosition(st.getString("tipodocum")))
