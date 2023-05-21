@@ -76,7 +76,7 @@ class infoCuentaGeneral : Fragment() {
         txtPatolog3 = requireView().findViewById(R.id.txtPatolog3)
         btnEditar3 = requireView().findViewById(R.id.btnEditar)
         btnGuardar3 = requireView().findViewById(R.id.btnGuardar)
-
+/*HOLA*/
         LLenarSpin()
         Habilit(false)
         cargarData()
