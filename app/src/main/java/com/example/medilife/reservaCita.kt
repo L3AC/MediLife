@@ -87,7 +87,7 @@ class reservaCita : Fragment() {
         volver = requireView().findViewById(R.id.btnVolver5)
 
         volver.setOnClickListener{
-            findNavController().navigate(R.id.action_citasActivas_to_homeCliente)
+            findNavController().navigate(R.id.homeCliente)
         }
 
         cbDoc.isEnabled = false
