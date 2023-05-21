@@ -12,6 +12,7 @@ import android.widget.EditText
 import android.widget.Spinner
 import android.widget.Toast
 import androidx.core.view.isVisible
+import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -73,6 +74,7 @@ class infoClienteCita : Fragment() {
         txtPatolog = requireView().findViewById(R.id.txtPatolog)
         btnEditar = requireView().findViewById(R.id.btnEditar2)
         btnGuardar = requireView().findViewById(R.id.btnGuardar2)
+        volver = requireView().findViewById(R.id.btnVolver8)
 
         //LLenarSpin()
         txtNombres.isEnabled = false
@@ -84,6 +86,10 @@ class infoClienteCita : Fragment() {
         txtTelf.isEnabled = false
         txtPatolog.isEnabled = false
         btnGuardar.isVisible = false
+
+        volver.setOnClickListener {
+            findNavController().navigate(R.id.infoCita)
+        }
 
 
         CargarDatos()

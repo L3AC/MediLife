@@ -65,6 +65,11 @@ class infoCita : Fragment() {
         btnInfo = requireView().findViewById(R.id.btnInfo)
         btnCancelar = requireView().findViewById(R.id.btnCancelar)
         btnAtender = requireView().findViewById(R.id.btnAtender)
+        volver = requireView().findViewById(R.id.btnVolver7)
+
+        volver.setOnClickListener {
+            findNavController().navigate(R.id.citasActivas)
+        }
 
 
         buscarID()
@@ -89,6 +94,8 @@ class infoCita : Fragment() {
         btnCancelar.setOnClickListener() {
             CancelarCita()
         }
+
+
     }
 
     fun CargarDatos() {
