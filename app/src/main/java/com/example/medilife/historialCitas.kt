@@ -52,6 +52,7 @@ class historialCitas : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        volver = requireView().findViewById(R.id.btnVolver6)
         //ListVista2 = requireView().findViewById(R.id.miLista2)
         miRecyclerView = requireView().findViewById(R.id.recyclerView)
         miRecyclerView.layoutManager = LinearLayoutManager(context)
@@ -63,6 +64,19 @@ class historialCitas : Fragment() {
         }
         if (nivelC == 3) {
             CargarDatosCl()
+        }
+
+        volver.setOnClickListener {
+            if (nivelC == 1){
+                findNavController().navigate(R.id.homeDoctor)
+            }
+            if (nivelC == 2){
+                findNavController().navigate(R.id.homeSecretaria)
+            }
+            if (nivelC == 3)
+            {
+                findNavController().navigate(R.id.homeCliente)
+            }
         }
 
         miRecyclerView.addOnItemTouchListener(
