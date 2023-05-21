@@ -13,10 +13,13 @@ import java.util.Date
 lateinit var perfil:Button
 class CuentaGeneral : Fragment() {
     var idCuenta: Int = 0
+    var nivelC=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
+            idCuenta = arguments?.getInt("idcu")!!
+            nivelC= arguments?.getInt("nvc")!!
         }
 
     }
@@ -26,7 +29,7 @@ class CuentaGeneral : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        idCuenta = arguments?.getInt("idcu")!!
+
         return inflater.inflate(R.layout.fragment_cuenta_general, container, false)
     }
 
@@ -36,14 +39,21 @@ class CuentaGeneral : Fragment() {
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
         }
-        val volver = requireView().findViewById<Button>(R.id.btnPerfil)
+        perfil = requireView().findViewById<Button>(R.id.btnPerfil)
 
 
-        volver.setOnClickListener{
-            findNavController().navigate(R.id.action_cuentaGeneral_to_infoCuentaGeneral,bundle)
+        perfil.setOnClickListener{
+            if(nivelC==3){
+                findNavController().navigate(R.id.action_cuentaGeneral_to_infoCuentaGeneral,bundle)
+            }
+            else {
+                findNavController().navigate(R.id.action_cuentaGeneral_to_infoCuentaLaboral,bundle)
+            }
         }
     }
+
 
 
 }

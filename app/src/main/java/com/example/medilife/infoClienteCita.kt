@@ -156,14 +156,5 @@ class infoClienteCita : Fragment() {
 
     }
 
-    /*fun LLenarSpin(): ArrayAdapter<String> {
-        val adaptadorSpinner =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, sexo)
-        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        val spinner = requireView().findViewById<Spinner>(R.id.spinSexoIC)
-        spinner.adapter = adaptadorSpinner
-        return adaptadorSpinner
-
-    }*/
 
 }

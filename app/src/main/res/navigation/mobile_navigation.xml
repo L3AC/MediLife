@@ -55,6 +55,9 @@
         <action
             android:id="@+id/action_cuentaGeneral_to_cambioContra"
             app:destination="@id/cambioContra" />
+        <action
+            android:id="@+id/action_cuentaGeneral_to_infoCuentaLaboral"
+            app:destination="@id/infoCuentaLaboral" />
     </fragment>
     <fragment
         android:id="@+id/infoCuentaGeneral"
@@ -135,6 +138,15 @@
         tools:layout="@layout/fragment_cambio_contra" >
         <action
             android:id="@+id/action_cambioContra_to_cuentaGeneral"
+            app:destination="@id/cuentaGeneral" />
+    </fragment>
+    <fragment
+        android:id="@+id/infoCuentaLaboral"
+        android:name="com.example.medilife.infoCuentaLaboral"
+        android:label="fragment_info_cuenta_laboral"
+        tools:layout="@layout/fragment_info_cuenta_laboral" >
+        <action
+            android:id="@+id/action_infoCuentaLaboral_to_cuentaGeneral"
             app:destination="@id/cuentaGeneral" />
     </fragment>
 
