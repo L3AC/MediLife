@@ -90,10 +90,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.441"
+        app:layout_constraintHorizontal_bias="0.549"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.412" />
+        app:layout_constraintVertical_bias="0.499" />
 
     <EditText
         android:id="@+id/txtNewPass"
@@ -109,7 +109,7 @@
         app:layout_constraintHorizontal_bias="0.506"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.508" />
+        app:layout_constraintVertical_bias="0.587" />
 
     <TextView
         android:id="@+id/textView15"
@@ -144,7 +144,7 @@
         app:layout_constraintVertical_bias="0.767" />
 
     <Button
-        android:id="@+id/btnVerificar"
+        android:id="@+id/btnConfirmar"
         android:layout_width="128dp"
         android:layout_height="50dp"
         android:backgroundTint="#E98DB87D"
@@ -155,6 +155,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.892" />
+
+    <Button
+        android:id="@+id/btnVerificar"
+        android:layout_width="128dp"
+        android:layout_height="50dp"
+        android:backgroundTint="#E98DB87D"
+        android:text="Verificar"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.498"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.38" />
 
     <TextView
         android:id="@+id/textView16"

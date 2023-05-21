@@ -69,7 +69,6 @@ class CambioContra : Fragment() {
     fun cambocontra(newPass:String, newnewPass:String){
         try {
 
-
             val cadena= "Update tbClientes Set = ? Where idCliente = ?"
             val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
 
