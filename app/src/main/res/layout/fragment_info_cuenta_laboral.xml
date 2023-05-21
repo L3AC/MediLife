@@ -28,7 +28,7 @@
 
 
                 <Spinner
-                    android:id="@+id/spinQuin2"
+                    android:id="@+id/spinQuin4"
                     android:layout_width="90dp"
                     android:layout_height="41dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -39,7 +39,7 @@
                     app:layout_constraintVertical_bias="0.853" />
 
                 <Spinner
-                    android:id="@+id/spinEnt2"
+                    android:id="@+id/spinEnt4"
                     android:layout_width="90dp"
                     android:layout_height="41dp"
                     app:layout_constraintBottom_toBottomOf="parent"
@@ -50,7 +50,7 @@
                     app:layout_constraintVertical_bias="0.853" />
 
                 <EditText
-                    android:id="@+id/txtHora3"
+                    android:id="@+id/txtHora4"
                     android:layout_width="93dp"
                     android:layout_height="46dp"
                     android:ems="10"
@@ -66,7 +66,7 @@
                     app:layout_constraintVertical_bias="0.825" />
 
                 <ImageButton
-                    android:id="@+id/btnVolver4"
+                    android:id="@+id/btnVolver5"
                     android:layout_width="49dp"
                     android:layout_height="49dp"
                     android:background="@android:color/transparent"
@@ -160,7 +160,7 @@
                     app:layout_constraintVertical_bias="0.37" />
 
                 <EditText
-                    android:id="@+id/txtUsuario3"
+                    android:id="@+id/txtUsuario4"
                     android:layout_width="180dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -175,7 +175,7 @@
                     app:layout_constraintVertical_bias="0.192" />
 
                 <EditText
-                    android:id="@+id/txtNombres3"
+                    android:id="@+id/txtNombres4"
                     android:layout_width="190dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -190,7 +190,7 @@
                     app:layout_constraintVertical_bias="0.307" />
 
                 <EditText
-                    android:id="@+id/txtApellidos3"
+                    android:id="@+id/txtApellidos4"
                     android:layout_width="190dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -221,7 +221,7 @@
                     app:layout_constraintVertical_bias="0.37" />
 
                 <EditText
-                    android:id="@+id/txtMail3"
+                    android:id="@+id/txtMail4"
                     android:layout_width="190dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -299,7 +299,7 @@
                     app:layout_constraintVertical_bias="0.8" />
 
                 <EditText
-                    android:id="@+id/txtNumDoc3"
+                    android:id="@+id/txtNumDoc4"
                     android:layout_width="250dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -330,7 +330,7 @@
                     app:layout_constraintVertical_bias="0.568" />
 
                 <Spinner
-                    android:id="@+id/spinTipoD"
+                    android:id="@+id/spinTipoD4"
                     android:layout_width="220dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -358,7 +358,7 @@
                     app:layout_constraintVertical_bias="0.659" />
 
                 <EditText
-                    android:id="@+id/txtNaci3"
+                    android:id="@+id/txtNaci4"
                     android:layout_width="178dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -375,7 +375,7 @@
                     app:layout_constraintVertical_bias="0.192" />
 
                 <Spinner
-                    android:id="@+id/spinSexo3"
+                    android:id="@+id/spinSexo4"
                     android:layout_width="170dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -388,7 +388,7 @@
                     app:layout_constraintVertical_bias="0.306" />
 
                 <Spinner
-                    android:id="@+id/spinEspD"
+                    android:id="@+id/spinEspD4"
                     android:layout_width="170dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -401,7 +401,7 @@
                     app:layout_constraintVertical_bias="0.412" />
 
                 <EditText
-                    android:id="@+id/txtTelefono3"
+                    android:id="@+id/txtTelefono4"
                     android:layout_width="160dp"
                     android:layout_height="37dp"
                     android:background="@drawable/customs_edidtext"
@@ -448,7 +448,7 @@
                     app:layout_constraintVertical_bias="0.023" />
 
                 <Button
-                    android:id="@+id/btnGuardar"
+                    android:id="@+id/btnGuardar4"
                     android:layout_width="114dp"
                     android:layout_height="54dp"
                     android:backgroundTint="#FF8BC34A"
@@ -461,7 +461,7 @@
                     app:layout_constraintVertical_bias="0.943" />
 
                 <Button
-                    android:id="@+id/btnEditar"
+                    android:id="@+id/btnEditar4"
                     android:layout_width="114dp"
                     android:layout_height="54dp"
                     android:backgroundTint="#158CC1"

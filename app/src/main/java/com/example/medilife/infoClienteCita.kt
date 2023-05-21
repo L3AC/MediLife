@@ -112,7 +112,6 @@ class infoClienteCita : Fragment() {
 
     fun CargarDatos() {
         try {
-           // val adapti = LLenarSpin()
             var cadena = "select * from tbClientes where idCliente=?;"
             var st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
@@ -125,7 +124,6 @@ class infoClienteCita : Fragment() {
             txtApellid2.setText(st.getString("apellidos"))
             txtNacimiento.setText(st.getString("nacimiento"))
             txtSexo.setText(st.getString("sexo"))
-            //spinSexoIC.setSelection(adapti.getPosition(st.getString("sexo")));
             txtIdent.setText(st.getString("numdocum"))
             txtTipoSangre.setText(st.getString("tipoSangre"))
             txtTelf.setText(st.getString("telefono"))
