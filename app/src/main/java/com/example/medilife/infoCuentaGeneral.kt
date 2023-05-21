@@ -163,7 +163,7 @@ class infoCuentaGeneral : Fragment() {
             ps.setString(11, txtTipoSangre3.text.toString())
             ps.setString(12, txtPatolog3.text.toString())
             ps.setInt(13,idCuenta)
-
+//
             ps.executeUpdate()
             Toast.makeText(context, "Campos actualizados", Toast.LENGTH_SHORT).show()
         } catch (ex: SQLException) {
