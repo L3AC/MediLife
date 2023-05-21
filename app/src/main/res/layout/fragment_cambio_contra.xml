@@ -80,7 +80,7 @@
         app:layout_constraintVertical_bias="0.261" />
 
     <TextView
-        android:id="@+id/textView14"
+        android:id="@+id/tv1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa"
@@ -112,7 +112,7 @@
         app:layout_constraintVertical_bias="0.587" />
 
     <TextView
-        android:id="@+id/textView15"
+        android:id="@+id/tv2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/comfortaa"

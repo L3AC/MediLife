@@ -1,5 +1,6 @@
 package com.example.medilife
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -9,7 +10,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageButton
+import android.widget.TextView
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
@@ -19,6 +22,10 @@ lateinit var CambioContr: Button
 lateinit var txtPass:EditText
 lateinit var txtNewPass:EditText
 lateinit var txtNewNewPass:EditText
+lateinit var btnVerificar:Button
+lateinit var btnConfirmar:Button
+lateinit var tv1: TextView
+lateinit var tv2: TextView
 
 
 class CambioContra : Fragment() {
@@ -32,31 +39,75 @@ class CambioContra : Fragment() {
         }
     }
 
-    fun buscarID() {
-        try {
-            var cadena: String =
-                "select idCliente from tbClientes where idCliente=?;"
-            var st: ResultSet
-            val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
-
-            st = ps.executeQuery()
-            st.next()
-            iduser = st.getInt("idCliente")
-
-
-        } catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
-        }
-    }
-
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        txtPass = requireView().findViewById(R.id.txtPass)
+        txtNewPass = requireView().findViewById(R.id.txtNewPass)
+        txtNewNewPass = requireView().findViewById(R.id.txtNewNewPass)
+        btnVerificar = requireView().findViewById(R.id.btnVerificar)
+        btnConfirmar = requireView().findViewById(R.id.btnConfirmar)
         volver = requireView().findViewById(R.id.btnVolver3)
+
+        habil(false)
+
+        btnVerificar.setOnClickListener {
+            verifpass()
+            habil(true)
+        }
+
+        btnConfirmar.setOnClickListener {
+            verificar2()
+            cambocontra()
+        }
+
 
         volver.setOnClickListener {
             findNavController().navigate(R.id.action_cambioContra_to_cuentaGeneral)
         }
     }
+
+    fun habil(tf: Boolean){
+        txtNewPass.isVisible = tf
+        tv1.isVisible = tf
+        tv2.isVisible = tf
+        txtNewPass.isVisible = tf
+        btnConfirmar.isVisible = tf
+    }
+
+    fun verifpass(){
+        try {
+            val cadena: String="Select contra From tbUsuarios Where usuario=?"
+            val st: ResultSet
+            val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, txtPass.text.toString())
+            st = ps.executeQuery()
+            st.next()
+
+            val found = st.row
+            if (found == 2) {
+                Toast.makeText(context, "La contraseña no coincide", Toast.LENGTH_SHORT).show()
+            }
+        }catch (ex: SQLException) {
+
+            Toast.makeText(context, "Error interno", Toast.LENGTH_SHORT).show()
+        }
+        cox.dbConn()!!.close()
+    }
+
+    fun verificar2(){
+        if(txtNewPass.text.toString()== txtNewNewPass.text.toString())
+        {
+            Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
+            btnConfirmar.isEnabled=false
+        }
+        else
+        {
+            btnConfirmar.isEnabled=true
+        }
+    }
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -66,11 +117,13 @@ class CambioContra : Fragment() {
         return inflater.inflate(R.layout.fragment_cambio_contra, container, false)
     }
 
-    fun cambocontra(newPass:String, newnewPass:String){
+    fun cambocontra(){
         try {
 
-            val cadena= "Update tbClientes Set = ? Where idCliente = ?"
+            val cadena= "Update tbUsuarios Set contra = ? Where usuario = ?"
             val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, txtNewPass.text.toString())
 
 
             Toast.makeText(context, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show()
