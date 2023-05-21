@@ -23,7 +23,7 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.Date
-
+lateinit var btnVolver4:ImageButton
 lateinit var txtUsuario3: EditText
 lateinit var txtNombres3: EditText
 lateinit var txtApellid3: EditText
@@ -40,6 +40,7 @@ lateinit var btnEditar3: Button
 
 class infoCuentaGeneral : Fragment() {
     var idCuenta: Int = 0
+    var nivelC=0
     val sexo = listOf("Femenino", "Masculino")
     val tipodoc = listOf("DUI", "Pasaporte")
     private var conx = Conx()
@@ -47,6 +48,7 @@ class infoCuentaGeneral : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
+            nivelC = arguments?.getInt("nvc")!!
         }
     }
 
@@ -96,12 +98,13 @@ class infoCuentaGeneral : Fragment() {
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
         }
         Log.i("xd", idCuenta.toString())
 
-        val volver = requireView().findViewById<ImageButton>(R.id.btnVolver4)
+        btnVolver4= requireView().findViewById<ImageButton>(R.id.btnVolver4)
 
-        volver.setOnClickListener {
+        btnVolver4.setOnClickListener {
             findNavController().navigate(R.id.action_infoCuentaGeneral_to_cuentaGeneral, bundle)
         }
 
