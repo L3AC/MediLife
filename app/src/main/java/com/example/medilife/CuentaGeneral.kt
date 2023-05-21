@@ -11,6 +11,7 @@ import android.widget.TextView
 import androidx.navigation.fragment.findNavController
 import java.util.Date
 lateinit var perfil:Button
+lateinit var seguridad:Button
 class CuentaGeneral : Fragment() {
     var idCuenta: Int = 0
     var nivelC=0
@@ -42,6 +43,7 @@ class CuentaGeneral : Fragment() {
             putInt("nvc", nivelC)
         }
         perfil = requireView().findViewById<Button>(R.id.btnPerfil)
+        seguridad = requireView().findViewById(R.id.btnSec)
 
 
         perfil.setOnClickListener{
@@ -51,6 +53,10 @@ class CuentaGeneral : Fragment() {
             else {
                 findNavController().navigate(R.id.action_cuentaGeneral_to_infoCuentaLaboral,bundle)
             }
+        }
+
+        seguridad.setOnClickListener {
+            findNavController().navigate(R.id.action_cuentaGeneral_to_cambioContra,bundle)
         }
     }
 

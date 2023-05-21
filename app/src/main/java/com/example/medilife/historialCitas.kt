@@ -68,14 +68,14 @@ class historialCitas : Fragment() {
 
         volver.setOnClickListener {
             if (nivelC == 1){
-                findNavController().navigate(R.id.homeDoctor)
+                findNavController().navigate(R.id.action_historialCitas_to_homeDoctor)
             }
             if (nivelC == 2){
-                findNavController().navigate(R.id.homeSecretaria)
+                findNavController().navigate(R.id.action_historialCitas_to_homeSecretaria)
             }
             if (nivelC == 3)
             {
-                findNavController().navigate(R.id.homeCliente)
+                findNavController().navigate(R.id.action_historialCitas_to_homeCliente)
             }
         }
 

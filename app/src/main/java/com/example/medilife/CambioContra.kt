@@ -30,12 +30,13 @@ lateinit var tv2: TextView
 
 class CambioContra : Fragment() {
     private var cox=Conx()
-    var iduser:Int=0
-
+    var idCuenta: Int = 0
+    var nivelC: Int = 0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            iduser = arguments?.getInt("idcu")!!
+            idCuenta = arguments?.getInt("idcu")!!
+            nivelC = arguments?.getInt("nvc")!!
         }
     }
 
@@ -60,10 +61,14 @@ class CambioContra : Fragment() {
             cambocontra()
         }
 
-
-        volver.setOnClickListener {
-            findNavController().navigate(R.id.action_cambioContra_to_cuentaGeneral)
+        val bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
         }
+        volver.setOnClickListener {
+            findNavController().navigate(R.id.action_cambioContra_to_cuentaGeneral, bundle)
+        }
+
     }
 
     fun habil(tf: Boolean){
