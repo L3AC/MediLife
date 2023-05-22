@@ -44,12 +44,18 @@ class HomeDoctor : Fragment() {
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
+            putInt("estado", 1)
+        }
+        var bundle2 = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+            putInt("estado", 2)
         }
         bPendiente.setOnClickListener() {
             findNavController().navigate(R.id.action_homeDoctor_to_citasActivas, bundle)
         }
         bPasadas.setOnClickListener() {
-            findNavController().navigate(R.id.action_homeDoctor_to_historialCitas, bundle)
+            findNavController().navigate(R.id.action_homeDoctor_to_historialCitas, bundle2)
         }
     }
 

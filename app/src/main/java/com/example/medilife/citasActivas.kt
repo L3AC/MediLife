@@ -85,13 +85,23 @@ class citasActivas : Fragment() {
         miRecyclerView2.adapter = miAdapter
 
         volver2 = requireView().findViewById(R.id.btnVolver6)
-        val bundle = Bundle().apply {
-            putInt("idcu", idCuenta)
-            putInt("nvc", nivelC)
-        }
+
 
         volver2.setOnClickListener {
-            findNavController().navigate(R.id.action_citasActivas_to_homeCliente, bundle)
+            val bundle = Bundle().apply {
+                putInt("idcu", idCuenta)
+                putInt("nvc", nivelC)
+            }
+            if (nivelC == 1) {
+                findNavController().navigate(R.id.action_citasActivas_to_homeDoctor, bundle)
+            }
+            if (nivelC == 2) {
+                findNavController().navigate(R.id.action_citasActivas_to_homeSecretaria, bundle)
+            }
+            if (nivelC == 3) {
+                findNavController().navigate(R.id.action_citasActivas_to_homeCliente, bundle)
+            }
+
         }
     }
     fun CargarDatosDoc() {

@@ -1,15 +1,13 @@
 package com.example.medilife
 
-import android.annotation.SuppressLint
-import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.ImageButton
 import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
@@ -29,14 +27,17 @@ lateinit var tv2: TextView
 
 
 class CambioContra : Fragment() {
-    private var cox=Conx()
+    private var conx=Conx()
     var idCuenta: Int = 0
     var nivelC: Int = 0
+    var contra:String=""
+    var idUser:Int=0
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
             nivelC = arguments?.getInt("nvc")!!
+            idUser = arguments?.getInt("idus")!!
         }
     }
 
@@ -54,18 +55,17 @@ class CambioContra : Fragment() {
         habil(false)
 
         btnVerificar.setOnClickListener {
-            verifpass()
-            habil(true)
+            verifContra()
         }
 
         btnConfirmar.setOnClickListener {
-            verificar2()
-            cambocontra()
+            verifNew()
         }
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
+            putInt("idus", idUser)
         }
         volver.setOnClickListener {
             findNavController().navigate(R.id.action_cambioContra_to_cuentaGeneral, bundle)
@@ -74,43 +74,47 @@ class CambioContra : Fragment() {
     }
 
     fun habil(tf: Boolean){
-        txtNewPass.isVisible = tf
-        tv1.isVisible = tf
-        tv2.isVisible = tf
-        txtNewPass.isVisible = tf
-        btnConfirmar.isVisible = tf
+        txtNewPass.isEnabled = tf
+        tv1.isEnabled= tf
+        tv2.isEnabled= tf
+        txtNewNewPass.isEnabled = tf
+        btnConfirmar.isEnabled = tf
     }
-
-    fun verifpass(){
+    fun verifContra() {
         try {
-            val cadena: String="Select contra From tbUsuarios Where usuario=?"
+            val cadena: String = "select contra from tbUsuarios where idUsuario=? " +
+                    "and contra=? COLLATE SQL_Latin1_General_CP1_CS_AS"
             val st: ResultSet
-            val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
-            ps.setString(1, txtPass.text.toString())
+            ps.setInt(1, idUser)
+            ps.setString(2, txtPass.text.toString())
             st = ps.executeQuery()
             st.next()
 
             val found = st.row
-            if (found == 2) {
-                Toast.makeText(context, "La contraseña no coincide", Toast.LENGTH_SHORT).show()
+            if (found == 1) {
+                contra = st.getString("contra")
+                habil(true)
+            } else {
+                Toast.makeText(context, "Contraseña incorrecta", Toast.LENGTH_SHORT).show()
+                habil(false)
             }
-        }catch (ex: SQLException) {
-
-            Toast.makeText(context, "Error interno", Toast.LENGTH_SHORT).show()
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(context, "Error al ejecutar", Toast.LENGTH_SHORT).show()
         }
-        cox.dbConn()!!.close()
+        conx.dbConn()!!.close()
     }
 
-    fun verificar2(){
+    fun verifNew(){
         if(txtNewPass.text.toString()== txtNewNewPass.text.toString())
         {
-            Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
-            btnConfirmar.isEnabled=false
+            updateContra()
         }
         else
         {
-            btnConfirmar.isEnabled=true
+            Toast.makeText(context, "Las contraseñas no coinciden", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -124,18 +128,18 @@ class CambioContra : Fragment() {
         return inflater.inflate(R.layout.fragment_cambio_contra, container, false)
     }
 
-    fun cambocontra(){
+    fun updateContra(){
         try {
-
-            val cadena= "Update tbUsuarios Set contra = ? Where usuario = ?"
-            val ps: PreparedStatement = cox.dbConn()?.prepareStatement(cadena)!!
-
+            val cadena= "Update tbUsuarios Set contra=? Where idUsuario =?;"
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+Log.i("usuario",idUser.toString())
             ps.setString(1, txtNewPass.text.toString())
-
-
-            Toast.makeText(context, "Contraseña cambiada correctamente", Toast.LENGTH_SHORT).show()
+            ps.setInt(2,idUser)
+            ps.executeUpdate()
+            Toast.makeText(context, "Contraseña actualizada", Toast.LENGTH_SHORT).show()
         }catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+            Log.i("error",ex.message.toString())
+            Toast.makeText(context, "Error al actualizar", Toast.LENGTH_SHORT).show()
         }
     }
 

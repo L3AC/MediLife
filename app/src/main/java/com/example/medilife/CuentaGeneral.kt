@@ -15,12 +15,14 @@ lateinit var seguridad:Button
 class CuentaGeneral : Fragment() {
     var idCuenta: Int = 0
     var nivelC=0
+    var idUser=0
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
             nivelC= arguments?.getInt("nvc")!!
+            idUser = arguments?.getInt("idus")!!
         }
 
     }
@@ -41,6 +43,7 @@ class CuentaGeneral : Fragment() {
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
+            putInt("idus", idUser)
         }
         perfil = requireView().findViewById<Button>(R.id.btnPerfil)
         seguridad = requireView().findViewById(R.id.btnSec)
@@ -56,9 +59,8 @@ class CuentaGeneral : Fragment() {
         }
 
         seguridad.setOnClickListener {
-            if(nivelC==3) {
                 findNavController().navigate(R.id.action_cuentaGeneral_to_cambioContra, bundle)
-            }
+
         }
     }
 

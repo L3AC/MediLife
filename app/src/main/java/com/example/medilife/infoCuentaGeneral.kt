@@ -41,6 +41,7 @@ lateinit var btnEditar3: Button
 class infoCuentaGeneral : Fragment() {
     var idCuenta: Int = 0
     var nivelC=0
+    var idUser:Int=0
     val sexo = listOf("Femenino", "Masculino")
     val tipodoc = listOf("DUI", "Pasaporte")
 
@@ -49,7 +50,8 @@ class infoCuentaGeneral : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
-            nivelC = arguments?.getInt("nvc")!!
+            nivelC= arguments?.getInt("nvc")!!
+            idUser = arguments?.getInt("idus")!!
         }
     }
 
@@ -79,7 +81,16 @@ class infoCuentaGeneral : Fragment() {
         txtPatolog3 = requireView().findViewById(R.id.txtPatolog3)
         btnEditar3 = requireView().findViewById(R.id.btnEditar)
         btnGuardar3 = requireView().findViewById(R.id.btnGuardar)
+        btnVolver4= requireView().findViewById(R.id.btnVolver4)
 
+        val bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+            putInt("idus", idUser)
+        }
+        btnVolver5.setOnClickListener(){
+            findNavController().navigate(R.id.action_infoCuentaGeneral_to_cuentaGeneral,bundle)
+        }
         LLenarSpin()
         Habilit(false)
         cargarData()
@@ -96,18 +107,6 @@ class infoCuentaGeneral : Fragment() {
             updateData()
         }
 
-
-        val bundle = Bundle().apply {
-            putInt("idcu", idCuenta)
-            putInt("nvc", nivelC)
-        }
-        Log.i("xd", idCuenta.toString())
-
-        btnVolver4= requireView().findViewById<ImageButton>(R.id.btnVolver4)
-
-        btnVolver4.setOnClickListener {
-            findNavController().navigate(R.id.action_infoCuentaGeneral_to_cuentaGeneral, bundle)
-        }
 
     }
 

@@ -84,6 +84,7 @@ class MainActivity : AppCompatActivity() {
             if (found == 1) {
                 idTipo = st.getInt("idTipo")//Si es secretaria, doctor o cliente
                 idUs = st.getInt("idUsuario")
+
                 //Toast.makeText(applicationContext,"Acceso completado", Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(applicationContext, "Datos incorrectos", Toast.LENGTH_SHORT).show()
@@ -117,6 +118,7 @@ class MainActivity : AppCompatActivity() {
                         .show()
                     scndAct.putExtra("idCuenta", idCuenta)
                     scndAct.putExtra("idTipo", idTipo)
+                    scndAct.putExtra("idus", idUs)
                     startActivity(scndAct)
                 } else {
                     Toast.makeText(applicationContext, "Datos incorrectos", Toast.LENGTH_SHORT)
@@ -141,6 +143,7 @@ class MainActivity : AppCompatActivity() {
                     idCuenta = st.getInt("idSecretaria")
                     scndAct.putExtra("idCuenta", idCuenta)
                     scndAct.putExtra("idTipo", idTipo)
+                    scndAct.putExtra("idus", idUs)
                     startActivity(scndAct)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)
                         .show()
@@ -167,6 +170,7 @@ class MainActivity : AppCompatActivity() {
                     idCuenta = st.getInt("idCliente")
                     scndAct.putExtra("idCuenta", idCuenta)
                     scndAct.putExtra("idTipo", idTipo)
+                    scndAct.putExtra("idus", idUs)
                     startActivity(scndAct)
                     overridePendingTransition(0, 0)
                     Toast.makeText(applicationContext, "Acceso completado", Toast.LENGTH_SHORT)

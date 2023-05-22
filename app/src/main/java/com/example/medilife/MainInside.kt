@@ -20,6 +20,7 @@ import com.example.medilife.databinding.ActivityMainInsideBinding
 class MainInside : AppCompatActivity() {
     var idCuenta: Int = 0
     var idTipo: Int = 0
+    var idUser:Int=0
 
     private lateinit var binding: ActivityMainInsideBinding
 
@@ -31,6 +32,7 @@ class MainInside : AppCompatActivity() {
         val extras = intent.extras
         idCuenta = extras?.getInt("idCuenta")!!
         idTipo = extras?.getInt("idTipo")!!
+        idUser = extras?.getInt("idus")!!
 
         binding = ActivityMainInsideBinding.inflate(layoutInflater)
         setContentView(binding.root)
@@ -40,6 +42,7 @@ class MainInside : AppCompatActivity() {
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", idTipo)
+            putInt("idus", idUser)
         }
 
         if (idTipo == 1) {

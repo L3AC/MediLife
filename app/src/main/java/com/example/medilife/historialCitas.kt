@@ -27,11 +27,13 @@ class fila2(
 val reg2 = mutableListOf<fila2>()
 val myData2 = mutableListOf<String>()
 
+
 class historialCitas : Fragment() {
 
     var idCuenta: Int = 0
     var nivelC: Int = 0
     var idCita: Int = 0
+    var estadoC: Int = 2
     private var conx = Conx()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -69,6 +71,7 @@ class historialCitas : Fragment() {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
             putInt("nvc", nivelC)
+            putInt("estado",estadoC)
         }
 
         volver.setOnClickListener {
@@ -95,6 +98,7 @@ class historialCitas : Fragment() {
                             putInt("idcu", idCuenta)
                             putInt("idcita", idCita)
                             putInt("nvc", nivelC)
+                            putInt("estado",estadoC)
                         }
                         Log.i("IDE: ", idCita.toString())
                         findNavController().navigate(R.id.action_historialCitas_to_infoCita, bundle)

@@ -119,6 +119,9 @@
         <action
             android:id="@+id/action_infoCita_to_citasActivas"
             app:destination="@id/citasActivas" />
+        <action
+            android:id="@+id/action_infoCita_to_historialCitas"
+            app:destination="@id/historialCitas" />
     </fragment>
     <fragment
         android:id="@+id/historialCitas"

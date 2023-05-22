@@ -32,6 +32,7 @@ class infoCita : Fragment() {
     var idCita: Int = 0
     var nivelC: Int = 0
     var idCliente: Int = 0
+    var estadoC: Int = 0
     private var conx = Conx()
 
 
@@ -41,7 +42,7 @@ class infoCita : Fragment() {
             idCuenta = arguments?.getInt("idcu")!!
             idCita = arguments?.getInt("idcita")!!
             nivelC = arguments?.getInt("nvc")!!
-
+            estadoC = arguments?.getInt("estado")!!
             Log.i("id", idCuenta.toString())
             Log.i("nivel ", nivelC.toString())
             Log.i("k", idCita.toString())
@@ -69,38 +70,75 @@ class infoCita : Fragment() {
         btnAtender = requireView().findViewById(R.id.btnAtender)
         volver = requireView().findViewById(R.id.btnVolver7)
 
-        var bundle = Bundle().apply {
-            putInt("idcu", idCuenta)
-            putInt("idcita", idCita)
-            putInt("idcl", idCliente)
-            putInt("nvc", nivelC)
-        }
-        volver.setOnClickListener {
-            findNavController().navigate(R.id.action_infoCita_to_citasActivas,bundle)
-        }
 
-
+        volver = requireView().findViewById(R.id.btnVolver7)
         buscarID()
-
         CargarDatos()
 
-        if (nivelC == 3) {
-            btnInfo.isVisible = false
+        if (estadoC != 2) {//ACTIVA
+
+            var bundle = Bundle().apply {
+                putInt("idcu", idCuenta)
+                putInt("idcita", idCita)
+                putInt("idcl", idCliente)
+                putInt("nvc", nivelC)
+            }
+            volver.setOnClickListener {
+                findNavController().navigate(R.id.action_infoCita_to_citasActivas, bundle)
+            }
+
+            if (nivelC == 3) {
+                btnInfo.isVisible = false
+                btnAtender.isVisible = false
+            }
+            btnInfo.setOnClickListener() {
+                var bundle2 = Bundle().apply {
+                    putInt("idcu", idCuenta)
+                    putInt("idcita", idCita)
+                    putInt("idcl", idCliente)
+                    putInt("nvc", nivelC)
+                }
+                findNavController().navigate(R.id.action_infoCita_to_infoClienteCita, bundle2)
+                Log.i("id", idCuenta.toString())
+                Log.i("cliente ", idCliente.toString())
+            }
+            btnAtender.setOnClickListener() {
+                AtenderCita()
+            }
+            btnCancelar.setOnClickListener() {
+                CancelarCita()
+            }
+
+        } else {//NO ES ACTIVA
+            btnCancelar.isVisible = false
             btnAtender.isVisible = false
-        }
-        btnInfo.setOnClickListener() {
-            findNavController().navigate(R.id.action_infoCita_to_infoClienteCita, bundle)
-            Log.i("id", idCuenta.toString())
-            Log.i("nivel ", nivelC.toString())
-        }
-        btnAtender.setOnClickListener() {
-            AtenderCita()
-        }
-        btnCancelar.setOnClickListener() {
-            CancelarCita()
-        }
+            var bundle = Bundle().apply {
+                putInt("idcu", idCuenta)
+                putInt("idcita", idCita)
+                putInt("idcl", idCliente)
+                putInt("nvc", nivelC)
+                putInt("estado", estadoC)
+            }
+            volver.setOnClickListener {
+                findNavController().navigate(R.id.action_infoCita_to_historialCitas, bundle)
+            }
 
-
+            if (nivelC == 3) {
+                btnInfo.isVisible = false
+            }
+            btnInfo.setOnClickListener() {
+                var bundle2 = Bundle().apply {
+                    putInt("idcu", idCuenta)
+                    putInt("idcita", idCita)
+                    putInt("idcl", idCliente)
+                    putInt("nvc", nivelC)
+                    putInt("estado", estadoC)
+                }
+                findNavController().navigate(R.id.action_infoCita_to_infoClienteCita, bundle2)
+                Log.i("id", idCuenta.toString())
+                Log.i("cliente ", idCliente.toString())
+            }
+        }
     }
 
     fun CargarDatos() {
@@ -134,18 +172,15 @@ class infoCita : Fragment() {
         try {
             var cadena: String =
                 "update tbCitas set estado='Atentida' where idCita=?;"
-            var st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
             ps.setInt(1, idCita)
-
-            st = ps.executeQuery()
-            st.next()
-            Toast.makeText(context, "Cita marcar", Toast.LENGTH_SHORT).show()
+            ps.executeUpdate()
+            Toast.makeText(context, "Cita atendida", Toast.LENGTH_SHORT).show()
 
 
         } catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Error al actualizar", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -155,16 +190,14 @@ class infoCita : Fragment() {
                 "delete tbCitas  where idCita=?;"
             var st: ResultSet
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
-
+            Log.i("elim", idCita.toString())
             ps.setInt(1, idCita)
 
-            st = ps.executeQuery()
-            st.next()
+            ps.executeUpdate()
             Toast.makeText(context, "Cita eliminada", Toast.LENGTH_SHORT).show()
-
-
         } catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+            Log.i("elim", ex.message.toString())
+            Toast.makeText(context, "Error al eliminar", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -183,7 +216,7 @@ class infoCita : Fragment() {
 
 
         } catch (ex: SQLException) {
-            Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "Error al buscar", Toast.LENGTH_SHORT).show()
         }
     }
 

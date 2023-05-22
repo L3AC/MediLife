@@ -43,6 +43,12 @@ class HomeCliente : Fragment() {
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
+            putInt("estado", 1)
+        }
+        var bundle2 = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+            putInt("estado", 2)
         }
         reservar = requireView().findViewById(R.id.btnReserv)
         bPendiente = requireView().findViewById(R.id.btnPendiC)
@@ -54,7 +60,7 @@ class HomeCliente : Fragment() {
             findNavController().navigate(R.id.action_homeCliente_to_citasActivas, bundle)
         }
         bPasadas.setOnClickListener() {
-            findNavController().navigate(R.id.action_homeCliente_to_historialCitas, bundle)
+            findNavController().navigate(R.id.action_homeCliente_to_historialCitas, bundle2)
         }
     }
 

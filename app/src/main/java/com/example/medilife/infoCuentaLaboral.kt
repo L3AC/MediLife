@@ -19,6 +19,7 @@ import android.widget.TextView
 import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.fragment.app.DialogFragment
+import androidx.navigation.fragment.findNavController
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -53,6 +54,7 @@ class infoCuentaLaboral : Fragment() {
     var idEsp: Int = 0
     val sexo = listOf("Femenino", "Masculino")
     val tipodoc = listOf("DUI", "Pasaporte")
+    var idUser:Int=0
     private var fechaSql: String = ""
     private var dateh: String = ""
     val hora = listOf(
@@ -67,7 +69,8 @@ class infoCuentaLaboral : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
-            nivelC = arguments?.getInt("nvc")!!
+            nivelC= arguments?.getInt("nvc")!!
+            idUser = arguments?.getInt("idus")!!
         }
     }
 
@@ -98,7 +101,16 @@ class infoCuentaLaboral : Fragment() {
         btnEditar4 = requireView().findViewById(R.id.btnEditar4)
         btnGuardar4 = requireView().findViewById(R.id.btnGuardar4)
         btnFecha2 = requireView().findViewById(R.id.btnFecha2)
+        btnVolver5= requireView().findViewById(R.id.btnVolver5)
 
+        val bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+            putInt("idus", idUser)
+        }
+        btnVolver5.setOnClickListener(){
+            findNavController().navigate(R.id.action_infoCuentaLaboral_to_cuentaGeneral,bundle)
+        }
         txtNacimiento4.isEnabled = false
 
         //SpinHora()

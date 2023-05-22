@@ -39,6 +39,12 @@ class HomeSecretaria : Fragment() {
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)
+            putInt("estado", 1)
+        }
+        var bundle2 = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("nvc", nivelC)
+            putInt("estado", 2)
         }
         bPendienteS = requireView().findViewById(R.id.btnPendiS)
         bPasadasS = requireView().findViewById(R.id.btnPasadS)
@@ -47,7 +53,7 @@ class HomeSecretaria : Fragment() {
             findNavController().navigate(R.id.action_homeSecretaria_to_citasActivas, bundle)
         }
         bPasadasS.setOnClickListener() {
-            findNavController().navigate(R.id.action_homeSecretaria_to_historialCitas, bundle)
+            findNavController().navigate(R.id.action_homeSecretaria_to_historialCitas, bundle2)
         }
     }
 

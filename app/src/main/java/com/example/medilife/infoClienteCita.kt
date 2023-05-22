@@ -35,9 +35,8 @@ class infoClienteCita : Fragment() {
     var idCita: Int = 0
     var nivelC: Int = 0
     var idCliente: Int = 0
+    var estadoC: Int = 0
     private var conx = Conx()
-   // val sexo = listOf("Femenino", "Masculino")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -46,10 +45,10 @@ class infoClienteCita : Fragment() {
             idCita = arguments?.getInt("idcita")!!
             idCliente = arguments?.getInt("idcl")!!
             nivelC = arguments?.getInt("nvc")!!
+            estadoC = arguments?.getInt("estado")!!
             Log.i("IDCUENTA", idCuenta.toString())
             Log.i("IDcita", idCita.toString())
             Log.i("IDCLIENTE", idCliente.toString())
-
         }
     }
 
@@ -77,18 +76,22 @@ class infoClienteCita : Fragment() {
         volver = requireView().findViewById(R.id.btnVolver8)
 
         //LLenarSpin()
-        txtNombres.isEnabled = false
-        txtApellid2.isEnabled = false
-        txtNacimiento.isEnabled = false
-        txtSexo.isEnabled = false
-        txtIdent.isEnabled = false
-        txtTipoSangre.isEnabled = false
-        txtTelf.isEnabled = false
-        txtPatolog.isEnabled = false
-        btnGuardar.isVisible = false
+        if (estadoC == 2) {//INACTIVA
+            habilit(false)
+            btnEditar.isVisible = false
+            btnGuardar.isVisible = false
+        }
+        habilit(false)
 
+        var bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("idcita", idCita)
+            putInt("idcl", idCliente)
+            putInt("nvc", nivelC)
+            putInt("estado", estadoC)
+        }
         volver.setOnClickListener {
-            findNavController().navigate(R.id.infoCita)
+            findNavController().navigate(R.id.action_infoClienteCita_to_infoCita, bundle)
         }
 
 
@@ -97,11 +100,11 @@ class infoClienteCita : Fragment() {
             if (btnGuardar.isVisible) {
                 btnEditar.text = "Editar"
                 btnGuardar.isVisible = false
-                txtPatolog.isEnabled=false
+                txtPatolog.isEnabled = false
             } else {
                 btnEditar.text = "Cancelar"
                 btnGuardar.isVisible = true
-                txtPatolog.isEnabled=true
+                txtPatolog.isEnabled = true
             }
         }
         btnGuardar.setOnClickListener() {
@@ -131,6 +134,7 @@ class infoClienteCita : Fragment() {
 
 
         } catch (ex: SQLException) {
+            Log.i("error", ex.message.toString())
             Toast.makeText(context, "Error al mostrar", Toast.LENGTH_SHORT).show()
         }
     }
@@ -154,5 +158,16 @@ class infoClienteCita : Fragment() {
 
     }
 
+    fun habilit(tf: Boolean) {
+        txtNombres.isEnabled = tf
+        txtApellid2.isEnabled = tf
+        txtNacimiento.isEnabled = tf
+        txtSexo.isEnabled = tf
+        txtIdent.isEnabled = tf
+        txtTipoSangre.isEnabled = tf
+        txtTelf.isEnabled = tf
+        txtPatolog.isEnabled = tf
+        btnGuardar.isVisible = tf
+    }
 
 }

@@ -186,8 +186,12 @@ class RegistroMain : AppCompatActivity() {
             ps.setString(7, tpsexo.selectedItem.toString())
             ps.setString(8, tel.text.toString())
             ps.setString(9, tpsangre.text.toString())
-            ps.setString(10, patol.text.toString())
-
+            if(patol.text.toString()==""){
+            ps.setString(10, "Ninguna")
+            }
+            else{
+                ps.setString(10, patol.text.toString())
+            }
             ps.executeUpdate()
 
         } catch (ex: SQLException) {
