@@ -37,8 +37,8 @@ lateinit var txtTelf4: EditText
 lateinit var txtMail4: EditText
 lateinit var spintipoDocum4: Spinner
 lateinit var txtnumDocum4: EditText
-lateinit var spinEnt4: Spinner
-lateinit var spinQuin4: Spinner
+/*lateinit var spinEnt4: Spinner
+lateinit var spinQuin4: Spinner*/
 lateinit var txtHora4: EditText
 lateinit var btnGuardar4: Button
 lateinit var btnEditar4: Button
@@ -50,13 +50,14 @@ val speciL = mutableListOf<spec>()
 class infoCuentaLaboral : Fragment() {
     var idCuenta: Int = 0
     var nivelC = 0
+    var idEsp: Int = 0
     val sexo = listOf("Femenino", "Masculino")
     val tipodoc = listOf("DUI", "Pasaporte")
     private var fechaSql: String = ""
     private var dateh: String = ""
     val hora = listOf(
         "00:00", "01:00", "02:00", "03:00", "04:00", "05:00", "06:00", "07:00",
-        "08:00", "09:00", "10:00","11:00", "12:00", "13:00", "14:00", "15:00",
+        "08:00", "09:00", "10:00", "11:00", "12:00", "13:00", "14:00", "15:00",
         "16:00", "17:00", "18:00", "19:00", "20:00", "21:00", "22:00", "23:00"
     )
     var horaN: String = ""
@@ -91,16 +92,17 @@ class infoCuentaLaboral : Fragment() {
         txtMail4 = requireView().findViewById(R.id.txtMail4)
         spintipoDocum4 = requireView().findViewById(R.id.spinTipoD4)
         txtnumDocum4 = requireView().findViewById(R.id.txtNumDoc4)
-        spinEnt4 = requireView().findViewById(R.id.spinEnt4)/**/
-        spinQuin4 = requireView().findViewById(R.id.spinQuin4)
+        //spinEnt4 = requireView().findViewById(R.id.spinEnt4)/**/
+        //spinQuin4 = requireView().findViewById(R.id.spinQuin4)
         txtHora4 = requireView().findViewById(R.id.txtHora4)
         btnEditar4 = requireView().findViewById(R.id.btnEditar4)
         btnGuardar4 = requireView().findViewById(R.id.btnGuardar4)
         btnFecha2 = requireView().findViewById(R.id.btnFecha2)
 
         txtNacimiento4.isEnabled = false
-        txtHora4.isEnabled = false
-        SpinHora()
+
+        //SpinHora()
+        //horaItem()
         LLenarSpinSe()
         LLenarSpinTPD()
 
@@ -121,6 +123,7 @@ class infoCuentaLaboral : Fragment() {
             lbEsp.isVisible = false
             spinEsp4.isVisible = false
             cargarDataSec()
+
             HabilitSec(false)
         }
         btnEditar4.setOnClickListener() {
@@ -133,7 +136,7 @@ class infoCuentaLaboral : Fragment() {
                     HabilitDoc(true)
                 }
             }
-            if(nivelC==2){
+            if (nivelC == 2) {
                 if (btnGuardar4.isVisible) {
                     btnEditar4.text = "Editar"
                     HabilitSec(false)
@@ -143,41 +146,74 @@ class infoCuentaLaboral : Fragment() {
                 }
             }
         }
-        spinQuin4.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                horaM = spinQuin4.getItemAtPosition(position).toString()
-                txtHora4.setText(spinEnt4.selectedItem.toString() + "-" + horaM)
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
-        spinEnt4.onItemSelectedListener = object :
-            AdapterView.OnItemSelectedListener {
-            override fun onItemSelected(
-                parent: AdapterView<*>,
-                view: View?,
-                position: Int,
-                id: Long
-            ) {
-                horaN = spinEnt4.getItemAtPosition(position).toString()
-                txtHora4.setText(horaN + "-" + spinQuin4.selectedItem.toString())
-            }
-
-            override fun onNothingSelected(p0: AdapterView<*>?) {
-            }
-        }
         btnGuardar4.setOnClickListener() {
 
         }
-    }
 
+    }
+    fun updateDataDoc() {
+        try {
+            val cadena =
+                "UPDATE tbUsuarios SET usuario=?,correo=?  from tbDoctores c,tbUsuarios u \n" +
+                "WHERE c.idUsuario=u.idUsuario and idDoctor=?;\n" +
+                "UPDATE tbDoctores SET nombres =?, apellidos=?,tipodocum=?,\n" +
+                "numdocum=?,nacimiento=?,sexo=?,telefono=?,horarioLaboral=?,idEspecialidad=? " +
+                "from tbClientes c,tbUsuarios u WHERE c.idUsuario=u.idUsuario and idDoctor=?;;"
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, txtUsuario4.text.toString())
+            ps.setString(2, txtMail4.text.toString())
+            ps.setInt(3, idCuenta)
+            ps.setString(4, txtNombres4.text.toString())
+            ps.setString(5, txtApellid4.text.toString())
+            ps.setString(6, spintipoDocum4.selectedItem.toString())
+            ps.setString(7, txtnumDocum4.text.toString())
+            ps.setString(8, txtNacimiento4.text.toString())
+            ps.setString(9, spinSexo4.selectedItem.toString())
+            ps.setString(10, txtTelf4.text.toString())
+            ps.setString(11, txtHora4.text.toString())
+            ps.setInt(12, idEsp)
+            ps.setInt(13,idCuenta)
+//
+            ps.executeUpdate()
+            Toast.makeText(context, "Campos actualizados", Toast.LENGTH_SHORT).show()
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(context, "No se pudo actualizar", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
+    }
+    fun updateDataSec() {
+        try {
+            val cadena =
+                "UPDATE tbUsuarios SET usuario=?,correo=?  from tbSecretarias c,tbUsuarios u \n" +
+                "WHERE c.idUsuario=u.idUsuario and idSecretaria=?;\n" +
+                "UPDATE tbSecretarias SET nombres =?, apellidos=?,tipodocum=?,\n" +
+                "numdocum=?,nacimiento=?,sexo=?,telefono=?, horarioLaboral=? \n" +
+          "from tbSecretarias c,tbUsuarios u WHERE c.idUsuario=u.idUsuario and idSecretaria=?;"
+            val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
+
+            ps.setString(1, txtUsuario4.text.toString())
+            ps.setString(2, txtMail4.text.toString())
+            ps.setInt(3, idCuenta)
+            ps.setString(4, txtNombres4.text.toString())
+            ps.setString(5, txtApellid4.text.toString())
+            ps.setString(6, spintipoDocum4.selectedItem.toString())
+            ps.setString(7, txtnumDocum4.text.toString())
+            ps.setString(8, txtNacimiento4.text.toString())
+            ps.setString(9, spinSexo4.selectedItem.toString())
+            ps.setString(10, txtTelf4.text.toString())
+            ps.setString(11, txtHora4.text.toString())
+            ps.setInt(12,idCuenta)
+//
+            ps.executeUpdate()
+            Toast.makeText(context, "Campos actualizados", Toast.LENGTH_SHORT).show()
+        } catch (ex: SQLException) {
+            Log.e("Error: ", ex.message!!)
+            Toast.makeText(context, "No se pudo actualizar", Toast.LENGTH_SHORT).show()
+        }
+        conx.dbConn()!!.close()
+    }
     fun SpinEsp() {
         try {
 
@@ -195,6 +231,23 @@ class infoCuentaLaboral : Fragment() {
             LLenarSpinEsp()
             conx.dbConn()!!.close()
 
+            spinEsp4.onItemSelectedListener = object :
+                AdapterView.OnItemSelectedListener {
+                override fun onItemSelected(
+                    parent: AdapterView<*>,
+                    view: View?,
+                    position: Int,
+                    id: Long
+                ) {
+                    val espc = speciL[position]
+                    idEsp = espc.id
+                    Log.i("especialidad",idEsp.toString())
+                }
+
+                override fun onNothingSelected(p0: AdapterView<*>?) {
+                }
+
+            }
         } catch (ex: SQLException) {
             Log.e("Error: ", ex.message!!)
             Toast.makeText(context, "No existen especialidades", Toast.LENGTH_SHORT).show()
@@ -209,8 +262,8 @@ class infoCuentaLaboral : Fragment() {
             var st: ResultSet
             val cadena =
                 "select usuario,correo,especialidad,nombres,apellidos,tipodocum,numdocum,nacimiento,sexo,telefono " +
-                 ",horarioLaboral from tbDoctores c,tbUsuarios u,tbEspecialidades e " +
-                "where c.idUsuario=u.idUsuario and c.idEspecialidad=e.idEspecialidad and idDoctor=?;"
+                        ",horarioLaboral from tbDoctores c,tbUsuarios u,tbEspecialidades e " +
+                        "where c.idUsuario=u.idUsuario and c.idEspecialidad=e.idEspecialidad and idDoctor=?;"
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
             st = ps.executeQuery()
@@ -242,7 +295,7 @@ class infoCuentaLaboral : Fragment() {
             var st: ResultSet
             val cadena =
                 "select usuario,correo,nombres,apellidos,tipodocum,numdocum,nacimiento,sexo,telefono " +
-                ",horarioLaboral from tbSecretarias c,tbUsuarios u where c.idUsuario=u.idUsuario and idSecretaria=?;"
+                        ",horarioLaboral from tbSecretarias c,tbUsuarios u where c.idUsuario=u.idUsuario and idSecretaria=?;"
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
             ps.setInt(1, idCuenta)
             st = ps.executeQuery()
@@ -316,19 +369,9 @@ class infoCuentaLaboral : Fragment() {
             listener(year, month, day)
         }
     }
-    fun SpinHora() {
-        val adaptadorSpinner =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
-        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        val spinner = requireView().findViewById<Spinner>(R.id.spinEnt4)
-        spinner.adapter = adaptadorSpinner
 
-        val adaptadorSpinner2 =
-            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
-        adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        val spinner2 = requireView().findViewById<Spinner>(R.id.spinQuin4)
-        spinner2.adapter = adaptadorSpinner2
-    }
+
+
     fun HabilitDoc(tf: Boolean) {
         txtUsuario4.isEnabled = tf
         txtMail4.isEnabled = tf
@@ -338,8 +381,9 @@ class infoCuentaLaboral : Fragment() {
         spinSexo4.isEnabled = tf
         spinEsp4.isEnabled = tf
         txtTelf4.isEnabled = tf
-        spinEnt4.isEnabled = tf
-        spinQuin4.isEnabled = tf
+        txtHora4.isEnabled = tf
+        /*spinEnt4.isEnabled = tf
+        spinQuin4.isEnabled = tf*/
         spintipoDocum4.isEnabled = tf
         txtnumDocum4.isEnabled = tf
         btnGuardar4.isVisible = tf
@@ -353,10 +397,59 @@ class infoCuentaLaboral : Fragment() {
         txtApellid4.isEnabled = tf
         spinSexo4.isEnabled = tf
         txtTelf4.isEnabled = tf
-        spinEnt4.isEnabled = tf
-        spinQuin4.isEnabled = tf
+        txtHora4.isEnabled = tf
+        /*spinEnt4.isEnabled = tf
+        spinQuin4.isEnabled = tf*/
         spintipoDocum4.isEnabled = tf
         txtnumDocum4.isEnabled = tf
         btnGuardar4.isVisible = tf
     }
+    /*fun horaItem() {
+    spinQuin4.onItemSelectedListener = object :
+        AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            horaM = spinQuin4.getItemAtPosition(position).toString()
+            txtHora4.setText(spinEnt4.selectedItem.toString() + "-" + horaM)
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+    }
+
+    spinEnt4.onItemSelectedListener = object :
+        AdapterView.OnItemSelectedListener {
+        override fun onItemSelected(
+            parent: AdapterView<*>,
+            view: View?,
+            position: Int,
+            id: Long
+        ) {
+            horaN = spinEnt4.getItemAtPosition(position).toString()
+            txtHora4.setText(horaN + "-" + spinQuin4.selectedItem.toString())
+
+        }
+
+        override fun onNothingSelected(p0: AdapterView<*>?) {
+        }
+
+    }
+}*/
+    /*fun SpinHora() {
+        val adaptadorSpinner =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
+        adaptadorSpinner.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner = requireView().findViewById<Spinner>(R.id.spinEnt4)
+        spinner.adapter = adaptadorSpinner
+
+        val adaptadorSpinner2 =
+            ArrayAdapter(requireContext(), android.R.layout.simple_spinner_item, hora)
+        adaptadorSpinner2.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        val spinner2 = requireView().findViewById<Spinner>(R.id.spinQuin4)
+        spinner2.adapter = adaptadorSpinner2
+    }*/
 }

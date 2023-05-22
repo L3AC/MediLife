@@ -41,31 +41,9 @@
                     app:layout_constraintVertical_bias="0.13"
                     app:srcCompat="@drawable/calnd" />
 
-                <Spinner
-                    android:id="@+id/spinQuin4"
-                    android:layout_width="90dp"
-                    android:layout_height="41dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.454"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.853" />
-
-                <Spinner
-                    android:id="@+id/spinEnt4"
-                    android:layout_width="90dp"
-                    android:layout_height="41dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.056"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.853" />
-
                 <EditText
                     android:id="@+id/txtHora4"
-                    android:layout_width="93dp"
+                    android:layout_width="110dp"
                     android:layout_height="46dp"
                     android:ems="10"
                     android:hint="00:00-00:00"
@@ -74,10 +52,10 @@
                     android:textColor="#FFFFFF"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.896"
+                    app:layout_constraintHorizontal_bias="0.79"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.825" />
+                    app:layout_constraintVertical_bias="0.783" />
 
                 <ImageButton
                     android:id="@+id/btnVolver5"
@@ -276,9 +254,10 @@
                     android:textStyle="bold"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.146"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.757" />
+                    app:layout_constraintVertical_bias="0.776" />
 
                 <TextView
                     android:id="@+id/textView54"
@@ -289,28 +268,8 @@
                     android:textColor="#FFFFFF"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.059"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.798" />
-
-                <TextView
-                    android:id="@+id/textView55"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:fontFamily="@font/comfortaa"
-                    android:text="Salida:"
-                    android:textColor="#FFFFFF"
-                    android:textSize="16sp"
-                    android:textStyle="bold"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.456"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.8" />
+                    app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
                     android:id="@+id/txtNumDoc4"
@@ -472,7 +431,7 @@
                     app:layout_constraintHorizontal_bias="0.845"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.923" />
+                    app:layout_constraintVertical_bias="0.889" />
 
                 <Button
                     android:id="@+id/btnEditar4"
@@ -485,7 +444,7 @@
                     app:layout_constraintHorizontal_bias="0.161"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.923" />
+                    app:layout_constraintVertical_bias="0.889" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
         </LinearLayout>
