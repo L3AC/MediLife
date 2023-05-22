@@ -47,6 +47,8 @@ class CambioContra : Fragment() {
         txtNewNewPass = requireView().findViewById(R.id.txtNewNewPass)
         btnVerificar = requireView().findViewById(R.id.btnVerificar)
         btnConfirmar = requireView().findViewById(R.id.btnConfirmar)
+        tv1 = requireActivity().findViewById(R.id.tv1)
+        tv2 = requireActivity().findViewById(R.id.tv2)
         volver = requireView().findViewById(R.id.btnVolver3)
 
         habil(false)
