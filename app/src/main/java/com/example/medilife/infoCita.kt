@@ -42,6 +42,8 @@ class infoCita : Fragment() {
             idCita = arguments?.getInt("idcita")!!
             nivelC = arguments?.getInt("nvc")!!
 
+            Log.i("id", idCuenta.toString())
+            Log.i("nivel ", nivelC.toString())
             Log.i("k", idCita.toString())
         }
     }
@@ -67,18 +69,19 @@ class infoCita : Fragment() {
         btnAtender = requireView().findViewById(R.id.btnAtender)
         volver = requireView().findViewById(R.id.btnVolver7)
 
-        volver.setOnClickListener {
-            findNavController().navigate(R.id.citasActivas)
-        }
-
-
-        buscarID()
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("idcita", idCita)
             putInt("idcl", idCliente)
             putInt("nvc", nivelC)
         }
+        volver.setOnClickListener {
+            findNavController().navigate(R.id.action_infoCita_to_citasActivas,bundle)
+        }
+
+
+        buscarID()
+
         CargarDatos()
 
         if (nivelC == 3) {
@@ -87,6 +90,8 @@ class infoCita : Fragment() {
         }
         btnInfo.setOnClickListener() {
             findNavController().navigate(R.id.action_infoCita_to_infoClienteCita, bundle)
+            Log.i("id", idCuenta.toString())
+            Log.i("nivel ", nivelC.toString())
         }
         btnAtender.setOnClickListener() {
             AtenderCita()

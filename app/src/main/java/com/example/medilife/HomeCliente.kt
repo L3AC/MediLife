@@ -22,7 +22,8 @@ class HomeCliente : Fragment() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
-            idCuenta = arguments?.getInt("idcu")!!
+            val parametros = arguments
+            idCuenta = parametros?.getInt("idcu")!!
             nivelC = arguments?.getInt("nvc")!!
         }
     }
@@ -37,7 +38,8 @@ class HomeCliente : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        Log.i("cliente", idCuenta.toString())
+        Log.i("id", idCuenta.toString())
+        Log.i("nivel", nivelC.toString())
         var bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)

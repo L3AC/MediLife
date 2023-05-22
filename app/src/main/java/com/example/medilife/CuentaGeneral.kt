@@ -56,7 +56,9 @@ class CuentaGeneral : Fragment() {
         }
 
         seguridad.setOnClickListener {
-            findNavController().navigate(R.id.action_cuentaGeneral_to_cambioContra,bundle)
+            if(nivelC==3) {
+                findNavController().navigate(R.id.action_cuentaGeneral_to_cambioContra, bundle)
+            }
         }
     }
 

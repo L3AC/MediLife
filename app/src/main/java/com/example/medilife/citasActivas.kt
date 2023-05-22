@@ -37,6 +37,8 @@ class citasActivas : Fragment() {
         arguments?.let {
             idCuenta = arguments?.getInt("idcu")!!
             nivelC = arguments?.getInt("nvc")!!
+            Log.i("id", idCuenta.toString())
+            Log.i("nivel ", nivelC.toString())
         }
 
     }
@@ -74,7 +76,7 @@ class citasActivas : Fragment() {
                             putInt("idcita", idCita)
                             putInt("nvc", nivelC)
                         }
-                        Log.i("IDE: ", idCita.toString())
+
                         findNavController().navigate(R.id.action_citasActivas_to_infoCita, bundle)
                     }
                 })

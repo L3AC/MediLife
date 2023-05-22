@@ -65,17 +65,22 @@ class historialCitas : Fragment() {
         if (nivelC == 3) {
             CargarDatosCl()
         }
+        var bundle = Bundle().apply {
+            putInt("idcu", idCuenta)
+            putInt("idcita", idCita)
+            putInt("nvc", nivelC)
+        }
 
         volver.setOnClickListener {
             if (nivelC == 1){
-                findNavController().navigate(R.id.action_historialCitas_to_homeDoctor)
+                findNavController().navigate(R.id.action_historialCitas_to_homeDoctor,bundle)
             }
             if (nivelC == 2){
-                findNavController().navigate(R.id.action_historialCitas_to_homeSecretaria)
+                findNavController().navigate(R.id.action_historialCitas_to_homeSecretaria, bundle)
             }
             if (nivelC == 3)
             {
-                findNavController().navigate(R.id.action_historialCitas_to_homeCliente)
+                findNavController().navigate(R.id.action_historialCitas_to_homeCliente, bundle)
             }
         }
 

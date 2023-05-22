@@ -103,7 +103,11 @@
         android:id="@+id/infoClienteCita"
         android:name="com.example.medilife.infoClienteCita"
         android:label="fragment_info_cliente_cita"
-        tools:layout="@layout/fragment_info_cliente_cita" />
+        tools:layout="@layout/fragment_info_cliente_cita" >
+        <action
+            android:id="@+id/action_infoClienteCita_to_infoCita"
+            app:destination="@id/infoCita" />
+    </fragment>
     <fragment
         android:id="@+id/infoCita"
         android:name="com.example.medilife.infoCita"
@@ -112,6 +116,9 @@
         <action
             android:id="@+id/action_infoCita_to_infoClienteCita"
             app:destination="@id/infoClienteCita" />
+        <action
+            android:id="@+id/action_infoCita_to_citasActivas"
+            app:destination="@id/citasActivas" />
     </fragment>
     <fragment
         android:id="@+id/historialCitas"
