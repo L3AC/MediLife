@@ -171,7 +171,7 @@ class infoCita : Fragment() {
     fun AtenderCita() {
         try {
             var cadena: String =
-                "update tbCitas set estado='Atentida' where idCita=?;"
+                "update tbCitas set estado='Atendida' where idCita=?;"
             val ps: PreparedStatement = conx.dbConn()?.prepareStatement(cadena)!!
 
             ps.setInt(1, idCita)

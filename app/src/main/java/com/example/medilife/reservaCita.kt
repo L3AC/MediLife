@@ -48,6 +48,7 @@ class reservaCita : Fragment() {
     private var idCliente: Int = 0
     private var fechaSql: String = ""
     private var dateh: String = ""
+    private var nivelC:Int=0
     val hora = listOf(
         "00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10",
         "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23"
@@ -59,6 +60,7 @@ class reservaCita : Fragment() {
         super.onCreate(savedInstanceState)
         arguments?.let {
             idCliente = arguments?.getInt("idcu")!!
+            nivelC = arguments?.getInt("nvc")!!
             Log.i("cliente", idCliente.toString())
         }
     }
@@ -86,8 +88,12 @@ class reservaCita : Fragment() {
         spinQuin = requireView().findViewById(R.id.spinQuin)
         volver = requireView().findViewById(R.id.btnVolver5)
 
+        val bundle = Bundle().apply {
+            putInt("idcu", idCliente)
+            putInt("nvc",nivelC)
+        }
         volver.setOnClickListener{
-            findNavController().navigate(R.id.homeCliente)
+            findNavController().navigate(R.id.action_reservaCita_to_homeCliente,bundle)
         }
 
         cbDoc.isEnabled = false
