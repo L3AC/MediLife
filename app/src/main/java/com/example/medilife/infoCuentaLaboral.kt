@@ -147,7 +147,12 @@ class infoCuentaLaboral : Fragment() {
             }
         }
         btnGuardar4.setOnClickListener() {
-
+            if (nivelC == 1) {
+                updateDataDoc()
+            }
+            if (nivelC == 2) {
+                updateDataSec()
+            }
         }
 
     }
