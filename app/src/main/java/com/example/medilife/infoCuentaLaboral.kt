@@ -145,6 +145,9 @@ class infoCuentaLaboral : Fragment() {
         btnFecha2 = requireView().findViewById(R.id.btnFecha2)
         btnVolver5= requireView().findViewById(R.id.btnVolver5)
 
+////////////////////
+        setupEditText(txtNombres4)
+        setupEditText(txtApellid4)
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)

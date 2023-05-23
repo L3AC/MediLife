@@ -126,6 +126,9 @@ class infoCuentaGeneral : Fragment() {
         btnGuardar3 = requireView().findViewById(R.id.btnGuardar)
         btnVolver4= requireView().findViewById(R.id.btnVolver4)
 
+        setupEditText(txtNombres3)
+        setupEditText(txtApellid3)
+
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
             putInt("nvc", nivelC)

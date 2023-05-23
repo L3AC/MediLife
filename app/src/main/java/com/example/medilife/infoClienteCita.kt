@@ -1,6 +1,7 @@
 package com.example.medilife
 
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -31,6 +32,20 @@ lateinit var btnVolver: Button
 lateinit var tpsexo2: Spinner
 
 class infoClienteCita : Fragment() {
+
+    fun setupEditText(editText: EditText) {
+        val filter = InputFilter { source, _, _, _, _, _ ->
+            val pattern = Regex("[a-zA-Z\\s]*") // Expresión regular para letras y espacios
+            if (pattern.matches(source)) {
+                source
+            } else {
+                "" // Si no coincide con la expresión regular, se rechaza el carácter
+            }
+        }
+        editText.filters = arrayOf(filter)
+    }
+
+
     var idCuenta: Int = 0
     var idCita: Int = 0
     var nivelC: Int = 0
@@ -74,6 +89,8 @@ class infoClienteCita : Fragment() {
         btnEditar = requireView().findViewById(R.id.btnEditar2)
         btnGuardar = requireView().findViewById(R.id.btnGuardar2)
         volver = requireView().findViewById(R.id.btnVolver8)
+
+        setupEditText(txtPatolog)
 
         //LLenarSpin()
         if (estadoC == 2) {//INACTIVA
