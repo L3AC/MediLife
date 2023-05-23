@@ -3,7 +3,9 @@ package com.example.medilife
 import android.app.DatePickerDialog
 import android.app.Dialog
 import android.os.Bundle
+import android.text.InputFilter
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -49,6 +51,35 @@ class spec(val id: Int, val nombre: String)
 val speciL = mutableListOf<spec>()
 
 class infoCuentaLaboral : Fragment() {
+
+    fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
+    }
+
+    fun setupEditText(editText: EditText) {
+        val filter = InputFilter { source, _, _, _, _, _ ->
+            val pattern = Regex("[a-zA-Z\\s]*") // Expresión regular para letras y espacios
+            if (pattern.matches(source)) {
+                source
+            } else {
+                "" // Si no coincide con la expresión regular, se rechaza el carácter
+            }
+        }
+        editText.filters = arrayOf(filter)
+    }
+
+    fun areFieldsNotEmpty(editTextList: List<EditText>): Boolean {
+        for (editText in editTextList) {
+            val text = editText.text.toString().trim()
+            if (text.isEmpty()) {
+                Toast.makeText(context, "Campos vacíos", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
     var idCuenta: Int = 0
     var nivelC = 0
     var idEsp: Int = 0
@@ -102,6 +133,9 @@ class infoCuentaLaboral : Fragment() {
         btnGuardar4 = requireView().findViewById(R.id.btnGuardar4)
         btnFecha2 = requireView().findViewById(R.id.btnFecha2)
         btnVolver5= requireView().findViewById(R.id.btnVolver5)
+
+        val editTextList = listOf(txtNombres4, txtApellid4, txtMail4, txtTelf4, txtnumDocum4)
+        val areFieldsValid = areFieldsNotEmpty(editTextList)
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
@@ -159,8 +193,14 @@ class infoCuentaLaboral : Fragment() {
             }
         }
         btnGuardar4.setOnClickListener() {
+
+
             if (nivelC == 1) {
-                updateDataDoc()
+                if(areFieldsValid|| isValidEmail(txtMail4.text.toString().trim())){
+
+                    updateDataDoc()
+                }
+
             }
             if (nivelC == 2) {
                 updateDataSec()

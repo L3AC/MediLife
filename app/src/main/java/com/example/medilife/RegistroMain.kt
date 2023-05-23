@@ -18,6 +18,11 @@ import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
 import java.util.*
+import android.text.Editable
+import android.text.InputFilter
+import android.text.TextWatcher
+import android.util.Patterns
+import android.widget.EditText
 
 //CAMPOS
 lateinit var volv: ImageButton
@@ -42,7 +47,37 @@ lateinit var textAdv: TextView
 lateinit var textAdv2: TextView
 lateinit var textAdv6: TextView
 
+
 class RegistroMain : AppCompatActivity() {
+
+    fun isValidEmail(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
+    }
+
+    fun setupEditText(editText: EditText) {
+        val filter = InputFilter { source, _, _, _, _, _ ->
+            val pattern = Regex("[a-zA-Z\\s]*") // Expresión regular para letras y espacios
+            if (pattern.matches(source)) {
+                source
+            } else {
+                "" // Si no coincide con la expresión regular, se rechaza el carácter
+            }
+        }
+        editText.filters = arrayOf(filter)
+    }
+
+    fun areFieldsNotEmpty(editTextList: List<EditText>): Boolean {
+        for (editText in editTextList) {
+            val text = editText.text.toString().trim()
+            if (text.isEmpty()) {
+                Toast.makeText(applicationContext, "Campos vacíos", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
     private var conx = Conx()
     private var idus: Int = 0
     private var fechaSql: String = ""
@@ -78,20 +113,34 @@ class RegistroMain : AppCompatActivity() {
         patol = findViewById(R.id.txtPatologias)
         //LLENAR SPINNER
         LLenarSpin()
+
+        val editTextList = listOf(usu, tNaci, contra1, contra2, nomb, apell, tel, ndoc, patol)
+        val areFieldsValid  = areFieldsNotEmpty(editTextList)
+
+        setupEditText(nomb)
+        setupEditText(patol)
+        setupEditText(apell)
         volv.setOnClickListener {
             val scndAct = Intent(this, MainActivity::class.java)
             startActivity(scndAct)
         }
         bingresar.setOnClickListener {
-            createUs()
-            selectUs()
-            createCl()
-            val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-            inputMethodManager.hideSoftInputFromWindow(bingresar.windowToken, 0)
+            if (areFieldsValid || isValidEmail(correo.text.toString().trim()))
+            {
+                createUs()
+                selectUs()
+                createCl()
+                val inputMethodManager = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+                inputMethodManager.hideSoftInputFromWindow(bingresar.windowToken, 0)
 
-            Toast.makeText(applicationContext, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
-            val scndAct = Intent(this, MainActivity::class.java)
-            startActivity(scndAct)
+                Toast.makeText(applicationContext, "Cuenta creada exitosamente", Toast.LENGTH_SHORT).show()
+                val scndAct = Intent(this, MainActivity::class.java)
+                startActivity(scndAct)
+            }
+            else {
+                Toast.makeText(applicationContext, "Campos incorrectos o vacíos", Toast.LENGTH_SHORT).show()
+            }
+
         }
         bFecha.setOnClickListener {
             val Calendario =
