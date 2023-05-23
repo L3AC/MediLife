@@ -50,9 +50,20 @@ lateinit var textAdv6: TextView
 
 class RegistroMain : AppCompatActivity() {
 
-    fun isValidEmail(email: String): Boolean {
+    fun isEmailValid(email: String): Boolean {
         val pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+
+    fun validateEmail(editText: EditText): Boolean {
+        val email = editText.text.toString().trim()
+        val isValid = isEmailValid(email)
+        if (!isValid) {
+            editText.error = "Correo electrónico inválido"
+        } else {
+            editText.error = null
+        }
+        return isValid
     }
 
     fun setupEditText(editText: EditText) {
@@ -114,8 +125,6 @@ class RegistroMain : AppCompatActivity() {
         //LLENAR SPINNER
         LLenarSpin()
 
-        val editTextList = listOf(usu, tNaci, contra1, contra2, nomb, apell, tel, ndoc, patol)
-        val areFieldsValid  = areFieldsNotEmpty(editTextList)
 
         setupEditText(nomb)
         setupEditText(patol)
@@ -125,7 +134,10 @@ class RegistroMain : AppCompatActivity() {
             startActivity(scndAct)
         }
         bingresar.setOnClickListener {
-            if (areFieldsValid || isValidEmail(correo.text.toString().trim()))
+            val editTextList = listOf(usu, tNaci, contra1, contra2, correo,nomb, apell, tel, ndoc, patol)
+            val areFieldsValid  = areFieldsNotEmpty(editTextList)
+            val isEmailValid = validateEmail(correo)
+            if (areFieldsValid && isEmailValid)
             {
                 createUs()
                 selectUs()

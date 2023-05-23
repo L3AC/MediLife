@@ -3,8 +3,10 @@ package com.example.medilife
 import android.annotation.SuppressLint
 import android.os.Bundle
 import android.text.Editable
+import android.text.InputFilter
 import android.text.TextWatcher
 import android.util.Log
+import android.util.Patterns
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -39,6 +41,47 @@ lateinit var btnGuardar3: Button
 lateinit var btnEditar3: Button
 
 class infoCuentaGeneral : Fragment() {
+
+    fun isEmailValid(email: String): Boolean {
+        val pattern = Patterns.EMAIL_ADDRESS
+        return pattern.matcher(email).matches()
+    }
+
+    fun validateEmail(editText: EditText): Boolean {
+        val email = editText.text.toString().trim()
+        val isValid = isEmailValid(email)
+        if (!isValid) {
+            editText.error = "Correo electrónico inválido"
+        } else {
+            editText.error = null
+        }
+        return isValid
+    }
+
+    fun setupEditText(editText: EditText) {
+        val filter = InputFilter { source, _, _, _, _, _ ->
+            val pattern = Regex("[a-zA-Z\\s]*") // Expresión regular para letras y espacios
+            if (pattern.matches(source)) {
+                source
+            } else {
+                "" // Si no coincide con la expresión regular, se rechaza el carácter
+            }
+        }
+        editText.filters = arrayOf(filter)
+    }
+
+    fun areFieldsNotEmpty(editTextList: List<EditText>): Boolean {
+        for (editText in editTextList) {
+            val text = editText.text.toString().trim()
+            if (text.isEmpty()) {
+                Toast.makeText(context, "Campos vacíos", Toast.LENGTH_SHORT).show()
+                return false
+            }
+        }
+        return true
+    }
+
+
     var idCuenta: Int = 0
     var nivelC=0
     var idUser:Int=0
@@ -88,7 +131,7 @@ class infoCuentaGeneral : Fragment() {
             putInt("nvc", nivelC)
             putInt("idus", idUser)
         }
-        btnVolver5.setOnClickListener(){
+        btnVolver4.setOnClickListener(){
             findNavController().navigate(R.id.action_infoCuentaGeneral_to_cuentaGeneral,bundle)
         }
         LLenarSpin()
@@ -104,6 +147,15 @@ class infoCuentaGeneral : Fragment() {
             }
         }
         btnGuardar3.setOnClickListener(){
+            val editTextList = listOf(txtNombres3, txtApellid3, txtMail3, txtTelf3, txtnumDocum)
+            val areFieldsValid = areFieldsNotEmpty(editTextList)
+            val isEmailValid = validateEmail(txtMail3)
+            if (areFieldsValid && isEmailValid) {
+
+            }
+            else{
+                Toast.makeText(context, "Campos incorrectos o vacíos", Toast.LENGTH_SHORT).show()
+            }
             updateData()
         }
 

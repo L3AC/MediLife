@@ -52,9 +52,20 @@ val speciL = mutableListOf<spec>()
 
 class infoCuentaLaboral : Fragment() {
 
-    fun isValidEmail(email: String): Boolean {
+    fun isEmailValid(email: String): Boolean {
         val pattern = Patterns.EMAIL_ADDRESS
         return pattern.matcher(email).matches()
+    }
+
+    fun validateEmail(editText: EditText): Boolean {
+        val email = editText.text.toString().trim()
+        val isValid = isEmailValid(email)
+        if (!isValid) {
+            editText.error = "Correo electrónico inválido"
+        } else {
+            editText.error = null
+        }
+        return isValid
     }
 
     fun setupEditText(editText: EditText) {
@@ -134,8 +145,6 @@ class infoCuentaLaboral : Fragment() {
         btnFecha2 = requireView().findViewById(R.id.btnFecha2)
         btnVolver5= requireView().findViewById(R.id.btnVolver5)
 
-        val editTextList = listOf(txtNombres4, txtApellid4, txtMail4, txtTelf4, txtnumDocum4)
-        val areFieldsValid = areFieldsNotEmpty(editTextList)
 
         val bundle = Bundle().apply {
             putInt("idcu", idCuenta)
@@ -193,17 +202,20 @@ class infoCuentaLaboral : Fragment() {
             }
         }
         btnGuardar4.setOnClickListener() {
+            val editTextList = listOf(txtNombres4, txtApellid4, txtMail4, txtTelf4, txtnumDocum4)
+            val areFieldsValid = areFieldsNotEmpty(editTextList)
+            val isEmailValid = validateEmail(txtMail4)
+            if (areFieldsValid && isEmailValid) {
 
-
-            if (nivelC == 1) {
-                if(areFieldsValid|| isValidEmail(txtMail4.text.toString().trim())){
-
+                if (nivelC == 1) {
                     updateDataDoc()
                 }
-
+                if (nivelC == 2) {
+                    updateDataSec()
+                }
             }
-            if (nivelC == 2) {
-                updateDataSec()
+            else{
+                Toast.makeText(context, "Campos incorrectos o vacíos", Toast.LENGTH_SHORT).show()
             }
         }
 
