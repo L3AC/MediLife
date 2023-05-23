@@ -25,7 +25,7 @@ class SendMailTask(private val destinatario: String,
         val session = Session.getDefaultInstance(props,
             object : javax.mail.Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication("leac.2xy@gmail.com", "uxuugqsgxyspazfw")
+                    return PasswordAuthentication("leac.2xy@gmail.com", "cyzojfszdqrtttzq")
                 }
             })
 
@@ -41,10 +41,10 @@ class SendMailTask(private val destinatario: String,
             Transport.send(message)
 
             println("Correo enviado satisfactoriamente")
+
         } catch (e: MessagingException) {
             e.printStackTrace()
-
-            println("Correo no enviado")
+            println("Correo no enviado"+" "+e.message.toString())
         }
         return null
     }

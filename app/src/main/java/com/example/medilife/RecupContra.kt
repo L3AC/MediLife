@@ -57,6 +57,7 @@ class RecupContra : AppCompatActivity() {
             if (found == 1) {
                 correo = st.getString("correo")
                 contra = st.getString("contra")
+                Log.i("jo",correo)
                 val task = SendMailTask(
                     correo,
                     "Aqui esta el link para la recuperacion de contraseña",
