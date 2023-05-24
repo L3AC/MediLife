@@ -12,8 +12,6 @@ class SendMailTask(private val destinatario: String,
     AsyncTask<Void?, Void?, Void?>() {
 
     override fun doInBackground(vararg params: Void?): Void? {
-
-        // Configuración del servidor SMTP
         val props = Properties()
         props["mail.smtp.host"] = "smtp.gmail.com"
         props["mail.smtp.socketFactory.port"] = "465"
@@ -25,7 +23,10 @@ class SendMailTask(private val destinatario: String,
         val session = Session.getDefaultInstance(props,
             object : javax.mail.Authenticator() {
                 override fun getPasswordAuthentication(): PasswordAuthentication {
-                    return PasswordAuthentication("leac.2xy@gmail.com", "cyzojfszdqrtttzq")
+
+                    //Colocamos el correo y contraseña desde donde enviaremos el mensaje
+                    //La contraseña debe ser generada en "Contraseñas de aplicaciones"
+                    return PasswordAuthentication("leac.2xy@gmail.com", "ayujifrzsifeltmb")
                 }
             })
 
@@ -41,11 +42,12 @@ class SendMailTask(private val destinatario: String,
             Transport.send(message)
 
             println("Correo enviado satisfactoriamente")
-
         } catch (e: MessagingException) {
             e.printStackTrace()
-            println("Correo no enviado"+" "+e.message.toString())
+
+            println("Correo no enviado")
         }
-        return null
+        return null//
+
     }
 }

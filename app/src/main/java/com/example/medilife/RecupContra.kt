@@ -71,6 +71,7 @@ class RecupContra : AppCompatActivity() {
                 ).show()
                 val scndAct = Intent(this, MainActivity::class.java)
                 startActivity(scndAct)
+
             } else {
                 Toast.makeText(applicationContext, "Usuario incorrecto", Toast.LENGTH_SHORT).show()
             }
