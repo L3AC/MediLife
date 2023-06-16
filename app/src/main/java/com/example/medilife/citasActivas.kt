@@ -212,18 +212,26 @@ class citasActivas : Fragment() {
         RecyclerView.Adapter<misCard.MyViewHolder>() {
         class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             val textView: TextView = view.findViewById(R.id.txCarta)
+            ///val btn:Button=view.findViewById<Button>(R.id.txCarta)
             //   val imageView: ImageView = view.findViewById(R.id.image_view)
         }
         @SuppressLint("MissingInflatedId")
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val vista =
                 LayoutInflater.from(parent.context).inflate(R.layout.card, parent, false)
-            vista.findViewById<TextView>(R.id.txCarta)
+            /*val lol=vista.findViewById<TextView>(R.id.txCarta)
+            lol.setOnClickListener(){
+                Toast.makeText(parent.context, "PARA UN POCO NENE", Toast.LENGTH_SHORT).show()
+            }*/
             return MyViewHolder(vista)
         }
+
         override fun getItemCount() = Datos.size
         override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
             holder.textView.setText(Datos[position])
+            holder.textView.setOnClickListener(){
+                //btnClick(position)
+            }
             //Reemplazamos la imagen
             //  holder.imageView.setImageResource(Imagenes[position])
         }
