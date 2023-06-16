@@ -15,9 +15,7 @@
         <activity
             android:name=".MainInside"
             android:exported="false"
-            android:label="@string/title_activity_main_inside"
-
-/>
+            android:label="@string/title_activity_main_inside" />
         <activity
             android:name=".RecupContra"
             android:exported="false"

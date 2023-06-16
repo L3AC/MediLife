@@ -1,5 +1,6 @@
 package com.example.medilife
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.os.Bundle
 import android.util.Log
@@ -13,6 +14,7 @@ import android.widget.*
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import org.w3c.dom.Text
 import java.sql.PreparedStatement
 import java.sql.ResultSet
 import java.sql.SQLException
@@ -80,7 +82,7 @@ class citasActivas : Fragment() {
                         findNavController().navigate(R.id.action_citasActivas_to_infoCita, bundle)
                     }
                 })
-        )
+        )/////////////////
         val miAdapter = historialCitas.misCard(myData)
         miRecyclerView2.adapter = miAdapter
 
@@ -206,15 +208,17 @@ class citasActivas : Fragment() {
         }
     }
 
-    class misCard(private val Datos: MutableList<String>) :
+    class misCard(private val Datos: MutableList<String>/*,private val btnClick:(Int)->Unit*/) :
         RecyclerView.Adapter<misCard.MyViewHolder>() {
         class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView: TextView = view.findViewById(R.id.title_text_view)
+            val textView: TextView = view.findViewById(R.id.txCarta)
             //   val imageView: ImageView = view.findViewById(R.id.image_view)
         }
+        @SuppressLint("MissingInflatedId")
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
             val vista =
                 LayoutInflater.from(parent.context).inflate(R.layout.card, parent, false)
+            vista.findViewById<TextView>(R.id.txCarta)
             return MyViewHolder(vista)
         }
         override fun getItemCount() = Datos.size

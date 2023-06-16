@@ -217,7 +217,7 @@ class historialCitas : Fragment() {
     class misCard(private val Datos: MutableList<String>) :
         RecyclerView.Adapter<misCard.MyViewHolder>() {
         class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
-            val textView: TextView = view.findViewById(R.id.title_text_view)
+            val textView: TextView = view.findViewById(R.id.txCarta)
             //   val imageView: ImageView = view.findViewById(R.id.image_view)
         }
         override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
